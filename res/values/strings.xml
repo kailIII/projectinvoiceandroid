@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Invoice</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="text_confirm_exit_app">Are you sure you want to exit the Job Aid?</string>
+    <string name="text_button_ok">YES</string>
+    <string name="text_button_no">NO</string>
+
+</resources>
