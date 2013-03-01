@@ -59,8 +59,8 @@ public class InputInvoiceView extends BaseActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.layout.main_menu_layout, menu);
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.layout.main_menu_layout, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
