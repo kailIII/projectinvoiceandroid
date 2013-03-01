@@ -18,4 +18,6 @@ public interface Constants {
 	public static final String STR_IS_PROCESSING = "Loading";
 	// string blank
 	public static final String STR_BLANK = "";
+	// string space 
+	public static final String STR_SPACE = " ";
 }
