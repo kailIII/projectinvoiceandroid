@@ -46,10 +46,15 @@ public class SQLUtils {
 					try {
 						boolean dbExists = GlobalUtil.checkExistsDataBase();
 						mDB = SQLiteDatabase.openOrCreateDatabase(
-								ExternalStorage.getFileDBPath(InvoiceInfo.getInstance().getAppContext())
-										.getAbsolutePath() + "/InvoiceDatabase", null, new DatabaseErrorHandler() {
+								ExternalStorage.getFileDBPath(
+										InvoiceInfo.getInstance()
+												.getAppContext())
+										.getAbsolutePath()
+										+ "/InvoiceDatabase", null,
+								new DatabaseErrorHandler() {
 
-									public void onCorruption(SQLiteDatabase dbObj) {
+									public void onCorruption(
+											SQLiteDatabase dbObj) {
 										// TODO Auto-generated method stub
 
 									}
@@ -84,11 +89,13 @@ public class SQLUtils {
 	 */
 	public static void createAllTableForDatabase() {
 		ArrayList<ABSTRACT_TABLE> listTable = new ArrayList<ABSTRACT_TABLE>();
-		CLASS_TABLE tbListClass = new CLASS_TABLE(mDB);
+		COMPANY_TABLE tbListClass = new COMPANY_TABLE(mDB);
 		STUDENT_TABLE studentTable = new STUDENT_TABLE(mDB);
-		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(mDB);
+		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(
+				mDB);
 		LEARN_TABLE learn_table = new LEARN_TABLE(mDB);
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(mDB);
+		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
+				mDB);
 		LEARN_TO_CLASS_TABLE laerntoclass_table = new LEARN_TO_CLASS_TABLE(mDB);
 		PRAISE_TABLE praise_table = new PRAISE_TABLE(mDB);
 		DISCIPLINE_TABLE discipline_table = new DISCIPLINE_TABLE(mDB);
@@ -123,12 +130,15 @@ public class SQLUtils {
 	 * @author: HaiTC3
 	 * @date: Dec 7, 2012
 	 */
-	public boolean createOneTableIntoDatabase(String tableName, ArrayList<ColumnTable> listColumnInfo) {
+	public boolean createOneTableIntoDatabase(String tableName,
+			ArrayList<ColumnTable> listColumnInfo) {
 		boolean result = false;
 		StringBuffer strSQLCreateTable = new StringBuffer();
-		strSQLCreateTable.append("CREATE TABLE IF NOT EXISTS " + tableName + " (");
+		strSQLCreateTable.append("CREATE TABLE IF NOT EXISTS " + tableName
+				+ " (");
 		for (int i = 0, size = listColumnInfo.size(); i < size; i++) {
-			strSQLCreateTable.append(listColumnInfo.get(i).generaSQLCreateColumn());
+			strSQLCreateTable.append(listColumnInfo.get(i)
+					.generaSQLCreateColumn());
 			if (i < (size - 1)) {
 				strSQLCreateTable.append(" , ");
 			}
@@ -190,7 +200,8 @@ public class SQLUtils {
 	 * @author: HaiTC3
 	 * @date: Dec 7, 2012
 	 */
-	public static boolean createListTableIntoDB(ArrayList<ABSTRACT_TABLE> listTable) {
+	public static boolean createListTableIntoDB(
+			ArrayList<ABSTRACT_TABLE> listTable) {
 		boolean result = false;
 		if (mDB != null && mDB.isOpen()) {
 			try {
@@ -216,12 +227,12 @@ public class SQLUtils {
 	 * 
 	 * drop one table in database if it exists
 	 * 
+	 * @author: HaiTC3
 	 * @param tableName
 	 * @return
 	 * @return: boolean
 	 * @throws:
-	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @since: Mar 2, 2013
 	 */
 	public boolean dropTableIfExists(String tableName) {
 		boolean result = true;
@@ -246,12 +257,12 @@ public class SQLUtils {
 	 * 
 	 * drop list table in DB
 	 * 
+	 * @author: HaiTC3
 	 * @param listTableName
 	 * @return
 	 * @return: boolean
 	 * @throws:
-	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @since: Mar 2, 2013
 	 */
 	public boolean dropListTableIfExists(ArrayList<String> listTableName) {
 		boolean result = true;
@@ -259,7 +270,8 @@ public class SQLUtils {
 			try {
 				mDB.beginTransaction();
 				for (int i = 0, size = listTableName.size(); i < size; i++) {
-					mDB.execSQL("DROP TABLE IF EXISTS " + listTableName.get(i).trim());
+					mDB.execSQL("DROP TABLE IF EXISTS "
+							+ listTableName.get(i).trim());
 				}
 				mDB.setTransactionSuccessful();
 			} catch (Exception e) {
@@ -283,7 +295,7 @@ public class SQLUtils {
 	 * @return: boolean
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 2, 2013
 	 */
 	public boolean clearAllDataInTable(String tableName) {
 		boolean result = true;
@@ -310,9 +322,10 @@ public class SQLUtils {
 	 * 
 	 * Delete all data in all table
 	 * 
-	 * @author: Nguyen Thanh Dung
+	 * @author: HaiTC3
 	 * @return: void
 	 * @throws:
+	 * @since: Mar 2, 2013
 	 */
 	public void clearAllDataInDatabase() {
 		StringBuilder sqlQuery = new StringBuilder();
@@ -367,12 +380,12 @@ public class SQLUtils {
 	 * @return: long
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 7, 2012
 	 */
 	private long insertDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
 		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
-			CLASS_TABLE table = new CLASS_TABLE(mDB);
+			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
 			res = table.insert(tableDTO);
 		}
 		return res;
@@ -388,12 +401,12 @@ public class SQLUtils {
 	 * @return: long
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: mar 7, 2012
 	 */
 	private long updateDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
 		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
-			CLASS_TABLE table = new CLASS_TABLE(mDB);
+			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
 			res = table.update(tableDTO);
 		}
 		return res;
@@ -408,12 +421,12 @@ public class SQLUtils {
 	 * @return: long
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 7, 2012
 	 */
 	private long deleteDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
 		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
-			CLASS_TABLE table = new CLASS_TABLE(mDB);
+			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
 			res = table.delete(tableDTO);
 		}
 		return res;
@@ -627,7 +640,8 @@ public class SQLUtils {
 	 * @author: HaiTC3
 	 * @date: Dec 7, 2012
 	 */
-	public boolean deleteCascade(String tableName, String whereClause, String[] whereArgs, String[] childTables) {
+	public boolean deleteCascade(String tableName, String whereClause,
+			String[] whereArgs, String[] childTables) {
 		boolean result = true;
 
 		int delete = mDB.delete(tableName, whereClause, whereArgs);
@@ -663,7 +677,8 @@ public class SQLUtils {
 	 * @author: HaiTC3
 	 * @date: Dec 7, 2012
 	 */
-	public int update(String tableName, ContentValues values, String whereClause, String[] whereArgs) {
+	public int update(String tableName, ContentValues values,
+			String whereClause, String[] whereArgs) {
 		int update = -1;
 		if (mDB != null && mDB.isOpen()) {
 			try {
@@ -692,7 +707,8 @@ public class SQLUtils {
 	 * @author: HaiTC3
 	 * @date: Dec 7, 2012
 	 */
-	public long insert(String nameTable, String nullColumnHack, ContentValues values) {
+	public long insert(String nameTable, String nullColumnHack,
+			ContentValues values) {
 		long insert = -1;
 		if (mDB != null && mDB.isOpen()) {
 			try {
@@ -760,9 +776,9 @@ public class SQLUtils {
 	 * @author: yenntth16
 	 * @date: Dec 7, 2012
 	 */
-	public ClassDTO getClassInfo(String classID) {
-		CLASS_TABLE cusTable = new CLASS_TABLE(mDB);
-		ClassDTO classInfo = cusTable.getClassById(classID);
+	public CompanyDTO getClassInfo(String classID) {
+		COMPANY_TABLE cusTable = new COMPANY_TABLE(mDB);
+		CompanyDTO classInfo = cusTable.getClassById(classID);
 		return classInfo;
 	}
 
@@ -778,8 +794,8 @@ public class SQLUtils {
 	public void saveListClass(ClassListDTO list) {
 		try {
 			mDB.beginTransaction();
-			CLASS_TABLE classTable = new CLASS_TABLE(mDB);
-			for (ClassDTO classDTO : list.getListclass()) {
+			COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
+			for (CompanyDTO classDTO : list.getListclass()) {
 				classTable.insert(classDTO);
 			}
 
@@ -803,7 +819,7 @@ public class SQLUtils {
 	public ClassListDTO getClassList() {
 		ClassListDTO list = null;
 
-		CLASS_TABLE classTable = new CLASS_TABLE(mDB);
+		COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
 		list = classTable.getAllRow();
 
 		return list;
@@ -835,7 +851,8 @@ public class SQLUtils {
 		StudientListDTO list = new StudientListDTO();
 
 		STUDENT_TABLE studentTable = new STUDENT_TABLE(mDB);
-		ArrayList<StudentDTO> pupilList = studentTable.getListStudent(String.valueOf(idClass));
+		ArrayList<StudentDTO> pupilList = studentTable.getListStudent(String
+				.valueOf(idClass));
 		if (pupilList != null) {
 			list.pupilList = pupilList;
 			list.totalPupil = list.pupilList.size();
@@ -852,9 +869,11 @@ public class SQLUtils {
 	 * @return: void
 	 * @throws:
 	 */
-	public void savePropertiesStudientDTO(PropertiesStudientDTO propertiesStudientDTO) {
+	public void savePropertiesStudientDTO(
+			PropertiesStudientDTO propertiesStudientDTO) {
 
-		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(mDB);
+		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(
+				mDB);
 		properties_student_table.saveList(propertiesStudientDTO);
 	}
 
@@ -869,8 +888,10 @@ public class SQLUtils {
 	public PropertiesStudientDTO getPropertiesStudientDTO(int pupilFileID) {
 		PropertiesStudientDTO propertiesStudientDTO = new PropertiesStudientDTO();
 
-		PROPERTIES_STUDENT_TABLE properties_table = new PROPERTIES_STUDENT_TABLE(mDB);
-		propertiesStudientDTO = properties_table.getPropertiesStudentbyId(String.valueOf(pupilFileID));
+		PROPERTIES_STUDENT_TABLE properties_table = new PROPERTIES_STUDENT_TABLE(
+				mDB);
+		propertiesStudientDTO = properties_table
+				.getPropertiesStudentbyId(String.valueOf(pupilFileID));
 		return propertiesStudientDTO;
 	}
 
@@ -920,7 +941,8 @@ public class SQLUtils {
 	 */
 	public void saveListProcessOfClassDTO(ListProcessOfClassDTO list) {
 
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(mDB);
+		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
+				mDB);
 
 		processOfClassTable.saveListProcessOfClass(list);
 	}
@@ -936,8 +958,10 @@ public class SQLUtils {
 	public ListProcessOfClassDTO getListProcessOfClassDTO(int pupilFileID) {
 		ListProcessOfClassDTO list = new ListProcessOfClassDTO();
 
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(mDB);
-		list.setlistProcessOfClass(processOfClassTable.getListProcessOfClass(String.valueOf(pupilFileID)));
+		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
+				mDB);
+		list.setlistProcessOfClass(processOfClassTable
+				.getListProcessOfClass(String.valueOf(pupilFileID)));
 		list.setTotalListProcessOfClass(list.getlistProcessOfClass().size());
 		return list;
 	}
@@ -971,7 +995,8 @@ public class SQLUtils {
 		ListLearnToClassDTO list = new ListLearnToClassDTO();
 
 		LEARN_TO_CLASS_TABLE learntoclasstable = new LEARN_TO_CLASS_TABLE(mDB);
-		list.setListLearnToClassDTO(learntoclasstable.getListLearnToClass(String.valueOf(pupilFileID)));
+		list.setListLearnToClassDTO(learntoclasstable
+				.getListLearnToClass(String.valueOf(pupilFileID)));
 		list.setTotalLearnToClass(list.getListLearnToClassDTO().size());
 		return list;
 	}
@@ -1005,7 +1030,8 @@ public class SQLUtils {
 		ListPraiseDTO list = new ListPraiseDTO();
 
 		PRAISE_TABLE praisetable = new PRAISE_TABLE(mDB);
-		list.setListPraise(praisetable.getListPraisePropertiesStudent(String.valueOf(pupilFileID)));
+		list.setListPraise(praisetable.getListPraisePropertiesStudent(String
+				.valueOf(pupilFileID)));
 		list.setTotalPraise(list.getListPraise().size());
 		return list;
 	}
@@ -1035,11 +1061,13 @@ public class SQLUtils {
 	 * @return: StudientListDTO
 	 * @throws:
 	 */
-	public ListDisciplinaryDTO getListDisciplinePropertiesStudent(int pupilFileID) {
+	public ListDisciplinaryDTO getListDisciplinePropertiesStudent(
+			int pupilFileID) {
 		ListDisciplinaryDTO list = new ListDisciplinaryDTO();
 
 		DISCIPLINE_TABLE discipline = new DISCIPLINE_TABLE(mDB);
-		list.setListDisciplinary(discipline.getListDisciplinePropertiesStudent(String.valueOf(pupilFileID)));
+		list.setListDisciplinary(discipline
+				.getListDisciplinePropertiesStudent(String.valueOf(pupilFileID)));
 		list.setTotalDisciplinary(list.getListDisciplinary().size());
 		return list;
 	}
@@ -1055,7 +1083,8 @@ public class SQLUtils {
 	 */
 	public void saveInfoPersonalDTO(InfoPersonalDTO infoPersonalDTO) {
 
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(mDB);
+		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
+				mDB);
 		infopersonal_student_table.insert(infoPersonalDTO);
 	}
 
@@ -1070,8 +1099,10 @@ public class SQLUtils {
 	public InfoPersonalDTO getInfoPersonalDTO(int teacherID) {
 		InfoPersonalDTO infoPersonalDTO = new InfoPersonalDTO();
 
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(mDB);
-		infoPersonalDTO = infopersonal_student_table.getInfoPersonalbyId(StringUtil.getString(teacherID));
+		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
+				mDB);
+		infoPersonalDTO = infopersonal_student_table
+				.getInfoPersonalbyId(StringUtil.getString(teacherID));
 		return infoPersonalDTO;
 	}
 
@@ -1085,7 +1116,8 @@ public class SQLUtils {
 	 */
 	public long updateInfoPersonalDTO(InfoPersonalDTO infoPersonalDTO) {
 		long flag;
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(mDB);
+		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
+				mDB);
 		flag = infopersonal_student_table.update(infoPersonalDTO);
 		return flag;
 	}
@@ -1165,7 +1197,7 @@ public class SQLUtils {
 	 */
 
 	public void clearClassTable() {
-		CLASS_TABLE classTable = new CLASS_TABLE(mDB);
+		COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
 		classTable.delete(null, null);
 	}
 

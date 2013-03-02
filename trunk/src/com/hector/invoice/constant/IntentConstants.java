@@ -20,4 +20,6 @@ public class IntentConstants {
 	public static final String INTENT_BROAD_CAST_ACTION = "jobaids.action";
 	// intent hash code for broad cast
 	public static final String INTENT_BROAD_CAST_HASH_CODE = "jobaids.hashCode";
+	public static final String INTENT_TYPE = "INTENT_TYPE";
+	public static final String INTENT_TABLE_NAME = "INTENT_TABLE_NAME";
 }
