@@ -73,6 +73,10 @@ public abstract class BaseActivity extends Activity implements
 		}
 	};
 
+	public void onEvent(int eventType, View control, Object data) {
+		// TODO Auto-generated method stub
+
+	}
 	/**
 	 * 
 	 * send broad cast
