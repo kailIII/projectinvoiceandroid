@@ -92,7 +92,7 @@ public class ColumnTable {
 	 * @return: String
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 3, 2012
 	 */
 	public String generaSQLCreateColumn() {
 		StringBuffer strSQL = new StringBuffer();

@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.common.StringUtil;
+import com.hector.invoice.dto.AbstractTableDTO;
 
 /**
  * 
@@ -778,7 +779,7 @@ public class SQLUtils {
 	 */
 	public CompanyDTO getClassInfo(String classID) {
 		COMPANY_TABLE cusTable = new COMPANY_TABLE(mDB);
-		CompanyDTO classInfo = cusTable.getClassById(classID);
+		CompanyDTO classInfo = cusTable.getCompanyById(classID);
 		return classInfo;
 	}
 
