@@ -1,3 +1,8 @@
+/**
+ * Copyright 2012 Mr.Hai Mobile Developer. All rights reserved.
+ * HAI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
 package com.hector.invoice.lib;
 
 import java.util.ArrayList;
@@ -6,60 +11,81 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hector.invoice.dto.AbstractTableDTO;
+import com.hector.invoice.dto.CompanyDTO;
+
 /**
  * 
- * thong tin danh sach cac lop hoc
+ * company information
  * 
  * @author: HaiTC3
  * @version: 1.0
  * @since: 1.0
  */
 public class COMPANY_TABLE extends ABSTRACT_TABLE {
-	// ma lop
-	public static final String CLASS_ID = "CLASS_ID";
-	// ten lop
-	public static final String CLASS_NAME = "CLASS_NAME";
-	// nam hoc
-	public static final String YEAR = "YEAR";
-	// khoi hoc
-	public static final String BLOCK = "BLOCK";
-	// phan ban
-	public static final String DEPARTMENT = "DEPARTMENT";
-	// giao vien chu nhiem
-	public static final String TEACHER = "TEACHER";
-	// buoi hoc (sang/chieu)
-	public static final String SESSION = "SESSION";
-	// hoc tieng dan toc 
-	public static final String LANGUAGE = "LANGUAGE";
-	// lop ghep 
-	public static final String MULTIGRADE = "MULTIGRADE";
-	// ma lop ghep (chi ton tai khi MULTIGRADE = 1
-	public static final String MULTIGRADE_ID = "MULTIGRADE_ID";
-	// ngoai ngu 1
-	public static final String LANGUAGE1 = "LANGUAGE1";
-	// ngoai ngu 2
-	public static final String LANGUAGE2 = "LANGUAGE2";
-	// tin hoc 
-	public static final String INFORMATICS = "INFORMATICS";
-	// hoc nghe pho thong
-	public static final String VOCATIONALSCHOOL = "VOCATIONALSCHOOL";
-	// thuoc diem truong 
-	public static final String SITE = "SITE";
-	// tinh chat
-	public static final String NATURE = "NATURE";
-	// mo ta
-	public static final String DESCRIPTION = "DESCRIPTION";
-	// ten lop
-	public static final String CLASS_TABLE = "CLASS";
-	// level id
-	public static final String LEVELID = "LEVELID";
+	/**
+	 * company info
+	 */
+	// company id
+	public static final String COMPANY_ID = "COMPANY_ID";
+	// logo
+	public static final String LOGO = "LOGO";
+	// company name
+	public static final String COMPANY_NAME = "COMPANY_NAME";
+	// company address
+	public static final String COMPANY_ADDRESS = "COMPANY_ADDRESS";
+	// company plz
+	public static final String COMPANY_PLZ = "COMPANY_PLZ";
+	// company city
+	public static final String COMPANY_CITY = "COMPANY_CITY";
+	/**
+	 * company data
+	 */
+	// CERTIFICATE OF ORIGIN / C/O
+	public static final String CERTIFICATE_OF_ORIGIN = "CERTIFICATE_OF_ORIGIN";
+	// sex | geschlech
+	public static final String SEX = "SEX";
+	// TELEPHONE
+	public static final String TELEPHONE = "TELEPHONE";
+	// FAX
+	public static final String FAX = "FAX";
+	// EMAIL
+	public static final String EMAIL = "EMAIL";
+	// UNITED_STATES_T | UST
+	public static final String UNITED_STATES_T = "UNITED_STATES_T";
+	/**
+	 * bank information
+	 */
+	// bank name
+	public static final String BANK_COMPANY_NAME = "INFORMATICS";
+	// BANK kontonr
+	public static final String BANK_ACCTNUM = "BANK_ACCTNUM";
+	// BANK_BLZ
+	public static final String BANK_BLZ = "BANK_BLZ";
+	// bank name
+	public static final String BANK_NAME = "BANK_NAME";
+	/**
+	 * VAT
+	 */
+	// vat text
+	public static final String VAT_TEXT = "VAT_TEXT";
+	// VAT_VALUE
+	public static final String VAT_VALUE = "VAT_VALUE";
+	// INVOICE_CONF / rechnungsnr conf
+	public static final String INVOICE_CONF = "INVOICE_CONF";
+	// staff sale / sachbearbeiter
+	public static final String STAFF_SALE = "STAFF_SALE";
+
+	// COMPANY TABLE
+	public static final String COMPANY_TABLE = "COMPANY_TABLE";
 
 	public COMPANY_TABLE(SQLiteDatabase mDB) {
-		this.tableName = CLASS_TABLE;
-		this.columns = new String[] { CLASS_ID, CLASS_NAME, YEAR, BLOCK,
-				DEPARTMENT, TEACHER, SESSION, LANGUAGE, MULTIGRADE, LANGUAGE1,
-				LANGUAGE2, INFORMATICS, VOCATIONALSCHOOL, SITE, NATURE,
-				DESCRIPTION, LEVELID };
+		this.tableName = COMPANY_TABLE;
+		this.columns = new String[] { COMPANY_ID, LOGO, COMPANY_NAME,
+				COMPANY_ADDRESS, COMPANY_ADDRESS, COMPANY_PLZ, COMPANY_CITY,
+				CERTIFICATE_OF_ORIGIN, SEX, TELEPHONE, FAX, EMAIL,
+				UNITED_STATES_T, BANK_COMPANY_NAME, BANK_ACCTNUM, BANK_BLZ,
+				BANK_NAME, VAT_TEXT, VAT_VALUE, INVOICE_CONF, STAFF_SALE };
 		this.sqlGetCountQuerry += this.tableName + ";";
 		this.mDB = mDB;
 		this.listColumn = newListColumn();
@@ -77,119 +103,140 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public ArrayList<ColumnTable> newListColumn() {
 		ArrayList<ColumnTable> listColumn = new ArrayList<ColumnTable>();
-		// column CLASS_ID
-		ColumnTable classId = new ColumnTable(CLASS_ID,
+		// column COMPANY_ID
+		ColumnTable CompanyId = new ColumnTable(COMPANY_ID,
 				ColumnTable.DATA_TYPE_INTEGER, true, true, true, true,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
-		listColumn.add(classId);
+		listColumn.add(CompanyId);
 
-		// column CLASS_NAME
-		ColumnTable className = new ColumnTable(CLASS_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+		// column LOGO
+		ColumnTable logo = new ColumnTable(LOGO, ColumnTable.DATA_TYPE_TEXT,
+				false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
-		listColumn.add(className);
-		
-		// column YEAR
-		ColumnTable year = new ColumnTable(YEAR,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
-				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
-				ColumnTable.ORDER_TYPE_ASC);
-		listColumn.add(year);
-		
-		// column BLOCK
-		ColumnTable block = new ColumnTable(BLOCK,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
-				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
-				ColumnTable.ORDER_TYPE_ASC);
-		listColumn.add(block);
+		listColumn.add(logo);
 
-		// column DEPARTMENT
-		ColumnTable department = new ColumnTable(DEPARTMENT,
+		// column company Name
+		ColumnTable companyName = new ColumnTable(COMPANY_NAME,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(companyName);
+
+		// column COMPANY_ADDRESS
+		ColumnTable department = new ColumnTable(COMPANY_ADDRESS,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(department);
 
-		// column TEACHER
-		ColumnTable teacher = new ColumnTable(TEACHER,
+		// column COMPANY_PLZ
+		ColumnTable teacher = new ColumnTable(COMPANY_PLZ,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(teacher);
 
-		// column SESSION
-		ColumnTable session = new ColumnTable(SESSION,
+		// column COMPANY_CITY
+		ColumnTable session = new ColumnTable(COMPANY_CITY,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(session);
-		// column LANGUAGE
-		ColumnTable language = new ColumnTable(LANGUAGE,
+
+		// column CERTIFICATE_OF_ORIGIN
+		ColumnTable language = new ColumnTable(CERTIFICATE_OF_ORIGIN,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language);
-		// column MULTIGRADE
-		ColumnTable multigrade = new ColumnTable(MULTIGRADE,
+		// column SEX
+		ColumnTable multigrade = new ColumnTable(SEX,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(multigrade);
-		// column LANGUAGE1
-		ColumnTable language1 = new ColumnTable(LANGUAGE1,
+		// column TELEPHONE
+		ColumnTable language1 = new ColumnTable(TELEPHONE,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language1);
-		// column LANGUAGE2
-		ColumnTable language2 = new ColumnTable(LANGUAGE2,
+		// column FAX
+		ColumnTable language2 = new ColumnTable(FAX,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language2);
-		// column INFORMATICS
-		ColumnTable informatics = new ColumnTable(INFORMATICS,
+		// column EMAIL
+		ColumnTable informatics = new ColumnTable(EMAIL,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(informatics);
-		// column VOCATIONALSCHOOL
-		ColumnTable vocationalschool = new ColumnTable(VOCATIONALSCHOOL,
+
+		// column UNITED_STATES_T
+		ColumnTable vocationalschool = new ColumnTable(UNITED_STATES_T,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(vocationalschool);
-		// column SITE
-		ColumnTable site = new ColumnTable(SITE, ColumnTable.DATA_TYPE_TEXT,
-				false, false, true, false, ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+		// column BANK_COMPANY_NAME
+		ColumnTable site = new ColumnTable(BANK_COMPANY_NAME,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(site);
-		// column NATURE
-		ColumnTable nature = new ColumnTable(NATURE,
+		// column BANK_ACCTNUM
+		ColumnTable nature = new ColumnTable(BANK_ACCTNUM,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(nature);
-		// column DESCRIPTION
-		ColumnTable description = new ColumnTable(DESCRIPTION,
+		// column BANK_BLZ
+		ColumnTable description = new ColumnTable(BANK_BLZ,
 				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(description);
-		//column LEVELID
-		ColumnTable levelId = new ColumnTable(LEVELID,
+		// column BANK_NAME
+		ColumnTable levelId = new ColumnTable(BANK_NAME,
 				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(levelId);
+		// column VAT_TEXT
+		ColumnTable vatText = new ColumnTable(VAT_TEXT,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(vatText);
+		// column VAT_VALUE
+		ColumnTable vatValue = new ColumnTable(VAT_VALUE,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(vatValue);
+		// column INVOICE_CONF
+		ColumnTable InvoiceConf = new ColumnTable(INVOICE_CONF,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(InvoiceConf);
+
+		// column STAFF_SALE
+		ColumnTable staffSale = new ColumnTable(STAFF_SALE,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(staffSale);
 
 		return listColumn;
 	}
 
 	/**
-	 * Them 1 dong xuong db
+	 * insert row into db
 	 */
 	@Override
 	protected long insert(AbstractTableDTO dto) {
@@ -199,7 +246,7 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 
 	/**
 	 * 
-	 * Cap nhat danh sach lop
+	 * update company info from company dto
 	 * 
 	 * @param dto
 	 * @return
@@ -210,21 +257,24 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public int update(CompanyDTO dto) {
 		ContentValues value = initDataRow(dto);
-		String[] params = { "" + dto.getclassID() };
-		return update(value, CLASS_ID + " = ?", params);
+		String[] params = { String.valueOf(dto.companyId) };
+		return update(value, COMPANY_ID + " = ?", params);
 	}
 
+	/**
+	 * update company info from abstract table dto
+	 */
 	@Override
 	protected long update(AbstractTableDTO dto) {
 		CompanyDTO cusDTO = (CompanyDTO) dto;
 		ContentValues value = initDataRow(cusDTO);
-		String[] params = { "" + cusDTO.getclassID() };
-		return update(value, CLASS_ID + " = ?", params);
+		String[] params = { String.valueOf(cusDTO.companyId) };
+		return update(value, COMPANY_ID + " = ?", params);
 	}
 
 	/**
 	 * 
-	 * Xoa 1 dong trong db
+	 * remove row in db
 	 * 
 	 * @param id
 	 * @return
@@ -235,19 +285,19 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public int delete(String id) {
 		String[] params = { id };
-		return delete(CLASS_ID + " = ?", params);
+		return delete(COMPANY_ID + " = ?", params);
 	}
 
 	@Override
 	protected long delete(AbstractTableDTO dto) {
 		CompanyDTO cusDTO = (CompanyDTO) dto;
-		String[] params = { cusDTO.getclassID() };
-		return delete(CLASS_ID + " = ?", params);
+		String[] params = { String.valueOf(cusDTO.companyId) };
+		return delete(COMPANY_ID + " = ?", params);
 	}
 
 	/**
 	 * 
-	 * Lay 1 dong trong db theo id
+	 * get row in db flow id
 	 * 
 	 * @param id
 	 * @return
@@ -256,15 +306,15 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 * @author: HaiTC3
 	 * @date: Dec 10, 2012
 	 */
-	public CompanyDTO getClassById(String id) {
-		CompanyDTO list_CLASS_DTO = null;
+	public CompanyDTO getCompanyById(String id) {
+		CompanyDTO companyInfo = new CompanyDTO();
 		Cursor c = null;
 		try {
 			String[] params = { id };
-			c = query(CLASS_ID + " = ?", params, null, null, null);
+			c = query(COMPANY_ID + " = ?", params, null, null, null);
 			if (c != null) {
 				if (c.moveToFirst()) {
-					list_CLASS_DTO = initLogDTOFromCursor(c);
+					companyInfo.initLogDTOFromCursor(c);
 				}
 			}
 		} catch (Exception ex) {
@@ -279,7 +329,7 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 			}
 		}
 
-		return list_CLASS_DTO;
+		return companyInfo;
 	}
 
 	/**
@@ -294,31 +344,9 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 * @date: Dec 10, 2012
 	 */
 	public CompanyDTO initLogDTOFromCursor(Cursor c) {
-		CompanyDTO classDTO = new CompanyDTO();
-		classDTO.setclassID(c.getInt(c.getColumnIndex(CLASS_ID)));
-		classDTO.setclassName(c.getString(c.getColumnIndex(CLASS_NAME)));
-		classDTO.setyear(c.getString(c.getColumnIndex("YEAR")));
-		classDTO.setblock(c.getString(c.getColumnIndex("BLOCK")));
-		classDTO
-				.setdepartment(c.getString(c.getColumnIndex("DEPARTMENT")));
-		classDTO.setteacher(c.getString(c.getColumnIndex("TEACHER")));
-		classDTO.setsession(c.getString(c.getColumnIndex("SESSION")));
-		classDTO
-				.setmultigrade(c.getString(c.getColumnIndex("MULTIGRADE")));
-		classDTO.setlanguage1(c.getString(c.getColumnIndex("LANGUAGE1")));
-		classDTO.setlanguage2(c.getString(c.getColumnIndex("LANGUAGE2")));
-		classDTO.setinformatics(c.getString(c
-				.getColumnIndex("INFORMATICS")));
-		classDTO.setvocationalschool(c.getString(c
-				.getColumnIndex("VOCATIONALSCHOOL")));
-		classDTO.setsite(c.getString(c.getColumnIndex("SITE")));
-		classDTO.setnature(c.getString(c.getColumnIndex("NATURE")));
-		classDTO.setdescription(c.getString(c
-				.getColumnIndex("DESCRIPTION")));
-		classDTO.setLevelId(c.getInt(c
-				.getColumnIndex("LEVELID")));
-
-		return classDTO;
+		CompanyDTO companyInfo = new CompanyDTO();
+		companyInfo.initLogDTOFromCursor(c);
+		return companyInfo;
 	}
 
 	/**
@@ -334,60 +362,25 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(CompanyDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		editedValues.put(CLASS_ID, dto.getclassID());
-		editedValues.put(CLASS_NAME, dto.getclassName());
-		editedValues.put(YEAR, dto.getyear());
-		editedValues.put(BLOCK, dto.getblock());
-		editedValues.put(DEPARTMENT, dto.getdepartment());
-		editedValues.put(TEACHER, dto.getteacher());
-		editedValues.put(SESSION, dto.getsession());
-		editedValues.put(LANGUAGE, dto.getlanguage());
-		editedValues.put(MULTIGRADE, dto.getmultigrade());
-		editedValues.put(LANGUAGE1, dto.getlanguage1());
-		editedValues.put(LANGUAGE2, dto.getlanguage2());
-		editedValues.put(INFORMATICS, dto.getinformatics());
-		editedValues.put(VOCATIONALSCHOOL, dto.getvocationalschool());
-		editedValues.put(SITE, dto.getsite());
-		editedValues.put(NATURE, dto.getnature());
-		editedValues.put(DESCRIPTION, dto.getdescription());
-		editedValues.put(LEVELID, dto.getLevelId());
+		editedValues.put(COMPANY_ID, String.valueOf(dto.companyId));
+		editedValues.put(LOGO, dto.logo);
+		editedValues.put(COMPANY_NAME, dto.companyName);
+		editedValues.put(COMPANY_ADDRESS, dto.companyAddress);
+		editedValues.put(COMPANY_PLZ, dto.companyPLZ);
+		editedValues.put(COMPANY_CITY, dto.companyCity);
+		editedValues.put(CERTIFICATE_OF_ORIGIN, dto.certificateOfOrigin);
+		editedValues.put(SEX, String.valueOf(dto.sex));
+		editedValues.put(FAX, dto.fax);
+		editedValues.put(EMAIL, dto.email);
+		editedValues.put(UNITED_STATES_T, dto.unitedStatesT);
+		editedValues.put(BANK_COMPANY_NAME, dto.bankCompanyName);
+		editedValues.put(BANK_ACCTNUM, dto.bankAcctnum);
+		editedValues.put(BANK_BLZ, dto.bankBLZ);
+		editedValues.put(BANK_NAME, dto.bankName);
+		editedValues.put(VAT_TEXT, dto.vatText);
+		editedValues.put(VAT_VALUE, dto.vatValue);
+		editedValues.put(INVOICE_CONF, dto.invoiceConf);
+		editedValues.put(STAFF_SALE, dto.staffSale);
 		return editedValues;
 	}
-
-	/**
-	*  Lay tat ca cac lop trong bang
-	*  @author: Nguyen Thanh Dung
-	*  @return
-	*  @return: ClassListDTO
-	*  @throws: 
-	*/
-	
-	public ClassListDTO getAllRow() {
-		Cursor c = null;
-		ClassListDTO list = null;
-		
-		try {
-			c = query(null, null, null, null, null);
-			if(c != null) {
-				if (c.moveToFirst()) {
-					list = new ClassListDTO();
-					list.parseCustomerInfo(c);
-				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (c != null) {
-				try {
-					c.close();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-		}
-
-		return list;
-	}
-
-	
 }

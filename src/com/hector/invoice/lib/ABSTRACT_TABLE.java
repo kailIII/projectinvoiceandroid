@@ -7,6 +7,8 @@ package com.hector.invoice.lib;
 
 import java.util.ArrayList;
 
+import com.hector.invoice.dto.AbstractTableDTO;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,12 +24,6 @@ import android.database.sqlite.SQLiteStatement;
 public abstract class ABSTRACT_TABLE {
 	// trang thai khi row duoc tao
 	public static final int CREATED_STATUS = 0;
-	// trang thai khi row duoc chuyen thanh cong len server
-	public static final int TRANSFERED_STATUS = 1;
-	// trang thai khi dong bo thanh cong
-	public static final int SYNCHRONIZED_STATUS = 2;
-	// colum phuc vu syn
-	public static final String SYN_STATE = "SYN_STATE";
 	// list column
 	protected String[] columns;
 	// sql get count querry
@@ -52,11 +48,10 @@ public abstract class ABSTRACT_TABLE {
 	 * 
 	 * genera sql create table
 	 * 
-	 * @return
+	 * @param @return
 	 * @return: String
-	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 3, 2013
 	 */
 	public String generaSQLCreateTable() {
 		StringBuffer strSQLCreateTable = new StringBuffer();
@@ -73,11 +68,13 @@ public abstract class ABSTRACT_TABLE {
 	}
 
 	/**
+	 * 
 	 * Lay so luong record cua table
 	 * 
-	 * @author: TruongHN
+	 * @param @return
 	 * @return: long
-	 * @throws:
+	 * @author: HaiTC3
+	 * @date: Mar 3, 2013
 	 */
 	public long getCount() {
 		SQLiteStatement statement = compileStatement(sqlGetCountQuerry);
@@ -86,14 +83,15 @@ public abstract class ABSTRACT_TABLE {
 	}
 
 	/**
+	 * 
 	 * Get MaxId trong table khi truyen vao tableName & ten column
 	 * 
-	 * @author: TruongHN
-	 * @param tableName
-	 * @param columnIdName
-	 * @throws Exception
+	 * @param @param columnIdName
+	 * @param @return
+	 * @param @throws Exception
 	 * @return: int
-	 * @throws:
+	 * @author: HaiTC3
+	 * @date: Mar 3, 2013
 	 */
 	public int getMaxIdInTable(String columnIdName) throws Exception {
 		int maxId = -1;
@@ -130,7 +128,7 @@ public abstract class ABSTRACT_TABLE {
 	 * @return: int
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 3, 2012
 	 */
 	public int update(ContentValues values, String whereClause,
 			String[] whereArgs) {
@@ -148,12 +146,23 @@ public abstract class ABSTRACT_TABLE {
 	 * @return: Cursor
 	 * @throws:
 	 * @author: HaiTC3
-	 * @date: Dec 7, 2012
+	 * @date: Mar 3, 2012
 	 */
 	public Cursor rawQuery(String sqlQuery, String[] params) {
 		return mDB.rawQuery(sqlQuery, params);
 	}
 
+	/**
+	 * 
+	 * Raw queries
+	 * 
+	 * @param @param sqlQuery
+	 * @param @param params
+	 * @param @return
+	 * @return: Cursor
+	 * @author: HaiTC3
+	 * @date: Mar 3, 2013
+	 */
 	public Cursor rawQueries(String sqlQuery, ArrayList<String> params) {
 		String[] strParams = null;
 		if (params != null) {
@@ -186,7 +195,6 @@ public abstract class ABSTRACT_TABLE {
 
 	public int delete(String whereClause, String[] whereArgs) {
 		int delete = mDB.delete(tableName, whereClause, whereArgs);
-		// Log.i("Truong, delete - ", String.valueOf(delete));
 		return delete;
 	}
 
