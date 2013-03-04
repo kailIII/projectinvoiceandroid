@@ -85,14 +85,11 @@
 
                     <Button
                         android:id="@+id/btSelectAnsprechpartner"
-                        android:layout_width="100dip"
+                        android:layout_width="150dip"
                         android:layout_height="wrap_content"
                         android:text="Ansprechpartner"
                         android:width="10dip" />
                 </LinearLayout>
-
-                <View>
-                </View>
             </LinearLayout>
 
             <LinearLayout
@@ -107,7 +104,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_contacter" />
 
                 <EditText
                     android:id="@+id/etNumber"
@@ -134,10 +131,50 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_sex" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <RadioGroup
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/rbMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Male" />
+
+                        <RadioButton
+                            android:id="@+id/rbFeMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FeMale" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/TRANSPARENT"
+                android:gravity="center_vertical"
+                android:minHeight="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/text_lable_company" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etCompanyInfo"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -161,10 +198,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_address" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etAddress"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -188,10 +225,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_plz" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etPLZ"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -215,10 +252,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_stadt" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etStadt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -242,10 +279,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_order_on" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etOrderOn"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -269,10 +306,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_delivery" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etDelivery"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -296,10 +333,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="lable" />
+                    android:text="@string/text_lable_customer_info" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etCustomerInfo"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -309,6 +346,28 @@
                     android:maxLength="9"
                     android:singleLine="true"
                     android:text="eit tet" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/TRANSPARENT"
+                android:gravity="center_vertical"
+                android:minHeight="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/text_lable_invoice_number" />
+
+                <TextView
+                    android:id="@+id/tvInvoiceNumber"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_lable_invoice_number" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
