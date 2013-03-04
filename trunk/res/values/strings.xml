@@ -7,6 +7,15 @@
     <string name="text_confirm_exit_app">Are you sure you want to exit the Job Aid?</string>
     <string name="text_button_ok">YES</string>
     <string name="text_button_no">NO</string>
-    <string name="text_lable">NO</string>
+    <string name="text_lable_contacter">Ansprechpartner:</string> <!-- contacter -->
+    <string name="text_lable_sex">Geschlecht:</string> <!-- sex -->
+    <string name="text_lable_company">Firma:</string> <!-- company -->
+    <string name="text_lable_address">Adresse:</string> <!-- address -->
+    <string name="text_lable_plz">PLZ:</string> <!-- alz -->
+    <string name="text_lable_stadt">Stadt:</string> <!-- stadt -->
+    <string name="text_lable_order_on">Bestellt am:</string> <!-- project -->
+    <string name="text_lable_delivery">Lieferdatum:</string> <!-- lieferdatum -->
+    <string name="text_lable_customer_info">Kunden-Nr:</string> <!-- lieferdatum -->
+    <string name="text_lable_invoice_number">Rechnungsnummer:</string> <!-- lieferdatum -->
 
 </resources>
