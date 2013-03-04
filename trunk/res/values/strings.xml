@@ -7,5 +7,6 @@
     <string name="text_confirm_exit_app">Are you sure you want to exit the Job Aid?</string>
     <string name="text_button_ok">YES</string>
     <string name="text_button_no">NO</string>
+    <string name="text_lable">NO</string>
 
 </resources>
