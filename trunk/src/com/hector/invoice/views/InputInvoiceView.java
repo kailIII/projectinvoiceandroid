@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseActivity;
+import com.hector.invoice.lib.SQLUtils;
 
 /**
  * Screen input Invoice to Save to PDF file
@@ -33,6 +34,7 @@ public class InputInvoiceView extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_main_page_view);
+		SQLUtils.getInstance();
 	}
 
 	/*

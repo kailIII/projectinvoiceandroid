@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.view.inputmethod.InputMethodManager;
@@ -313,7 +312,7 @@ public class GlobalUtil {
 	 * @throws:
 	 * @since: Mar 2, 2013
 	 */
-	public static boolean checkExistsDataBase() {
+	public boolean checkExistsDataBase() {
 		boolean isExistData = false;
 		SQLiteDatabase checkDB = null;
 		try {
@@ -324,8 +323,6 @@ public class GlobalUtil {
 			if (checkDB != null) {
 				isExistData = true;
 			}
-		} catch (SQLiteCantOpenDatabaseException e) {
-			// file DB chua ton tai ko send log
 		} catch (SQLiteException e) {
 			// database doesn't exist yet.
 

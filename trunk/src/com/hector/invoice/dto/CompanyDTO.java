@@ -17,6 +17,9 @@ public class CompanyDTO extends AbstractTableDTO {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final int SEX_MALE = 1;
+	public static final int SEX_FEMALE = 0;
+	
 	// ma lop
 	public long companyId;
 	// ten lop

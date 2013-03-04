@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.InvoiceInfo;
-import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.AbstractTableDTO;
+import com.hector.invoice.dto.CompanyDTO;
 
 /**
  * 
@@ -45,27 +44,39 @@ public class SQLUtils {
 			synchronized (lockObject) {
 				if (mDB == null || !mDB.isOpen()) {
 					try {
-						boolean dbExists = GlobalUtil.checkExistsDataBase();
+						boolean dbExists = GlobalUtil.getInstance()
+								.checkExistsDataBase();
 						mDB = SQLiteDatabase.openOrCreateDatabase(
 								ExternalStorage.getFileDBPath(
 										InvoiceInfo.getInstance()
 												.getAppContext())
 										.getAbsolutePath()
-										+ "/InvoiceDatabase", null,
-								new DatabaseErrorHandler() {
+										+ "/InvoiceDatabase", null);
+						if (!dbExists) {
+							createAllTableForDatabase();
+						}
 
-									public void onCorruption(
-											SQLiteDatabase dbObj) {
-										// TODO Auto-generated method stub
+						// mDB = SQLiteDatabase.openOrCreateDatabase(
+						// ExternalStorage.getFileDBPath(
+						// InvoiceInfo.getInstance()
+						// .getAppContext())
+						// .getAbsolutePath()
+						// + "/InvoiceDatabase", null,
+						// new DatabaseErrorHandler() {
+						//
+						// public void onCorruption(
+						// SQLiteDatabase dbObj) {
+						// // TODO Auto-generated method stub
+						//
+						// }
+						// });
 
-									}
-								});
 						// mDB = SQLiteDatabase.openDatabase(
 						// ExternalStorage.getFileDBPath(
 						// GlobalInfo.getInstance()
 						// .getAppContext())
 						// .getAbsolutePath()
-						// + "/SmasDatabase", null,
+						// + "/InvoiceDatabase", null,
 						// SQLiteDatabase.OPEN_READWRITE);
 						// if (!dbExists) {
 						// createAllTableForDatabase();
@@ -91,30 +102,15 @@ public class SQLUtils {
 	public static void createAllTableForDatabase() {
 		ArrayList<ABSTRACT_TABLE> listTable = new ArrayList<ABSTRACT_TABLE>();
 		COMPANY_TABLE tbListClass = new COMPANY_TABLE(mDB);
-		STUDENT_TABLE studentTable = new STUDENT_TABLE(mDB);
-		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(
+		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		INVOICE_ORDER_TABLET invoiceOrderTable = new INVOICE_ORDER_TABLET(mDB);
+		INVOICE_ORDER_DETAIL_TABLET invoiceOrderDetailTable = new INVOICE_ORDER_DETAIL_TABLET(
 				mDB);
-		LEARN_TABLE learn_table = new LEARN_TABLE(mDB);
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
-				mDB);
-		LEARN_TO_CLASS_TABLE laerntoclass_table = new LEARN_TO_CLASS_TABLE(mDB);
-		PRAISE_TABLE praise_table = new PRAISE_TABLE(mDB);
-		DISCIPLINE_TABLE discipline_table = new DISCIPLINE_TABLE(mDB);
-		INFOPERSONAL_TABLE infopersoval_table = new INFOPERSONAL_TABLE(mDB);
-		ETHNICS_TABLE ethnics_table = new ETHNICS_TABLE(mDB);
-		RELIGION_TABLE religion_table = new RELIGION_TABLE(mDB);
 
 		listTable.add(tbListClass);
-		listTable.add(studentTable);
-		listTable.add(properties_student_table);
-		listTable.add(learn_table);
-		listTable.add(processOfClassTable);
-		listTable.add(laerntoclass_table);
-		listTable.add(praise_table);
-		listTable.add(discipline_table);
-		listTable.add(infopersoval_table);
-		listTable.add(ethnics_table);
-		listTable.add(religion_table);
+		listTable.add(contactTable);
+		listTable.add(invoiceOrderTable);
+		listTable.add(invoiceOrderDetailTable);
 
 		createListTableIntoDB(listTable);
 	}
@@ -256,7 +252,7 @@ public class SQLUtils {
 
 	/**
 	 * 
-	 * drop list table in DB
+	 * drop list table in DB if exists
 	 * 
 	 * @author: HaiTC3
 	 * @param listTableName
@@ -385,8 +381,21 @@ public class SQLUtils {
 	 */
 	private long insertDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
-		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
+		if (AbstractTableDTO.TableType.LIST_COMPANY.equals(tableDTO.getType())) {
 			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
+			res = table.insert(tableDTO);
+		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
+				.getType())) {
+			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			res = table.insert(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
+				.getType())) {
+			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			res = table.insert(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
+				.equals(tableDTO.getType())) {
+			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+					mDB);
 			res = table.insert(tableDTO);
 		}
 		return res;
@@ -406,8 +415,21 @@ public class SQLUtils {
 	 */
 	private long updateDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
-		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
+		if (AbstractTableDTO.TableType.LIST_COMPANY.equals(tableDTO.getType())) {
 			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
+			res = table.update(tableDTO);
+		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
+				.getType())) {
+			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			res = table.update(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
+				.getType())) {
+			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			res = table.update(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
+				.equals(tableDTO.getType())) {
+			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+					mDB);
 			res = table.update(tableDTO);
 		}
 		return res;
@@ -426,8 +448,21 @@ public class SQLUtils {
 	 */
 	private long deleteDTO(AbstractTableDTO tableDTO) {
 		long res = -1;
-		if (AbstractTableDTO.TableType.LIST_CLASS.equals(tableDTO.getType())) {
+		if (AbstractTableDTO.TableType.LIST_COMPANY.equals(tableDTO.getType())) {
 			COMPANY_TABLE table = new COMPANY_TABLE(mDB);
+			res = table.delete(tableDTO);
+		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
+				.getType())) {
+			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			res = table.delete(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
+				.getType())) {
+			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			res = table.delete(tableDTO);
+		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
+				.equals(tableDTO.getType())) {
+			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+					mDB);
 			res = table.delete(tableDTO);
 		}
 		return res;
@@ -762,29 +797,24 @@ public class SQLUtils {
 	}
 
 	/**
-	 * ------------------ LAY DU LIEU DANH SACH LOP
-	 * HOC---------------------------
-	 */
-
-	/**
 	 * 
-	 * Lay thong tin lop hoc
+	 * Lay thong tin cong ty
 	 * 
-	 * @param classID
+	 * @param companyId
 	 * @return
 	 * @return: ClassDTO
 	 * @throws:
 	 * @author: yenntth16
 	 * @date: Dec 7, 2012
 	 */
-	public CompanyDTO getClassInfo(String classID) {
+	public CompanyDTO getCompanyInfo(String companyId) {
 		COMPANY_TABLE cusTable = new COMPANY_TABLE(mDB);
-		CompanyDTO classInfo = cusTable.getCompanyById(classID);
+		CompanyDTO classInfo = cusTable.getCompanyById(companyId);
 		return classInfo;
 	}
 
 	/**
-	 * Luu lai thong tin cac lop hoc
+	 * Luu lai thong tin company
 	 * 
 	 * @author: Nguyen Thanh Dung
 	 * @param list
@@ -792,14 +822,11 @@ public class SQLUtils {
 	 * @throws:
 	 */
 
-	public void saveListClass(ClassListDTO list) {
+	public void saveListClass(CompanyDTO companyInfo) {
 		try {
 			mDB.beginTransaction();
-			COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
-			for (CompanyDTO classDTO : list.getListclass()) {
-				classTable.insert(classDTO);
-			}
-
+			COMPANY_TABLE companyTable = new COMPANY_TABLE(mDB);
+			companyTable.insert(companyInfo);
 			mDB.setTransactionSuccessful();
 		} catch (Exception ex) {
 
@@ -807,399 +834,4 @@ public class SQLUtils {
 			mDB.endTransaction();
 		}
 	}
-
-	/**
-	 * Lay tat ca cac lop trong bang
-	 * 
-	 * @author: Nguyen Thanh Dung
-	 * @return
-	 * @return: ClassListDTO
-	 * @throws:
-	 */
-
-	public ClassListDTO getClassList() {
-		ClassListDTO list = null;
-
-		COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
-		list = classTable.getAllRow();
-
-		return list;
-	}
-
-	/**
-	 * Thêm danh sach hoc sinh xuong db
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListStudientDTO(StudientListDTO list) {
-
-		STUDENT_TABLE studentTable = new STUDENT_TABLE(mDB);
-		studentTable.saveList(list);
-	}
-
-	/**
-	 * Lay danh sach hoc sinh tu db
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public StudientListDTO getListStudientDTO(int idClass) {
-		StudientListDTO list = new StudientListDTO();
-
-		STUDENT_TABLE studentTable = new STUDENT_TABLE(mDB);
-		ArrayList<StudentDTO> pupilList = studentTable.getListStudent(String
-				.valueOf(idClass));
-		if (pupilList != null) {
-			list.pupilList = pupilList;
-			list.totalPupil = list.pupilList.size();
-		}
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-	/**
-	 * Thêm chi tiet student xuong db
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void savePropertiesStudientDTO(
-			PropertiesStudientDTO propertiesStudientDTO) {
-
-		PROPERTIES_STUDENT_TABLE properties_student_table = new PROPERTIES_STUDENT_TABLE(
-				mDB);
-		properties_student_table.saveList(propertiesStudientDTO);
-	}
-
-	/**
-	 * Lay thong tin sinh vien
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public PropertiesStudientDTO getPropertiesStudientDTO(int pupilFileID) {
-		PropertiesStudientDTO propertiesStudientDTO = new PropertiesStudientDTO();
-
-		PROPERTIES_STUDENT_TABLE properties_table = new PROPERTIES_STUDENT_TABLE(
-				mDB);
-		propertiesStudientDTO = properties_table
-				.getPropertiesStudentbyId(String.valueOf(pupilFileID));
-		return propertiesStudientDTO;
-	}
-
-	// ///////////==============================/////////////////////////////////
-	/**
-	 * Thêm danh sach hoc luc va hanh kiem xuong db
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListLearnDTO(ListLearnDTO ListLearnDTO) {
-
-		LEARN_TABLE LEARN_TABLE = new LEARN_TABLE(mDB);
-		LEARN_TABLE.saveList(ListLearnDTO);
-	}
-
-	/**
-	 * Lay thong tin hoc luc va hanh kiem
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListLearnDTO getListLearnDTO(int pupilFileID) {
-		ListLearnDTO listLearnDTO = new ListLearnDTO();
-
-		LEARN_TABLE learn_table = new LEARN_TABLE(mDB);
-		ArrayList<LearnDTO> listLear = new ArrayList<LearnDTO>();
-		listLear.add(learn_table.getlearnbyId(String.valueOf(pupilFileID)));
-		listLearnDTO.setLearnList(listLear);
-		listLearnDTO.setTotalLearn(listLearnDTO.getLearnList().size());
-		return listLearnDTO;
-	}
-
-	// /////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach qua trinh len lop xuong db
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListProcessOfClassDTO(ListProcessOfClassDTO list) {
-
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
-				mDB);
-
-		processOfClassTable.saveListProcessOfClass(list);
-	}
-
-	/**
-	 * Lay danh sach qua trinh len lop tu db
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListProcessOfClassDTO getListProcessOfClassDTO(int pupilFileID) {
-		ListProcessOfClassDTO list = new ListProcessOfClassDTO();
-
-		PROCESS_OF_CLASS_TABLE processOfClassTable = new PROCESS_OF_CLASS_TABLE(
-				mDB);
-		list.setlistProcessOfClass(processOfClassTable
-				.getListProcessOfClass(String.valueOf(pupilFileID)));
-		list.setTotalListProcessOfClass(list.getlistProcessOfClass().size());
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach cac lop da hoc
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListLearnToClassDTO(ListLearnToClassDTO list) {
-
-		LEARN_TO_CLASS_TABLE learntoclass = new LEARN_TO_CLASS_TABLE(mDB);
-
-		learntoclass.saveListLearnToClass(list);
-	}
-
-	/**
-	 * Lay danh sach cac lop da hoc
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListLearnToClassDTO getListLearnToClassDTO(int pupilFileID) {
-		ListLearnToClassDTO list = new ListLearnToClassDTO();
-
-		LEARN_TO_CLASS_TABLE learntoclasstable = new LEARN_TO_CLASS_TABLE(mDB);
-		list.setListLearnToClassDTO(learntoclasstable
-				.getListLearnToClass(String.valueOf(pupilFileID)));
-		list.setTotalLearnToClass(list.getListLearnToClassDTO().size());
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach khen thuong
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListPraise(ListPraiseDTO list) {
-
-		PRAISE_TABLE praisetable = new PRAISE_TABLE(mDB);
-
-		praisetable.saveListPraise(list);
-	}
-
-	/**
-	 * Lay danh sach khen thuong
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListPraiseDTO getListPraisePropertiesStudent(int pupilFileID) {
-		ListPraiseDTO list = new ListPraiseDTO();
-
-		PRAISE_TABLE praisetable = new PRAISE_TABLE(mDB);
-		list.setListPraise(praisetable.getListPraisePropertiesStudent(String
-				.valueOf(pupilFileID)));
-		list.setTotalPraise(list.getListPraise().size());
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach ky luat
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListDisciplinaryDTO(ListDisciplinaryDTO list) {
-
-		DISCIPLINE_TABLE discipline = new DISCIPLINE_TABLE(mDB);
-
-		discipline.saveListDisciplinary(list);
-	}
-
-	/**
-	 * Lay danh sach ky luat
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListDisciplinaryDTO getListDisciplinePropertiesStudent(
-			int pupilFileID) {
-		ListDisciplinaryDTO list = new ListDisciplinaryDTO();
-
-		DISCIPLINE_TABLE discipline = new DISCIPLINE_TABLE(mDB);
-		list.setListDisciplinary(discipline
-				.getListDisciplinePropertiesStudent(String.valueOf(pupilFileID)));
-		list.setTotalDisciplinary(list.getListDisciplinary().size());
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-	/**
-	 * Thêm chi tiet nguoi xuong db
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveInfoPersonalDTO(InfoPersonalDTO infoPersonalDTO) {
-
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
-				mDB);
-		infopersonal_student_table.insert(infoPersonalDTO);
-	}
-
-	/**
-	 * Lay thong tin nguoi
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public InfoPersonalDTO getInfoPersonalDTO(int teacherID) {
-		InfoPersonalDTO infoPersonalDTO = new InfoPersonalDTO();
-
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
-				mDB);
-		infoPersonalDTO = infopersonal_student_table
-				.getInfoPersonalbyId(StringUtil.getString(teacherID));
-		return infoPersonalDTO;
-	}
-
-	/**
-	 * cap nhat thong tin nguoi dung
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public long updateInfoPersonalDTO(InfoPersonalDTO infoPersonalDTO) {
-		long flag;
-		INFOPERSONAL_TABLE infopersonal_student_table = new INFOPERSONAL_TABLE(
-				mDB);
-		flag = infopersonal_student_table.update(infoPersonalDTO);
-		return flag;
-	}
-
-	// ///////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach dan toc
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListEthnicDTO(ListEthnicsDTO list) {
-
-		ETHNICS_TABLE ethnics = new ETHNICS_TABLE(mDB);
-
-		ethnics.saveListEthnicsDTO(list);
-	}
-
-	/**
-	 * Lay danh sach dan toc
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListEthnicsDTO getListEthnicsDTO() {
-		ListEthnicsDTO list = new ListEthnicsDTO();
-
-		ETHNICS_TABLE ethnics = new ETHNICS_TABLE(mDB);
-		list = ethnics.getAllList();
-		return list;
-	}
-
-	// ///////////==============================/////////////////////////////////
-
-	/**
-	 * Thêm danh sach ton giao
-	 * 
-	 * @author: DucHHA
-	 * @param list
-	 * @return: void
-	 * @throws:
-	 */
-	public void saveListReligionDTO(ListReligionDTO list) {
-
-		RELIGION_TABLE religion = new RELIGION_TABLE(mDB);
-
-		religion.saveList(list);
-	}
-
-	/**
-	 * Lay danh sach ton giao
-	 * 
-	 * @author: DucHHA
-	 * @return
-	 * @return: StudientListDTO
-	 * @throws:
-	 */
-	public ListReligionDTO getListReligionDTO() {
-		ListReligionDTO listReligionDTO = new ListReligionDTO();
-
-		RELIGION_TABLE religion = new RELIGION_TABLE(mDB);
-		listReligionDTO = religion.getAllList();
-		return listReligionDTO;
-	}
-
-	/**
-	 * Mo ta chuc nang cua ham
-	 * 
-	 * @author: Nguyen Thanh Dung
-	 * @return: void
-	 * @throws:
-	 */
-
-	public void clearClassTable() {
-		COMPANY_TABLE classTable = new COMPANY_TABLE(mDB);
-		classTable.delete(null, null);
-	}
-
 }
