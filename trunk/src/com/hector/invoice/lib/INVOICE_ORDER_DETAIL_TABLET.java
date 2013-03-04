@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 
@@ -242,15 +243,32 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(InvoiceOrderDetailDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		editedValues.put(INVOICE_ORDER_DETAIL_ID,
-				String.valueOf(dto.invoiceOrderDetailId));
-		editedValues.put(INVOICE_ORDER_ID, String.valueOf(dto.invoiceOrderId));
-		editedValues.put(POS, dto.pos);
-		editedValues.put(DESIGNATION, dto.designation);
-		editedValues.put(ART_NR, dto.art_nr);
-		editedValues.put(QUANTITY, dto.quantity);
-		editedValues.put(SINGLE_PRICE, dto.single_price);
-		editedValues.put(TOTAL, dto.total);
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceOrderDetailId))) {
+			editedValues.put(INVOICE_ORDER_DETAIL_ID,
+					String.valueOf(dto.invoiceOrderDetailId));
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceOrderId))) {
+			editedValues.put(INVOICE_ORDER_ID,
+					String.valueOf(dto.invoiceOrderId));
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.pos))) {
+			editedValues.put(POS, dto.pos);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.designation))) {
+			editedValues.put(DESIGNATION, dto.designation);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.art_nr))) {
+			editedValues.put(ART_NR, dto.art_nr);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+			editedValues.put(QUANTITY, dto.quantity);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+			editedValues.put(SINGLE_PRICE, dto.single_price);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+			editedValues.put(TOTAL, dto.total);
+		}
 		return editedValues;
 	}
 

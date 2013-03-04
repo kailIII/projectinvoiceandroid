@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.ContactDTO;
 
@@ -213,14 +214,30 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(ContactDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
-		editedValues.put(CONTACT_NAME, dto.contactName);
-		editedValues.put(CONTACT_ADDRESS, dto.contactAddress);
-		editedValues.put(CONTACT_PLZ, dto.contactPLZ);
-		editedValues.put(CONTACT_STADT, dto.contactStadt);
-		editedValues.put(FIRST_NAME, dto.firstName);
-		editedValues.put(LAST_NAME, dto.lastName);
-		editedValues.put(SEX, String.valueOf(dto.sex));
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactId))) {
+			editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactName))) {
+			editedValues.put(CONTACT_NAME, dto.contactName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactAddress))) {
+			editedValues.put(CONTACT_ADDRESS, dto.contactAddress);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactAddress))) {
+			editedValues.put(CONTACT_PLZ, dto.contactPLZ);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactStadt))) {
+			editedValues.put(CONTACT_STADT, dto.contactStadt);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.firstName))) {
+			editedValues.put(FIRST_NAME, dto.firstName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.lastName))) {
+			editedValues.put(LAST_NAME, dto.lastName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.sex))) {
+			editedValues.put(SEX, String.valueOf(dto.sex));
+		}
 		return editedValues;
 	}
 
