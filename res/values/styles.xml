@@ -18,14 +18,14 @@
     </style>
 
     <style name="CustomEditText" parent="@android:style/Widget.EditText">
-        <item name="android:background">@drawable/edittext_hight_light</item>
+       <!--  <item name="android:background">@drawable/edittext_hight_light</item>
         <item name="android:textColor">@color/BLACK</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
-        <!-- <item name="android:textCursorDrawable">@drawable/black_cursor</item> -->
+        <item name="android:textCursorDrawable">@drawable/black_cursor</item>
         <item name="android:paddingLeft">@dimen/page_padding_left</item>
         <item name="android:paddingRight">@dimen/page_padding_right</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item> -->
     </style>
 
 </resources>
