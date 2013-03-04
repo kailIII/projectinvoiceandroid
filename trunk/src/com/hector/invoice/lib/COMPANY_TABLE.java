@@ -112,122 +112,122 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 
 		// column LOGO
 		ColumnTable logo = new ColumnTable(LOGO, ColumnTable.DATA_TYPE_TEXT,
-				false, false, true, false,
+				false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(logo);
 
 		// column company Name
 		ColumnTable companyName = new ColumnTable(COMPANY_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(companyName);
 
 		// column COMPANY_ADDRESS
 		ColumnTable department = new ColumnTable(COMPANY_ADDRESS,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(department);
 
 		// column COMPANY_PLZ
 		ColumnTable teacher = new ColumnTable(COMPANY_PLZ,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(teacher);
 
 		// column COMPANY_CITY
 		ColumnTable session = new ColumnTable(COMPANY_CITY,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(session);
 
 		// column CERTIFICATE_OF_ORIGIN
 		ColumnTable language = new ColumnTable(CERTIFICATE_OF_ORIGIN,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language);
 		// column SEX
 		ColumnTable multigrade = new ColumnTable(SEX,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(multigrade);
 		// column TELEPHONE
 		ColumnTable language1 = new ColumnTable(TELEPHONE,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language1);
 		// column FAX
 		ColumnTable language2 = new ColumnTable(FAX,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(language2);
 		// column EMAIL
 		ColumnTable informatics = new ColumnTable(EMAIL,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(informatics);
 
 		// column UNITED_STATES_T
 		ColumnTable vocationalschool = new ColumnTable(UNITED_STATES_T,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(vocationalschool);
 		// column BANK_COMPANY_NAME
 		ColumnTable site = new ColumnTable(BANK_COMPANY_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(site);
 		// column BANK_ACCTNUM
 		ColumnTable nature = new ColumnTable(BANK_ACCTNUM,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(nature);
 		// column BANK_BLZ
 		ColumnTable description = new ColumnTable(BANK_BLZ,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(description);
 		// column BANK_NAME
 		ColumnTable levelId = new ColumnTable(BANK_NAME,
-				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(levelId);
 		// column VAT_TEXT
 		ColumnTable vatText = new ColumnTable(VAT_TEXT,
-				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(vatText);
 		// column VAT_VALUE
 		ColumnTable vatValue = new ColumnTable(VAT_VALUE,
-				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(vatValue);
 		// column INVOICE_CONF
 		ColumnTable InvoiceConf = new ColumnTable(INVOICE_CONF,
-				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(InvoiceConf);
 
 		// column STAFF_SALE
 		ColumnTable staffSale = new ColumnTable(STAFF_SALE,
-				ColumnTable.DATA_TYPE_INTEGER, false, false, true, false,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(staffSale);
