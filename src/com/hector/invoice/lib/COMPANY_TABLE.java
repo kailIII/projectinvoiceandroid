@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
 
@@ -362,25 +363,63 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(CompanyDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		editedValues.put(COMPANY_ID, String.valueOf(dto.companyId));
-		editedValues.put(LOGO, dto.logo);
-		editedValues.put(COMPANY_NAME, dto.companyName);
-		editedValues.put(COMPANY_ADDRESS, dto.companyAddress);
-		editedValues.put(COMPANY_PLZ, dto.companyPLZ);
-		editedValues.put(COMPANY_CITY, dto.companyCity);
-		editedValues.put(CERTIFICATE_OF_ORIGIN, dto.certificateOfOrigin);
-		editedValues.put(SEX, String.valueOf(dto.sex));
-		editedValues.put(FAX, dto.fax);
-		editedValues.put(EMAIL, dto.email);
-		editedValues.put(UNITED_STATES_T, dto.unitedStatesT);
-		editedValues.put(BANK_COMPANY_NAME, dto.bankCompanyName);
-		editedValues.put(BANK_ACCTNUM, dto.bankAcctnum);
-		editedValues.put(BANK_BLZ, dto.bankBLZ);
-		editedValues.put(BANK_NAME, dto.bankName);
-		editedValues.put(VAT_TEXT, dto.vatText);
-		editedValues.put(VAT_VALUE, dto.vatValue);
-		editedValues.put(INVOICE_CONF, dto.invoiceConf);
-		editedValues.put(STAFF_SALE, dto.staffSale);
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyId))) {
+			editedValues.put(COMPANY_ID, String.valueOf(dto.companyId));
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.logo))) {
+			editedValues.put(LOGO, dto.logo);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyName))) {
+			editedValues.put(COMPANY_NAME, dto.companyName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyAddress))) {
+			editedValues.put(COMPANY_ADDRESS, dto.companyAddress);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyPLZ))) {
+			editedValues.put(COMPANY_PLZ, dto.companyPLZ);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyCity))) {
+			editedValues.put(COMPANY_CITY, dto.companyCity);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.certificateOfOrigin))) {
+			editedValues.put(CERTIFICATE_OF_ORIGIN, dto.certificateOfOrigin);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.sex))) {
+			editedValues.put(SEX, String.valueOf(dto.sex));
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.fax))) {
+			editedValues.put(FAX, dto.fax);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.email))) {
+			editedValues.put(EMAIL, dto.email);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.unitedStatesT))) {
+			editedValues.put(UNITED_STATES_T, dto.unitedStatesT);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankCompanyName))) {
+			editedValues.put(BANK_COMPANY_NAME, dto.bankCompanyName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankAcctnum))) {
+			editedValues.put(BANK_ACCTNUM, dto.bankAcctnum);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankBLZ))) {
+			editedValues.put(BANK_BLZ, dto.bankBLZ);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankName))) {
+			editedValues.put(BANK_NAME, dto.bankName);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.vatText))) {
+			editedValues.put(VAT_TEXT, dto.vatText);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.vatValue))) {
+			editedValues.put(VAT_VALUE, dto.vatValue);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceConf))) {
+			editedValues.put(INVOICE_CONF, dto.invoiceConf);
+		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.staffSale))) {
+			editedValues.put(STAFF_SALE, dto.staffSale);
+		}
 		return editedValues;
 	}
 }
