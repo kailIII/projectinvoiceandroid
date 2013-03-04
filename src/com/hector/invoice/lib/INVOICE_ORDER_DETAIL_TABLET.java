@@ -65,7 +65,7 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 
 		// column CONTACT_ID
 		ColumnTable invoiceOrderId = new ColumnTable(INVOICE_ORDER_ID,
-				ColumnTable.DATA_TYPE_INTEGER, true, true, true, true,
+				ColumnTable.DATA_TYPE_INTEGER, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(invoiceOrderId);
@@ -79,28 +79,28 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 
 		// column CONTACT_ADDRESS
 		ColumnTable designation = new ColumnTable(DESIGNATION,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(designation);
 
 		// column CONTACT_PLZ
 		ColumnTable art_nr = new ColumnTable(ART_NR,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(art_nr);
 
 		// column CONTACT_STADT
 		ColumnTable quantity = new ColumnTable(QUANTITY,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(quantity);
 
 		// column FIRST_NAME
 		ColumnTable single_price = new ColumnTable(SINGLE_PRICE,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(single_price);

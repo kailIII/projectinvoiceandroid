@@ -64,48 +64,48 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 
 		// column CONTACT_NAME
 		ColumnTable contactName = new ColumnTable(CONTACT_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactName);
 
 		// column CONTACT_ADDRESS
 		ColumnTable contactAddress = new ColumnTable(CONTACT_ADDRESS,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactAddress);
 
 		// column CONTACT_PLZ
 		ColumnTable contactPlz = new ColumnTable(CONTACT_PLZ,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactPlz);
 
 		// column CONTACT_STADT
 		ColumnTable contactStadt = new ColumnTable(CONTACT_STADT,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactStadt);
 
 		// column FIRST_NAME
 		ColumnTable firstName = new ColumnTable(FIRST_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(firstName);
 
 		// column LAST_NAME
 		ColumnTable lastName = new ColumnTable(LAST_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(lastName);
 		// column SEX
 		ColumnTable multigrade = new ColumnTable(SEX,
-				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(multigrade);
