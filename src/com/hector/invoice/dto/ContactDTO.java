@@ -22,6 +22,8 @@ public class ContactDTO extends AbstractTableDTO {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final int SEX_MALE = 1;
+	public static final int SEX_REMALE = 0;
 
 	public long contactId;
 	public String contactName;

@@ -36,7 +36,7 @@ public class ExternalStorage {
 
 	// external storage directory
 	public static String EXTERNAL_CACHE_DIR = InvoiceInfo.getInstance()
-			.getAppContext().getExternalCacheDir().getAbsolutePath()
+			.getAppContext().getCacheDir().getAbsolutePath()
 			+ "/";
 
 	/**
@@ -67,8 +67,7 @@ public class ExternalStorage {
 	// thu muc file buffer dong bo du lieu
 	public static final String INVOICE_SYNDATA_FOLDER = "SYN_DATA";
 	// thu muc database trong cache VNM
-	public static final String INVOICE_DATABASE_FOLDER = EXTERNAL_CACHE_DIR
-			+ "DATABASE";
+	public static final String INVOICE_DATABASE_FOLDER = EXTERNAL_CACHE_DIR + "DATABASE";
 
 	/**
 	 * 

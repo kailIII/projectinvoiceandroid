@@ -58,55 +58,55 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 		ArrayList<ColumnTable> listColumn = new ArrayList<ColumnTable>();
 		// column CONTACT_ID
 		ColumnTable invoiceOrderId = new ColumnTable(INVOICE_ORDER_ID,
-				ColumnTable.DATA_TYPE_INTEGER, true, true, true, true,
+				ColumnTable.DATA_TYPE_INTEGER, true, true, false, true,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(invoiceOrderId);
 
 		// column CONTACT_NAME
 		ColumnTable contactid = new ColumnTable(CONTACT_ID,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactid);
 
 		// column CONTACT_ADDRESS
 		ColumnTable contactName = new ColumnTable(CONTACT_NAME,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(contactName);
 
 		// column CONTACT_PLZ
 		ColumnTable project = new ColumnTable(PROJECT,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(project);
 
 		// column CONTACT_STADT
 		ColumnTable orderedOn = new ColumnTable(ORDERED_ON,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(orderedOn);
 
 		// column FIRST_NAME
 		ColumnTable delivery = new ColumnTable(DELIVERY,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(delivery);
 
 		// column LAST_NAME
 		ColumnTable customerNumber = new ColumnTable(CUSTOMER_NUMBER,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(customerNumber);
 		// column SEX
 		ColumnTable invoiceOrderNumber = new ColumnTable(INVOICE_ORDER_NUMBER,
-				ColumnTable.DATA_TYPE_TEXT, false, false, false, false,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(invoiceOrderNumber);
