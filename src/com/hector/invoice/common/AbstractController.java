@@ -16,7 +16,13 @@ package com.hector.invoice.common;
 public abstract class AbstractController {
 	// handle view event
 	abstract public void handleViewEvent(ActionEvent e);
-	// handle switch activity
-    abstract public void handleSwitchActivity(ActionEvent e);
-}
 
+	// handle switch activity
+	abstract public void handleSwitchActivity(ActionEvent e);
+
+	// hanle event from service
+	abstract public void handleModelEvent(ModelEvent modelEvent);
+
+	// handle error from service
+	abstract public void handleErrorModelEvent(ModelEvent modelEvent);
+}

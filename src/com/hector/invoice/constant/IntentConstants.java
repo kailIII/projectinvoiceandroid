@@ -22,4 +22,5 @@ public class IntentConstants {
 	public static final String INTENT_BROAD_CAST_HASH_CODE = "jobaids.hashCode";
 	public static final String INTENT_TYPE = "INTENT_TYPE";
 	public static final String INTENT_TABLE_NAME = "INTENT_TABLE_NAME";
+	public static final String INTENT_PAGE = "INTENT_PAGE";
 }
