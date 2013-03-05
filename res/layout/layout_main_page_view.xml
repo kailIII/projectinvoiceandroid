@@ -108,15 +108,15 @@
 
                 <EditText
                     android:id="@+id/etNumber"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -133,30 +133,24 @@
                     android:layout_weight="3"
                     android:text="@string/text_lable_sex" />
 
-                <LinearLayout
+                <RadioGroup
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
-                    <RadioGroup
-                        android:layout_width="fill_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content" >
+                    <RadioButton
+                        android:id="@+id/rbMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_lable_male" />
 
-                        <RadioButton
-                            android:id="@+id/rbMale"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Male" />
-
-                        <RadioButton
-                            android:id="@+id/rbFeMale"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FeMale" />
-                    </RadioGroup>
-                </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/rbFeMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_lable_female" />
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -175,15 +169,15 @@
 
                 <EditText
                     android:id="@+id/etCompanyInfo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -202,15 +196,15 @@
 
                 <EditText
                     android:id="@+id/etAddress"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -229,15 +223,15 @@
 
                 <EditText
                     android:id="@+id/etPLZ"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -256,15 +250,15 @@
 
                 <EditText
                     android:id="@+id/etStadt"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -283,15 +277,15 @@
 
                 <EditText
                     android:id="@+id/etOrderOn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -310,15 +304,15 @@
 
                 <EditText
                     android:id="@+id/etDelivery"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -337,15 +331,15 @@
 
                 <EditText
                     android:id="@+id/etCustomerInfo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CustomEditText"
                     android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
                     android:maxLength="9"
-                    android:singleLine="true"
-                    android:text="eit tet" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -369,6 +363,76 @@
                     android:layout_weight="1"
                     android:text="@string/text_lable_invoice_number" />
             </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tblListOrderNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/WHITE"
+                android:orientation="horizontal" >
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/WHITE"
+                    android:gravity="center"
+                    android:minHeight="@dimen/min_height_table_row" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dip"
+                        android:layout_marginRight="1dip"
+                        android:layout_weight="1"
+                        android:background="@color/COLOR_GRAY_DONE"
+                        android:padding="@dimen/page_padding" />
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </ScrollView>
 

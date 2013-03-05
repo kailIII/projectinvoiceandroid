@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/WHITE" >
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        style="@style/CustomEditText"
+        android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLength="9"
+        android:singleLine="true" />
+
+</TableRow>

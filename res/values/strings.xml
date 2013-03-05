@@ -17,5 +17,7 @@
     <string name="text_lable_delivery">Lieferdatum:</string> <!-- lieferdatum -->
     <string name="text_lable_customer_info">Kunden-Nr:</string> <!-- lieferdatum -->
     <string name="text_lable_invoice_number">Rechnungsnummer:</string> <!-- lieferdatum -->
+    <string name="text_lable_male">Male</string> <!-- Male -->
+    <string name="text_lable_female">Female</string> <!-- Female -->
 
 </resources>

@@ -13,5 +13,6 @@
     <dimen name="page_padding_top">5dp</dimen>
     <dimen name="page_padding_right">5dp</dimen>
     <dimen name="page_padding_bottom">5dp</dimen>
+    <dimen name="min_height_table_row">40dp</dimen>
 
 </resources>
