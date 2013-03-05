@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 
 import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
+import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
  * 
@@ -832,6 +835,32 @@ public class SQLUtils {
 
 		} finally {
 			mDB.endTransaction();
+		}
+	}
+
+	/**
+	 * 
+	 * get list contact from db
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: ArrayList<ContactDTO>
+	 * @throws:
+	 * @since: Mar 5, 2013
+	 */
+	public ListContactViewDTO getListContactFromDB(Bundle data) {
+		ListContactViewDTO listContact = new ListContactViewDTO();
+		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+
+		try {
+			listContact = contactTable.getListContact(data);
+			return listContact;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return null;
 		}
 	}
 }

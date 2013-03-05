@@ -15,7 +15,14 @@ package com.hector.invoice.constant;
 
 public class ActionEventConstant {
 	// action show splash screen
-	public static final int SHOW_SPLASH_SCREEN = 1;
+	public static final int SHOW_INPUT_INVOICE_VIEW = 1;
+	// request get list contact
+	public static final int GET_LIST_CONTACT = 2;
+	// request get company info
+	public static final int GET_COMPANY_INFO = 3;
+	// go to contact list view
+	public static final int SHOW_CONTACT_LIST_VIEW = 4;
+
 	// action show main menu view
 	public static final int SHOW_MAIN_MENU = 2;
 	// action show tab topic skin and mucous view

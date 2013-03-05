@@ -1,3 +1,8 @@
+/**
+ * Copyright 2012 Mr.Hai Mobile Developer. All rights reserved.
+ * HAI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
 package com.hector.invoice.common;
 
 import android.app.Activity;
@@ -41,6 +46,8 @@ public abstract class BaseActivity extends Activity implements
 	private boolean isActive;
 	// check time out cancel progress dialog
 	public boolean isTimeoutCancelDialog = false;
+	// is finished activity
+	public boolean isFinished = false;
 
 	protected void onResume() {
 		super.onResume();
@@ -77,6 +84,7 @@ public abstract class BaseActivity extends Activity implements
 		// TODO Auto-generated method stub
 
 	}
+
 	/**
 	 * 
 	 * send broad cast
@@ -234,6 +242,18 @@ public abstract class BaseActivity extends Activity implements
 		}
 	}
 
+	@Override
+	public void finish() {
+		isFinished = true;
+		super.finish();
+	}
+
+	@Override
+	public void finishActivity(int requestCode) {
+		isFinished = true;
+		super.finishActivity(requestCode);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -277,6 +297,42 @@ public abstract class BaseActivity extends Activity implements
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * 
+	 * handle model event for base activity
+	 * 
+	 * @author: HaiTC3
+	 * @param modelEvent
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 5, 2013
+	 */
+	public void handleModelViewEvent(ModelEvent modelEvent) {
+		ActionEvent e = modelEvent.getActionEvent();
+		switch (e.action) {
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * 
+	 * handle error model event from service for base activity
+	 * 
+	 * @author: HaiTC3
+	 * @param modelEvent
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 5, 2013
+	 */
+	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
+		ActionEvent e = modelEvent.getActionEvent();
+		switch (e.action) {
+		default:
+			break;
+		}
 	}
 
 }

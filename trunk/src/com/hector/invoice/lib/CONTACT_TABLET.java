@@ -10,10 +10,14 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.hector.invoice.common.StringUtil;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
  * Class description
@@ -241,4 +245,71 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 		return editedValues;
 	}
 
+	/**
+	 * 
+	 * get list contact
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: ListContactViewDTO
+	 * @throws:
+	 * @since: Mar 5, 2013
+	 */
+	public ListContactViewDTO getListContact(Bundle data) {
+		ListContactViewDTO listContact = new ListContactViewDTO();
+		String page = data.getString(IntentConstants.INTENT_PAGE);
+		StringBuffer queryGetlistContact = new StringBuffer();
+		ArrayList<String> listParams = new ArrayList<String>();
+		queryGetlistContact.append("select * from contact_");
+		String getCountContact = " select count(*) as total_row from ("
+				+ queryGetlistContact.toString() + ") ";
+
+		String[] paramsGetListProduct = new String[] {};
+		paramsGetListProduct = listParams
+				.toArray(new String[listParams.size()]);
+
+		Cursor c = null;
+		Cursor cTmp = null;
+		long startTime = System.currentTimeMillis();
+		try {
+			// get total row first
+			Log.v("start time: ", String.valueOf(System.currentTimeMillis()));
+			int total = 0;
+			cTmp = rawQuery(getCountContact, paramsGetListProduct);
+			if (cTmp != null) {
+				cTmp.moveToFirst();
+				total = cTmp.getInt(0);
+				listContact.totalContactList = total;
+			}
+			// end
+			c = rawQuery(queryGetlistContact + page, paramsGetListProduct);
+
+			if (c != null) {
+
+				if (c.moveToFirst()) {
+					do {
+						ContactDTO contactInfo = new ContactDTO();
+
+						contactInfo.initLogDTOFromCursor(c);
+						listContact.listContact.add(contactInfo);
+					} while (c.moveToNext());
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+			if (cTmp != null) {
+				cTmp.close();
+			}
+		}
+
+		Log.v("endTime", String.valueOf(System.currentTimeMillis() - startTime));
+
+		return listContact;
+	}
 }
