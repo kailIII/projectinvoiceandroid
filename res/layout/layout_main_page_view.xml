@@ -8,19 +8,16 @@
     <LinearLayout
         android:id="@+id/llTopMenu"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dip"
         android:layout_alignParentTop="true"
         android:background="@drawable/bar_bottom_bg"
         android:gravity="center_vertical"
-        android:minHeight="44dip"
-        android:orientation="horizontal"
-        android:padding="@dimen/page_margin" >
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/ivNewInvoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/page_margin"
             android:contentDescription="new invoice"
             android:src="@drawable/image_button_new_selector" />
 
@@ -28,7 +25,6 @@
             android:id="@+id/ivOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/page_margin"
             android:contentDescription="open invoice"
             android:src="@drawable/image_button_open_selector" />
 
@@ -36,7 +32,6 @@
             android:id="@+id/ivSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/page_margin"
             android:contentDescription="save invoice"
             android:src="@drawable/image_button_save_selector" />
 
@@ -44,7 +39,6 @@
             android:id="@+id/ivExport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/page_margin"
             android:contentDescription="export"
             android:src="@drawable/image_button_export_selector" />
     </LinearLayout>
