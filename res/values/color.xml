@@ -13,5 +13,6 @@
     <color name="TABLE_HEADER_BG">#edf3f8</color>
     <color name="TABLE_BG">#c3c3c3</color>
     <color name="COLOR_GRAY_DONE">#C6C6C6</color>
+    <color name="HEADER_TB_COLOR">#555555</color>
 
 </resources>

@@ -8,7 +8,7 @@ package com.hector.invoice.views;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 
 import com.hector.invoice.R;
 
@@ -19,7 +19,7 @@ import com.hector.invoice.R;
  * @version: 1.1
  * @since: 1.0
  */
-public class DisplayItemOrderNumberRow extends TableRow {
+public class DisplayItemOrderNumberRow extends LinearLayout {
 	Context _context;
 	View view;
 

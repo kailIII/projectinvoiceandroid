@@ -13,11 +13,18 @@
     <string name="text_lable_address">Adresse:</string> <!-- address -->
     <string name="text_lable_plz">PLZ:</string> <!-- alz -->
     <string name="text_lable_stadt">Stadt:</string> <!-- stadt -->
+    <string name="text_lable_project">Projekt:</string> <!-- stadt -->
     <string name="text_lable_order_on">Bestellt am:</string> <!-- project -->
     <string name="text_lable_delivery">Lieferdatum:</string> <!-- lieferdatum -->
     <string name="text_lable_customer_info">Kunden-Nr:</string> <!-- lieferdatum -->
     <string name="text_lable_invoice_number">Rechnungsnummer:</string> <!-- lieferdatum -->
-    <string name="text_lable_male">Male</string> <!-- Male -->
-    <string name="text_lable_female">Female</string> <!-- Female -->
+    <string name="text_lable_male">Herr</string> <!-- Male -->
+    <string name="text_lable_female">Frau</string> <!-- Female -->
+    <string name="text_lb_header_tb_Pos">Pos</string> <!-- Female -->
+    <string name="text_lb_header_tb_bezeichnung">Bezeichnung</string> <!-- Female -->
+    <string name="text_lb_header_tb_art_nr">Art-Nr.</string> <!-- Female -->
+    <string name="text_lb_header_tb_menge">Menge</string> <!-- Female -->
+    <string name="text_lb_header_tb_einze">Einzelpreis</string> <!-- Female -->
+    <string name="text_lb_header_tb_gesamt">Gesamt</string> <!-- Female -->
 
 </resources>
