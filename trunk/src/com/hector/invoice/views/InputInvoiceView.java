@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import com.hector.invoice.R;
@@ -48,7 +49,7 @@ public class InputInvoiceView extends BaseActivity {
 	// icon contact
 	ImageView ivContact;
 	// table tblListOrderNumber
-	TableLayout tblListOrderNumber;
+	LinearLayout tblListOrderNumber;
 
 	/*
 	 * (non-Javadoc)
@@ -92,7 +93,7 @@ public class InputInvoiceView extends BaseActivity {
 		ivContact.setOnClickListener(this);
 		btThema = (Button) findViewById(R.id.btThema);
 		btThema.setOnClickListener(this);
-		tblListOrderNumber = (TableLayout) findViewById(R.id.tblListOrderNumber);
+		tblListOrderNumber = (LinearLayout) findViewById(R.id.tblListOrderNumber);
 	}
 
 	/*
