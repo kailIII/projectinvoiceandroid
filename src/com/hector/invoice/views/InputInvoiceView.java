@@ -65,6 +65,7 @@ public class InputInvoiceView extends BaseActivity {
 
 		// init view control
 		this.initViewControl();
+		// create file DB if not exist
 		SQLUtils.getInstance();
 	}
 
@@ -138,20 +139,20 @@ public class InputInvoiceView extends BaseActivity {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v == ivAdd) {
-
+			this.createNewOrderNumber();
 		} else if (v == ivContact) {
 			this.gotoContactListView();
 		} else if (v == ivExport) {
-
+			showExportInvoiceScreen();
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
 			this.updateAllControl();
 		} else if (v == ivOpen) {
-
+			showInvoiceList();
 		} else if (v == ivSave) {
-
+			requestSaveInvoice();
 		} else if (v == ivSetting) {
-
+			this.showCompanyInfo();
 		} else if (v == btThema) {
 
 		} else {
@@ -159,12 +160,113 @@ public class InputInvoiceView extends BaseActivity {
 		}
 	}
 
+	/**
+	 * 
+	 * request save invoice
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void requestSaveInvoice() {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.REQUEST_SAVE_INVOICE;
+		MainController.getInstance().handleViewEvent(event);
+	}
+
+	/**
+	 * 
+	 * show company info
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void showInvoiceList() {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.SHOW_INVOICE_LIST_VIEW;
+		MainController.getInstance().handleSwitchActivity(event);
+	}
+
+	/**
+	 * 
+	 * show export invoice screen
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void showExportInvoiceScreen() {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN;
+		MainController.getInstance().handleSwitchActivity(event);
+	}
+
+	/**
+	 * 
+	 * show company info
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void showCompanyInfo() {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.SHOW_COMPANY_INFO_VIEW;
+		MainController.getInstance().handleSwitchActivity(event);
+	}
+
+	/**
+	 * 
+	 * create new row order for invoice
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void createNewOrderNumber() {
+		DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
+				this, tblListOrderNumber);
+		tblListOrderNumber.addView(rowOrder);
+	}
+
+	/**
+	 * 
+	 * update control of screen
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 13, 2013
+	 */
 	public void updateAllControl() {
 		if (this.isCreatingInvoice) {
 			this.ivSave.setVisibility(View.VISIBLE);
 			this.ivExport.setVisibility(View.VISIBLE);
 			this.ivAdd.setVisibility(View.VISIBLE);
 			this.btThema.setVisibility(View.VISIBLE);
+		} else {
+			ivSave.setVisibility(View.INVISIBLE);
+			ivExport.setVisibility(View.INVISIBLE);
+			ivAdd.setVisibility(View.INVISIBLE);
+			btThema.setVisibility(View.INVISIBLE);
 		}
 	}
 

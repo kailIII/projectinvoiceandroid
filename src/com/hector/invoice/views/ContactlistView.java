@@ -5,9 +5,13 @@
 package com.hector.invoice.views;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
@@ -26,6 +30,7 @@ import com.hector.invoice.dto.ListContactViewDTO;
  */
 public class ContactlistView extends BaseActivity {
 
+	ListView lvListContact;
 	boolean isDoneLoadFirst = false;
 	ListContactViewDTO listContactInfo = new ListContactViewDTO();
 
@@ -40,6 +45,7 @@ public class ContactlistView extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_contact_list_view);
 
+		lvListContact = (ListView) this.findViewById(R.id.lvListContact);
 		if (!isDoneLoadFirst) {
 			this.requestGetListContact();
 		}
@@ -99,7 +105,6 @@ public class ContactlistView extends BaseActivity {
 	 * @since: Mar 5, 2013
 	 */
 	public void renderLayout() {
-
 	}
 
 	/*
@@ -115,7 +120,8 @@ public class ContactlistView extends BaseActivity {
 		ActionEvent event = modelEvent.getActionEvent();
 		switch (event.action) {
 		case ActionEventConstant.GET_LIST_CONTACT:
-			this.listContactInfo = (ListContactViewDTO) modelEvent.getModelData();
+			this.listContactInfo = (ListContactViewDTO) modelEvent
+					.getModelData();
 			if (this.listContactInfo != null) {
 				this.renderLayout();
 			}

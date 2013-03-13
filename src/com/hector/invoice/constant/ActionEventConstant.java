@@ -22,6 +22,14 @@ public class ActionEventConstant {
 	public static final int GET_COMPANY_INFO = 3;
 	// go to contact list view
 	public static final int SHOW_CONTACT_LIST_VIEW = 4;
+	// go to company info
+	public static final int SHOW_COMPANY_INFO_VIEW = 5;
+	// go to invoice list view
+	public static final int SHOW_INVOICE_LIST_VIEW = 6;
+	// save invoice list view
+	public static final int REQUEST_SAVE_INVOICE = 7;
+	// show export invoice screen
+	public static final int SHOW_EXPORT_INVOICE_SCREEN = 8;
 
 	// action show main menu view
 	public static final int SHOW_MAIN_MENU = 2;
