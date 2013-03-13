@@ -261,7 +261,7 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 		String page = data.getString(IntentConstants.INTENT_PAGE);
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
-		queryGetlistContact.append("select * from contact_");
+		queryGetlistContact.append("select * from CONTACT_TABLET ");
 		String getCountContact = " select count(*) as total_row from ("
 				+ queryGetlistContact.toString() + ") ";
 

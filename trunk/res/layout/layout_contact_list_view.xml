@@ -2,17 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WHITE"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/etNumber"
-        style="@style/CustomEditText"
-        android:layout_gravity="center"
-        android:layout_margin="2dp"
-        android:layout_marginLeft="2dp"
-        android:gravity="center"
-        android:inputType="none"
-        android:maxLength="9"
-        android:singleLine="true" />
+    <ListView
+        android:id="@+id/lvListContact"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
