@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
@@ -50,6 +49,8 @@ public class InputInvoiceView extends BaseActivity {
 	ImageView ivContact;
 	// table tblListOrderNumber
 	LinearLayout tblListOrderNumber;
+	// check creating invoice
+	boolean isCreatingInvoice = false;
 
 	/*
 	 * (non-Javadoc)
@@ -94,6 +95,7 @@ public class InputInvoiceView extends BaseActivity {
 		btThema = (Button) findViewById(R.id.btThema);
 		btThema.setOnClickListener(this);
 		tblListOrderNumber = (LinearLayout) findViewById(R.id.tblListOrderNumber);
+		this.updateAllControl();
 	}
 
 	/*
@@ -142,7 +144,8 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivExport) {
 
 		} else if (v == ivNewInvoice) {
-
+			this.isCreatingInvoice = true;
+			this.updateAllControl();
 		} else if (v == ivOpen) {
 
 		} else if (v == ivSave) {
@@ -153,6 +156,15 @@ public class InputInvoiceView extends BaseActivity {
 
 		} else {
 			super.onClick(v);
+		}
+	}
+
+	public void updateAllControl() {
+		if (this.isCreatingInvoice) {
+			this.ivSave.setVisibility(View.VISIBLE);
+			this.ivExport.setVisibility(View.VISIBLE);
+			this.ivAdd.setVisibility(View.VISIBLE);
+			this.btThema.setVisibility(View.VISIBLE);
 		}
 	}
 

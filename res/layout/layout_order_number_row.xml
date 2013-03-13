@@ -7,82 +7,87 @@
     android:orientation="horizontal" >
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etPos"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:layout_marginBottom="1dip"
         android:layout_marginRight="1dip"
         android:layout_weight="1"
-        android:gravity="center"
-        android:inputType="none"
-        android:maxLength="9"
-        android:singleLine="true" />
-<!-- 
-    <EditText
-        android:id="@+id/etNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etBezeichnung"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etArtNr"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etMenge"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etEinze"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/etNumber"
+        android:id="@+id/etGesamt"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
+        android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
         android:maxLength="9"
-        android:singleLine="true" /> -->
+        android:singleLine="true" />
 
 </LinearLayout>
