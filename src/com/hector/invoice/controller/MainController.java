@@ -18,6 +18,7 @@ import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.ErrorConstants;
 import com.hector.invoice.model.MainModelServices;
 import com.hector.invoice.views.ContactlistView;
+import com.hector.invoice.views.CreateUpdateContactInfoView;
 import com.hector.invoice.views.InputInvoiceView;
 
 /**
@@ -58,6 +59,12 @@ public class MainController extends AbstractController {
 				case ActionEventConstant.GET_LIST_CONTACT:
 					MainModelServices.getInstance().requestGetListContact(e);
 					break;
+				case ActionEventConstant.REQUEST_DELETE_CONTACT:
+					MainModelServices.getInstance().requestDeleteContact(e);
+					break;
+				case ActionEventConstant.REQUEST_UPDATE_CREATE_CONTACT:
+					MainModelServices.getInstance().requestUpdateOrCreateContact(e);
+					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
 					break;
@@ -89,7 +96,6 @@ public class MainController extends AbstractController {
 			intent = new Intent(sender, InputInvoiceView.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
-			sender.finish();
 			break;
 		}
 		case ActionEventConstant.SHOW_CONTACT_LIST_VIEW: {
@@ -98,7 +104,14 @@ public class MainController extends AbstractController {
 			intent = new Intent(sender, ContactlistView.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
-			sender.finish();
+			break;
+		}
+		case ActionEventConstant.SHOW_CRATE_CONTACT_VIEW: {
+			BaseActivity sender = (BaseActivity) e.sender;
+			extras = (Bundle) e.viewData;
+			intent = new Intent(sender, CreateUpdateContactInfoView.class);
+			intent.putExtras(extras);
+			sender.startActivity(intent);
 			break;
 		}
 		default:

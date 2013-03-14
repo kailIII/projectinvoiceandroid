@@ -6,18 +6,20 @@
 package com.hector.invoice.views;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import android.app.Service;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hector.invoice.R;
+import com.hector.invoice.common.BaseActivity;
+import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.dto.ContactDTO;
 
 /**
@@ -31,10 +33,14 @@ public class ContactAdapter extends BaseAdapter {
 	private static final int MIN_ROW = 5;
 	private Context mContext;
 	private ArrayList<ContactDTO> mContacts = new ArrayList<ContactDTO>();
+	BaseActivity listen;
+	public int index = 0;
 
-	public ContactAdapter(Context context, ArrayList<ContactDTO> list) {
+	public ContactAdapter(Context context, ArrayList<ContactDTO> list,
+			BaseActivity listener) {
 		mContext = context;
 		mContacts = list;
+		this.listen = listener;
 	}
 
 	@Override
@@ -57,20 +63,46 @@ public class ContactAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		View vi = convertView;
+		this.index = position;
+		ContactDTO itemData = this.mContacts.get(position);
 		if (convertView == null) {
 			LayoutInflater li = (LayoutInflater) mContext
 					.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
 			vi = li.inflate(R.layout.layout_row_item_contact, null);
+			vi.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					listen.onEvent(
+							ActionEventConstant.ACTION_CLICK_ROW_CONTACT, null,
+							mContacts.get(index));
+				}
+			});
 
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
 			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
+			tvName.setText(itemData.firstName);
+			ivDelete.setVisibility(View.INVISIBLE);
+			ivDelete.setOnClickListener(new OnClickListener() {
 
-			
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					listen.onEvent(
+							ActionEventConstant.ACTION_CLICK_DELETE_CONTACT,
+							null, mContacts.get(index));
+				}
+			});
 			return vi;
 		} else {
+			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
+			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
+			tvName.setText(itemData.firstName);
+			ivDelete.setVisibility(View.INVISIBLE);
 		}
 
-		return convertView;
+		return vi;
 	}
 
 	public void setContact(ArrayList<ContactDTO> listContact) {

@@ -66,6 +66,8 @@
                 android:background="@color/TRANSPARENT"
                 android:gravity="center_vertical"
                 android:minHeight="40dip"
+                android:layout_marginTop="@dimen/page_margin_top"
+                android:layout_marginBottom="@dimen/page_margin_bottom"
                 android:orientation="horizontal" >
 
                 <TextView

@@ -5,12 +5,10 @@
 package com.hector.invoice.views;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.hector.invoice.R;
@@ -18,7 +16,9 @@ import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ActionEventConstant;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
+import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
@@ -33,6 +33,8 @@ public class ContactlistView extends BaseActivity {
 	ListView lvListContact;
 	boolean isDoneLoadFirst = false;
 	ListContactViewDTO listContactInfo = new ListContactViewDTO();
+	Button btBack;
+	Button btCreate;
 
 	/*
 	 * (non-Javadoc)
@@ -46,6 +48,10 @@ public class ContactlistView extends BaseActivity {
 		setContentView(R.layout.layout_contact_list_view);
 
 		lvListContact = (ListView) this.findViewById(R.id.lvListContact);
+		btBack = (Button) this.findViewById(R.id.btBack);
+		btBack.setOnClickListener(this);
+		btCreate = (Button) this.findViewById(R.id.btCreate);
+		btCreate.setOnClickListener(this);
 		if (!isDoneLoadFirst) {
 			this.requestGetListContact();
 		}
@@ -60,7 +66,7 @@ public class ContactlistView extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		if (this.isDoneLoadFirst) {
-
+			this.renderLayout();
 		}
 		super.onResume();
 	}
@@ -126,7 +132,12 @@ public class ContactlistView extends BaseActivity {
 				this.renderLayout();
 			}
 			break;
-
+		case ActionEventConstant.REQUEST_DELETE_CONTACT:
+			int result = (Integer) modelEvent.getModelData();
+			if (result == 1) {
+				this.requestGetListContact();
+			}
+			break;
 		default:
 			super.handleModelViewEvent(modelEvent);
 			break;
@@ -144,5 +155,86 @@ public class ContactlistView extends BaseActivity {
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
 		// TODO Auto-generated method stub
 		super.handleErrorModelViewEvent(modelEvent);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hector.invoice.common.BaseActivity#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		if (v == btBack) {
+			this.finish();
+		} else if (v == btCreate) {
+			this.gotoCreateContactView(null);
+		} else {
+			super.onClick(v);
+		}
+	}
+
+	/**
+	 * 
+	 * show create contact view
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void gotoCreateContactView(ContactDTO ctObject) {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		if (ctObject != null) {
+			data.putSerializable(IntentConstants.INTENT_CONTACT_OBJECT,
+					ctObject);
+		}
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.SHOW_CRATE_CONTACT_VIEW;
+		MainController.getInstance().handleSwitchActivity(event);
+	}
+
+	/**
+	 * 
+	 * request delete contact
+	 * 
+	 * @param @param myContact
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void requestDeleteContact(ContactDTO myContact) {
+		ActionEvent event = new ActionEvent();
+		Bundle data = new Bundle();
+		if (myContact != null) {
+			data.putSerializable(IntentConstants.INTENT_CONTACT_OBJECT,
+					myContact);
+		}
+		event.viewData = data;
+		event.sender = this;
+		event.action = ActionEventConstant.REQUEST_DELETE_CONTACT;
+		MainController.getInstance().handleViewEvent(event);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hector.invoice.common.BaseActivity#onEvent(int,
+	 * android.view.View, java.lang.Object)
+	 */
+	@Override
+	public void onEvent(int eventType, View control, Object data) {
+		// TODO Auto-generated method stub
+		if (eventType == ActionEventConstant.ACTION_CLICK_ROW_CONTACT) {
+			ContactDTO myData = (ContactDTO) data;
+			gotoCreateContactView(myData);
+		} else if (eventType == ActionEventConstant.ACTION_CLICK_DELETE_CONTACT) {
+			ContactDTO myData = (ContactDTO) data;
+			requestDeleteContact(myData);
+		} else {
+			super.onEvent(eventType, control, data);
+		}
 	}
 }

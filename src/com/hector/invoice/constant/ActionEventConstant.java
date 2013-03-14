@@ -30,6 +30,16 @@ public class ActionEventConstant {
 	public static final int REQUEST_SAVE_INVOICE = 7;
 	// show export invoice screen
 	public static final int SHOW_EXPORT_INVOICE_SCREEN = 8;
+	// show create contact view
+	public static final int SHOW_CRATE_CONTACT_VIEW = 9;
+	// show create contact view
+	public static final int ACTION_CLICK_ROW_CONTACT = 10;
+	// show create contact view
+	public static final int ACTION_CLICK_DELETE_CONTACT = 11;
+	// request delete contact
+	public static final int REQUEST_DELETE_CONTACT = 12;
+	// request delete contact
+	public static final int REQUEST_UPDATE_CREATE_CONTACT = 13;
 
 	// action show main menu view
 	public static final int SHOW_MAIN_MENU = 2;

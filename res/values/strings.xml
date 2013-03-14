@@ -20,6 +20,8 @@
     <string name="text_lable_invoice_number">Rechnungsnummer:</string> <!-- lieferdatum -->
     <string name="text_lable_male">Herr</string> <!-- Male -->
     <string name="text_lable_female">Frau</string> <!-- Female -->
+    <string name="text_lable_vorname">Vorname: </string> <!-- Female -->
+    <string name="text_lable_nachname">Nachname: </string> <!-- Female -->
     <string name="text_lb_header_tb_Pos">Pos</string> <!-- Female -->
     <string name="text_lb_header_tb_bezeichnung">Bezeichnung</string> <!-- Female -->
     <string name="text_lb_header_tb_art_nr">Art-Nr.</string> <!-- Female -->
