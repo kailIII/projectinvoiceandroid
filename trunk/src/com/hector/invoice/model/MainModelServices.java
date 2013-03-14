@@ -66,4 +66,67 @@ public class MainModelServices {
 			MainController.getInstance().handleErrorModelEvent(model);
 		}
 	}
+
+	/**
+	 * 
+	 * request delete contact
+	 * 
+	 * @param @param event
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public void requestDeleteContact(ActionEvent event) {
+
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			int index = SQLUtils.getInstance().requestDeleteContact(data);
+			if (index == 1) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(String.valueOf(index));
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * rquest update or create contact
+	 * 
+	 * @param @param event
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 15, 2013
+	 */
+	public void requestUpdateOrCreateContact(ActionEvent event) {
+
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			int index = SQLUtils.getInstance().requestCreateOrUpdateContact(
+					data);
+			if (index == 1) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(String.valueOf(index));
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
 }

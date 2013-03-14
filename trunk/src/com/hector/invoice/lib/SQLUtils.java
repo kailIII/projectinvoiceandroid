@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.InvoiceInfo;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
@@ -861,6 +862,60 @@ public class SQLUtils {
 			e.printStackTrace();
 
 			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * request delete contact in db
+	 * 
+	 * @param @param data
+	 * @param @return
+	 * @return: int
+	 * @author: HaiTC3
+	 * @date: Mar 14, 2013
+	 */
+	public int requestDeleteContact(Bundle data) {
+		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		ContactDTO myContact = (ContactDTO) data
+				.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT);
+
+		try {
+			contactTable.delete(myContact);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return 0;
+		}
+	}
+
+	/**
+	 * 
+	 * request create or update contact if it exist
+	 * 
+	 * @param @param data
+	 * @param @return
+	 * @return: int
+	 * @author: HaiTC3
+	 * @date: Mar 15, 2013
+	 */
+	public int requestCreateOrUpdateContact(Bundle data) {
+		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		ContactDTO myContact = (ContactDTO) data
+				.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT);
+
+		try {
+			if (myContact.contactId >= 1) {
+				contactTable.update(myContact);
+			} else {
+				contactTable.insert(myContact);
+			}
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return 0;
 		}
 	}
 }

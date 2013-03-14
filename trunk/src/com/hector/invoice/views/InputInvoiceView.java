@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -49,6 +50,16 @@ public class InputInvoiceView extends BaseActivity {
 	ImageView ivContact;
 	// table tblListOrderNumber
 	LinearLayout tblListOrderNumber;
+	EditText etNumber;
+	EditText etCompanyInfo;
+	EditText etAddress;
+	EditText etPLZ;
+	EditText etStadt;
+	EditText etProject;
+	EditText etOrderOn;
+	EditText etDelivery;
+	EditText etCustomerInfo;
+
 	// check creating invoice
 	boolean isCreatingInvoice = false;
 
@@ -79,6 +90,16 @@ public class InputInvoiceView extends BaseActivity {
 	 * @since: Mar 5, 2013
 	 */
 	public void initViewControl() {
+		etAddress = (EditText) findViewById(R.id.etAddress);
+		etCompanyInfo = (EditText) findViewById(R.id.etCompanyInfo);
+		etCustomerInfo = (EditText) findViewById(R.id.etCustomerInfo);
+		etDelivery = (EditText) findViewById(R.id.etDelivery);
+		etNumber = (EditText) findViewById(R.id.etNumber);
+		etOrderOn = (EditText) findViewById(R.id.etOrderOn);
+		etPLZ = (EditText) findViewById(R.id.etPLZ);
+		etProject = (EditText) findViewById(R.id.etProject);
+		etStadt = (EditText) findViewById(R.id.etStadt);
+
 		ivNewInvoice = (ImageView) findViewById(R.id.ivNewInvoice);
 		ivNewInvoice.setOnClickListener(this);
 		ivOpen = (ImageView) findViewById(R.id.ivOpen);
@@ -141,18 +162,18 @@ public class InputInvoiceView extends BaseActivity {
 		if (v == ivAdd) {
 			this.createNewOrderNumber();
 		} else if (v == ivContact) {
-			this.gotoContactListView();
+			this.gotoContactListView(); // show list contact view
 		} else if (v == ivExport) {
-			showExportInvoiceScreen();
+			showExportInvoiceScreen(); // export invoice
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
-			this.updateAllControl();
+			this.updateAllControl(); // update all control
 		} else if (v == ivOpen) {
-			showInvoiceList();
+			showInvoiceList(); // show list invoice
 		} else if (v == ivSave) {
-			requestSaveInvoice();
+			requestSaveInvoice(); // request save invoice
 		} else if (v == ivSetting) {
-			this.showCompanyInfo();
+			this.showCompanyInfo(); // show company info
 		} else if (v == btThema) {
 
 		} else {
@@ -258,6 +279,17 @@ public class InputInvoiceView extends BaseActivity {
 	 */
 	public void updateAllControl() {
 		if (this.isCreatingInvoice) {
+			// clear data
+			this.etAddress.setText("");
+			this.etCompanyInfo.setText("");
+			this.etCustomerInfo.setText("");
+			this.etDelivery.setText("");
+			this.etNumber.setText("");
+			this.etOrderOn.setText("");
+			this.etPLZ.setText("");
+			this.etProject.setText("");
+			this.etStadt.setText("");
+
 			this.ivSave.setVisibility(View.VISIBLE);
 			this.ivExport.setVisibility(View.VISIBLE);
 			this.ivAdd.setVisibility(View.VISIBLE);
