@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
@@ -59,10 +60,11 @@ public class InputInvoiceView extends BaseActivity {
 	EditText etPLZ;
 	EditText etStadt;
 	EditText etProject;
-	EditText etOrderOn;
-	EditText etDelivery;
-	EditText etCustomerInfo;
+	EditText etBestellt;
+	EditText etLieferdatum;
+	EditText etKunden;
 	Button btSelectAnsprechpartner;
+	TextView tvInvoiceNumber;
 
 	// check creating invoice
 	boolean isCreatingInvoice = false;
@@ -99,15 +101,18 @@ public class InputInvoiceView extends BaseActivity {
 	 * @since: Mar 5, 2013
 	 */
 	public void initViewControl() {
+		
+		etAnsprechpartner = (EditText) findViewById(R.id.etAnsprechpartner);
+		etFirma = (EditText) findViewById(R.id.etFirma);
 		etAddress = (EditText) findViewById(R.id.etAddress);
-		etCompanyInfo = (EditText) findViewById(R.id.etCompanyInfo);
-		etCustomerInfo = (EditText) findViewById(R.id.etCustomerInfo);
-		etDelivery = (EditText) findViewById(R.id.etDelivery);
-		etNumber = (EditText) findViewById(R.id.etNumber);
-		etOrderOn = (EditText) findViewById(R.id.etOrderOn);
+		
 		etPLZ = (EditText) findViewById(R.id.etPLZ);
 		etProject = (EditText) findViewById(R.id.etProject);
 		etStadt = (EditText) findViewById(R.id.etStadt);
+		etBestellt = (EditText) findViewById(R.id.etBestellt);
+		etLieferdatum = (EditText) findViewById(R.id.etLieferdatum);
+		etKunden = (EditText) findViewById(R.id.etKunden);
+		tvInvoiceNumber = (TextView) findViewById(R.id.tvInvoiceNumber);
 
 		ivNewInvoice = (ImageView) findViewById(R.id.ivNewInvoice);
 		ivNewInvoice.setOnClickListener(this);
@@ -315,14 +320,15 @@ public class InputInvoiceView extends BaseActivity {
 		if (this.isCreatingInvoice) {
 			// clear data
 			this.etAddress.setText("");
-			this.etCompanyInfo.setText("");
-			this.etCustomerInfo.setText("");
-			this.etDelivery.setText("");
-			this.etNumber.setText("");
-			this.etOrderOn.setText("");
+			this.etAnsprechpartner.setText("");
+			this.etBestellt.setText("");
+			this.etFirma.setText("");
+			this.etKunden.setText("");
+			this.etLieferdatum.setText("");
 			this.etPLZ.setText("");
 			this.etProject.setText("");
 			this.etStadt.setText("");
+			this.tvInvoiceNumber.setText("");
 
 			this.ivSave.setVisibility(View.VISIBLE);
 			this.ivExport.setVisibility(View.VISIBLE);
@@ -338,6 +344,9 @@ public class InputInvoiceView extends BaseActivity {
 	
 	public void updateInvoiceDataForScreen(){
 		etAddress.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress);
+		etAnsprechpartner.setText(this.invoiceInfo.invoiceOrder.contactInvoice.firstName + " " + this.invoiceInfo.invoiceOrder.contactInvoice.lastName);
+		etBestellt.setText(this.invoiceInfo.invoiceOrder.)
+		
 		etCompanyInfo.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactName);
 		etCustomerInfo
 	}
