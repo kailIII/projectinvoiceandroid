@@ -8,11 +8,22 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="17" />
 
+    <permission
+        android:name="com.dev.meinewerk.action"
+        android:description="@string/app_permision_info"
+        android:label="@string/app_permision_name"
+        android:protectionLevel="dangerous" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <receiver
+            android:name="com.hector.invoice.common.action"
+            android:enabled="true" >
+        </receiver>
+
         <activity
             android:name="com.hector.invoice.views.InputInvoiceView"
             android:label="@string/app_name" >
