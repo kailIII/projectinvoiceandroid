@@ -363,7 +363,7 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(CompanyDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyId))) {
+		if (dto.companyId > 0) {
 			editedValues.put(COMPANY_ID, String.valueOf(dto.companyId));
 		}
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.logo))) {

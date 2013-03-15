@@ -29,7 +29,7 @@ import com.hector.invoice.dto.ContactDTO;
  * @since: 1.0
  */
 public class CreateUpdateContactInfoView extends BaseActivity {
-	ContactDTO currentContact = new ContactDTO();
+	ContactDTO currentContact = null;
 
 	Button btBack;
 	Button btCreate;
@@ -82,6 +82,7 @@ public class CreateUpdateContactInfoView extends BaseActivity {
 		etVorname = (EditText) findViewById(R.id.etVorname);
 		rbFeMale = (RadioButton) findViewById(R.id.rbFeMale);
 		rbMale = (RadioButton) findViewById(R.id.rbMale);
+		rbMale.setChecked(true);
 		// udpate data for screen
 		if (this.currentContact != null && this.currentContact.contactId >= 0) {
 			etAddress.setText(this.currentContact.contactAddress);
@@ -110,6 +111,9 @@ public class CreateUpdateContactInfoView extends BaseActivity {
 	 * @date: Mar 15, 2013
 	 */
 	public void generalDataToUpdateOrInsert() {
+		if (this.currentContact == null) {
+			this.currentContact = new ContactDTO();
+		}
 		this.currentContact.contactAddress = etAddress.getText().toString()
 				.trim();
 		this.currentContact.contactName = etContactName.getText().toString()
