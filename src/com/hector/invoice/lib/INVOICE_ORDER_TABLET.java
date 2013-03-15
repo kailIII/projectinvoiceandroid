@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 
 import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.AbstractTableDTO;
+import com.hector.invoice.dto.InvoiceInfoDTO;
 import com.hector.invoice.dto.InvoiceOrderDTO;
 
 /**
@@ -25,8 +27,9 @@ import com.hector.invoice.dto.InvoiceOrderDTO;
 public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 
 	public static final String INVOICE_ORDER_ID = "INVOICE_ORDER_ID";
+	public static final String INVOICE_ORDER_NAME = "INVOICE_ORDER_NAME";// invoice name
 	public static final String CONTACT_ID = "CONTACT_ID";
-	public static final String CONTACT_NAME = "CONTACT_NAME";
+	public static final String CONTACT_NAME = "CONTACT_NAME"; // ansprechpartner
 	public static final String PROJECT = "PROJECT"; // projekt
 	public static final String ORDERED_ON = "ORDERED_ON"; // bestellt am:
 	public static final String DELIVERY = "DELIVERY"; // lieferdatum
@@ -38,9 +41,9 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 
 	public INVOICE_ORDER_TABLET(SQLiteDatabase mDB) {
 		this.tableName = INVOICE_ORDER_TABLET;
-		this.columns = new String[] { INVOICE_ORDER_ID, CONTACT_ID,
-				CONTACT_NAME, PROJECT, ORDERED_ON, DELIVERY, CUSTOMER_NUMBER,
-				INVOICE_ORDER_NUMBER };
+		this.columns = new String[] { INVOICE_ORDER_ID, INVOICE_ORDER_NAME,
+				CONTACT_ID, CONTACT_NAME, PROJECT, ORDERED_ON, DELIVERY,
+				CUSTOMER_NUMBER, INVOICE_ORDER_NUMBER };
 		this.sqlGetCountQuerry += this.tableName + ";";
 		this.mDB = mDB;
 		this.listColumn = newListColumn();
@@ -63,6 +66,13 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
 		listColumn.add(invoiceOrderId);
+
+		// column INVOICE_ORDER_NAME
+		ColumnTable invoiceName = new ColumnTable(INVOICE_ORDER_NAME,
+				ColumnTable.DATA_TYPE_TEXT, false, false, true, false,
+				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
+				ColumnTable.ORDER_TYPE_ASC);
+		listColumn.add(invoiceName);
 
 		// column CONTACT_NAME
 		ColumnTable contactid = new ColumnTable(CONTACT_ID,
@@ -249,6 +259,9 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactId))) {
 			editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
 		}
+		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceName))) {
+			editedValues.put(INVOICE_ORDER_NAME, dto.invoiceName);
+		}
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactName))) {
 			editedValues.put(CONTACT_NAME, dto.contactName);
 		}
@@ -268,6 +281,56 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 			editedValues.put(INVOICE_ORDER_NUMBER, dto.invoiceOrderNumber);
 		}
 		return editedValues;
+	}
+
+	/**
+	 * 
+	 * get list invoice order
+	 * 
+	 * @param @return
+	 * @return: ListInvoiceNumberInfoView
+	 * @author: HaiTC3
+	 * @date: Mar 15, 2013
+	 */
+	public ArrayList<InvoiceInfoDTO> getListInvoiceOrder(Bundle data) {
+		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
+		StringBuffer queryGetlistContact = new StringBuffer();
+		ArrayList<String> listParams = new ArrayList<String>();
+		queryGetlistContact.append("select IO. from INVOICE_ORDER_TABLET ");
+
+		String[] paramsGetListProduct = new String[] {};
+		paramsGetListProduct = listParams
+				.toArray(new String[listParams.size()]);
+
+		Cursor c = null;
+		Cursor cTmp = null;
+		try {
+			c = rawQuery(queryGetlistContact.toString(), paramsGetListProduct);
+
+			if (c != null) {
+
+				if (c.moveToFirst()) {
+					do {
+						InvoiceInfoDTO invoiceInfo = new InvoiceInfoDTO();
+
+						invoiceInfo.initDataWithCursor(c);
+						listInvoice.add(invoiceInfo);
+					} while (c.moveToNext());
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+			if (cTmp != null) {
+				cTmp.close();
+			}
+		}
+
+		return listInvoice;
 	}
 
 }

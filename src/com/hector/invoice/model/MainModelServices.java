@@ -5,13 +5,18 @@
 
 package com.hector.invoice.model;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 
 import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ErrorConstants;
 import com.hector.invoice.controller.MainController;
+import com.hector.invoice.dto.InvoiceInfoDTO;
+import com.hector.invoice.dto.InvoiceOrderDTO;
 import com.hector.invoice.dto.ListContactViewDTO;
+import com.hector.invoice.dto.ListInvoiceNumberInfoView;
 import com.hector.invoice.lib.SQLUtils;
 
 /**
@@ -118,6 +123,38 @@ public class MainModelServices {
 			if (index == 1) {
 				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
 				model.setModelData(String.valueOf(index));
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * request get list invoice order
+	 * 
+	 * @param @param event
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 15, 2013
+	 */
+	public void requestGetListInvoiceOrder(ActionEvent event) {
+
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			ArrayList<InvoiceInfoDTO> listInvoice = SQLUtils.getInstance()
+					.requestGetListInvoiceOrder(data);
+			if (listInvoice != null) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(listInvoice);
 				MainController.getInstance().handleModelEvent(model);
 			} else {
 				model.setModelCode(ErrorConstants.ERROR_COMMON);

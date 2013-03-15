@@ -17,6 +17,7 @@ import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.InvoiceInfoDTO;
 import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
@@ -921,5 +922,26 @@ public class SQLUtils {
 
 			return 0;
 		}
+	}
+
+	/**
+	 * 
+	 * get list invoice order
+	 * 
+	 * @param @param data
+	 * @param @return
+	 * @return: ListInvoiceNumberInfoView
+	 * @author: HaiTC3
+	 * @date: Mar 15, 2013
+	 */
+	public ArrayList<InvoiceInfoDTO> requestGetListInvoiceOrder(Bundle data) {
+		INVOICE_ORDER_TABLET invoiceTable = new INVOICE_ORDER_TABLET(mDB);
+		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
+		try {
+			listInvoice = invoiceTable.getListInvoiceOrder(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listInvoice;
 	}
 }

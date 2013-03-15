@@ -24,16 +24,6 @@
             android:gravity="center"
             android:text="zurück"
             android:textColor="@color/BLACK" />
-
-        <Button
-            android:id="@+id/btCreate"
-            style="@style/CustomButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:text="speichern"
-            android:textColor="@color/BLACK" />
     </RelativeLayout>
 
     <ListView

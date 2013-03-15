@@ -25,6 +25,8 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 
 	// ma lop
 	public long invoiceOrderId;
+	// invoice name
+	public String invoiceName;
 	// ten lop
 	public long contactId;
 	// ten lop de search
@@ -62,6 +64,10 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_ID) >= 0) {
 			contactId = c.getLong(c
 					.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_ID));
+		}
+		if (c.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NAME) >= 0) {
+			invoiceName = c.getString(c
+					.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NAME));
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_NAME) >= 0) {
 			contactName = c.getString(c

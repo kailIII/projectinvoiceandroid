@@ -109,7 +109,7 @@
                     android:text="@string/text_lable_contacter" />
 
                 <EditText
-                    android:id="@+id/etNumber"
+                    android:id="@+id/etAnsprechpartner"
                     style="@style/CustomEditText"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -170,7 +170,7 @@
                     android:text="@string/text_lable_company" />
 
                 <EditText
-                    android:id="@+id/etCompanyInfo"
+                    android:id="@+id/etFirma"
                     style="@style/CustomEditText"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -305,7 +305,7 @@
                     android:text="@string/text_lable_order_on" />
 
                 <EditText
-                    android:id="@+id/etOrderOn"
+                    android:id="@+id/etBestellt"
                     style="@style/CustomEditText"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -332,7 +332,7 @@
                     android:text="@string/text_lable_delivery" />
 
                 <EditText
-                    android:id="@+id/etDelivery"
+                    android:id="@+id/etLieferdatum"
                     style="@style/CustomEditText"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
@@ -359,7 +359,7 @@
                     android:text="@string/text_lable_customer_info" />
 
                 <EditText
-                    android:id="@+id/etCustomerInfo"
+                    android:id="@+id/etKunden"
                     style="@style/CustomEditText"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
