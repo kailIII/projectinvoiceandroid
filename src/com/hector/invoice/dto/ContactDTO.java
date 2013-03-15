@@ -7,6 +7,7 @@ package com.hector.invoice.dto;
 
 import android.database.Cursor;
 
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.lib.CONTACT_TABLET;
 
 /**
@@ -36,6 +37,14 @@ public class ContactDTO extends AbstractTableDTO {
 
 	public ContactDTO() {
 		super(TableType.LIST_CONTACT);
+		contactId = -1;
+		contactName = "";
+		contactAddress = "";
+		contactPLZ = "";
+		contactStadt = "";
+		firstName = "";
+		lastName = "";
+		sex = SEX_MALE;
 	}
 
 	/**
@@ -77,5 +86,39 @@ public class ContactDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(CONTACT_TABLET.SEX) >= 0) {
 			sex = c.getInt(c.getColumnIndex(CONTACT_TABLET.SEX));
 		}
+	}
+
+	/**
+	 * check object null to delete in DB Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @return
+	 * @return: boolean
+	 * @throws:
+	 * @since: Mar 15, 2013
+	 */
+	public boolean isNullObject() {
+		boolean isNull = true;
+		if (this.contactId > 0) {
+			if (!StringUtil.isNullOrEmpty(contactName)) {
+				isNull = false;
+			}
+			if (isNull && !StringUtil.isNullOrEmpty(contactAddress)) {
+				isNull = false;
+			}
+			if (isNull && !StringUtil.isNullOrEmpty(contactPLZ)) {
+				isNull = false;
+			}
+			if (isNull && !StringUtil.isNullOrEmpty(contactStadt)) {
+				isNull = false;
+			}
+			if (isNull && !StringUtil.isNullOrEmpty(firstName)) {
+				isNull = false;
+			}
+			if (isNull && !StringUtil.isNullOrEmpty(lastName)) {
+				isNull = false;
+			}
+		}
+		return isNull;
 	}
 }

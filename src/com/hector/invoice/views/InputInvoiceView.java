@@ -21,7 +21,9 @@ import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ActionEventConstant;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
+import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.lib.SQLUtils;
 
 /**
@@ -59,9 +61,13 @@ public class InputInvoiceView extends BaseActivity {
 	EditText etOrderOn;
 	EditText etDelivery;
 	EditText etCustomerInfo;
+	Button btSelectAnsprechpartner;
 
 	// check creating invoice
 	boolean isCreatingInvoice = false;
+
+	// current contact
+	ContactDTO myContact = new ContactDTO();
 
 	/*
 	 * (non-Javadoc)
@@ -114,6 +120,8 @@ public class InputInvoiceView extends BaseActivity {
 		ivSetting.setOnClickListener(this);
 		ivContact = (ImageView) findViewById(R.id.ivContact);
 		ivContact.setOnClickListener(this);
+		btSelectAnsprechpartner = (Button) findViewById(R.id.btSelectAnsprechpartner);
+		btSelectAnsprechpartner.setOnClickListener(this);
 		btThema = (Button) findViewById(R.id.btThema);
 		btThema.setOnClickListener(this);
 		tblListOrderNumber = (LinearLayout) findViewById(R.id.tblListOrderNumber);
@@ -142,13 +150,29 @@ public class InputInvoiceView extends BaseActivity {
 	 * @throws:
 	 * @since: Mar 5, 2013
 	 */
-	public void gotoContactListView() {
+	public void gotoContactListView(boolean isGetContact) {
 		ActionEvent event = new ActionEvent();
 		Bundle data = new Bundle();
+		data.putBoolean(IntentConstants.INTENT_GET_CONTACT_OBJECT, isGetContact);
 		event.viewData = data;
 		event.sender = this;
 		event.action = ActionEventConstant.SHOW_CONTACT_LIST_VIEW;
 		MainController.getInstance().handleSwitchActivity(event);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hector.invoice.common.BaseActivity#receiveBroadcast(int,
+	 * android.os.Bundle)
+	 */
+	@Override
+	public void receiveBroadcast(int action, Bundle bundle) {
+		// TODO Auto-generated method stub
+		if (action == ActionEventConstant.BROAD_CAST_CONTACT_OBJECT) {
+
+		}
+		super.receiveBroadcast(action, bundle);
 	}
 
 	/*
@@ -162,7 +186,7 @@ public class InputInvoiceView extends BaseActivity {
 		if (v == ivAdd) {
 			this.createNewOrderNumber();
 		} else if (v == ivContact) {
-			this.gotoContactListView(); // show list contact view
+			this.gotoContactListView(false); // show list contact view
 		} else if (v == ivExport) {
 			showExportInvoiceScreen(); // export invoice
 		} else if (v == ivNewInvoice) {
@@ -176,7 +200,10 @@ public class InputInvoiceView extends BaseActivity {
 			this.showCompanyInfo(); // show company info
 		} else if (v == btThema) {
 
+		} else if (v == btSelectAnsprechpartner) {
+			gotoContactListView(true);
 		} else {
+
 			super.onClick(v);
 		}
 	}
@@ -300,6 +327,21 @@ public class InputInvoiceView extends BaseActivity {
 			ivAdd.setVisibility(View.INVISIBLE);
 			btThema.setVisibility(View.INVISIBLE);
 		}
+	}
+
+	/**
+	 * 
+	 * update contact data for screen
+	 * 
+	 * @author: HaiTC3
+	 * @param contactObj
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 15, 2013
+	 */
+	public void updateContactDataForScreen(ContactDTO contactObj) {
+		this.myContact = contactObj;
+		etNumber.setText(contactObj.contactName);
 	}
 
 	/*

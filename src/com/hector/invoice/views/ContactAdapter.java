@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import android.app.Service;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -61,7 +63,7 @@ public class ContactAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
+	public View getView(final int position, View convertView, ViewGroup arg2) {
 		View vi = convertView;
 		this.index = position;
 		ContactDTO itemData = this.mContacts.get(position);
@@ -76,12 +78,21 @@ public class ContactAdapter extends BaseAdapter {
 					// TODO Auto-generated method stub
 					listen.onEvent(
 							ActionEventConstant.ACTION_CLICK_ROW_CONTACT, null,
-							mContacts.get(index));
+							mContacts.get(position));
 				}
 			});
-
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
-			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
+			final ImageView ivDelete = (ImageView) vi
+					.findViewById(R.id.ivDelete);
+			vi.setOnTouchListener(new OnTouchListener() {
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					ivDelete.setVisibility(View.VISIBLE);
+					return false;
+				}
+			});
 			tvName.setText(itemData.firstName);
 			ivDelete.setVisibility(View.INVISIBLE);
 			ivDelete.setOnClickListener(new OnClickListener() {

@@ -242,7 +242,7 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(InvoiceOrderDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceOrderId))) {
+		if (dto.invoiceOrderId > 0) {
 			editedValues.put(INVOICE_ORDER_ID,
 					String.valueOf(dto.invoiceOrderId));
 		}

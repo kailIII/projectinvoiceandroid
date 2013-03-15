@@ -24,4 +24,5 @@ public class IntentConstants {
 	public static final String INTENT_TABLE_NAME = "INTENT_TABLE_NAME";
 	public static final String INTENT_PAGE = "INTENT_PAGE";
 	public static final String INTENT_CONTACT_OBJECT = "intent.contact";
+	public static final String INTENT_GET_CONTACT_OBJECT = "intent.get.contact.object";
 }

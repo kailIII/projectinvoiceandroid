@@ -218,7 +218,7 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 	 */
 	public ContentValues initDataRow(ContactDTO dto) {
 		ContentValues editedValues = new ContentValues();
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactId))) {
+		if (dto.contactId > 0) {
 			editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
 		}
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactName))) {
@@ -258,7 +258,10 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 	 */
 	public ListContactViewDTO getListContact(Bundle data) {
 		ListContactViewDTO listContact = new ListContactViewDTO();
-		String page = data.getString(IntentConstants.INTENT_PAGE);
+		String page = "";
+		if(!StringUtil.isNullOrEmpty(data.getString(IntentConstants.INTENT_PAGE))){
+			page = data.getString(IntentConstants.INTENT_PAGE);
+		}
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
 		queryGetlistContact.append("select * from CONTACT_TABLET ");

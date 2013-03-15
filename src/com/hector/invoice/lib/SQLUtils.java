@@ -907,7 +907,11 @@ public class SQLUtils {
 
 		try {
 			if (myContact.contactId >= 1) {
-				contactTable.update(myContact);
+				if (myContact.isNullObject()) {
+					contactTable.delete(myContact);
+				} else {
+					contactTable.update(myContact);
+				}
 			} else {
 				contactTable.insert(myContact);
 			}

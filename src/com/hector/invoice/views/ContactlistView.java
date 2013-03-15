@@ -32,6 +32,7 @@ public class ContactlistView extends BaseActivity {
 
 	ListView lvListContact;
 	boolean isDoneLoadFirst = false;
+	boolean isGetContactObj = false;
 	ListContactViewDTO listContactInfo = new ListContactViewDTO();
 	Button btBack;
 	Button btCreate;
@@ -55,6 +56,9 @@ public class ContactlistView extends BaseActivity {
 		if (!isDoneLoadFirst) {
 			this.requestGetListContact();
 		}
+		Bundle data = this.getIntent().getExtras();
+		isGetContactObj = data
+				.getBoolean(IntentConstants.INTENT_GET_CONTACT_OBJECT);
 	}
 
 	/*
@@ -111,6 +115,9 @@ public class ContactlistView extends BaseActivity {
 	 * @since: Mar 5, 2013
 	 */
 	public void renderLayout() {
+		ContactAdapter myAdapter = new ContactAdapter(this,
+				this.listContactInfo.listContact, this);
+		lvListContact.setAdapter(myAdapter);
 	}
 
 	/*
@@ -229,7 +236,15 @@ public class ContactlistView extends BaseActivity {
 		// TODO Auto-generated method stub
 		if (eventType == ActionEventConstant.ACTION_CLICK_ROW_CONTACT) {
 			ContactDTO myData = (ContactDTO) data;
-			gotoCreateContactView(myData);
+			if (!this.isGetContactObj) {
+				gotoCreateContactView(myData);
+			} else {
+				Bundle dataObject = new Bundle();
+				dataObject.putSerializable(
+						IntentConstants.INTENT_CONTACT_OBJECT, myData);
+				sendBroadcast(ActionEventConstant.BROAD_CAST_CONTACT_OBJECT,
+						dataObject);
+			}
 		} else if (eventType == ActionEventConstant.ACTION_CLICK_DELETE_CONTACT) {
 			ContactDTO myData = (ContactDTO) data;
 			requestDeleteContact(myData);
