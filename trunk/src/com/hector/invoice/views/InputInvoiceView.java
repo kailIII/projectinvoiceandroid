@@ -24,6 +24,7 @@ import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
 import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 import com.hector.invoice.lib.SQLUtils;
 
 /**
@@ -52,8 +53,8 @@ public class InputInvoiceView extends BaseActivity {
 	ImageView ivContact;
 	// table tblListOrderNumber
 	LinearLayout tblListOrderNumber;
-	EditText etNumber;
-	EditText etCompanyInfo;
+	EditText etAnsprechpartner;
+	EditText etFirma;
 	EditText etAddress;
 	EditText etPLZ;
 	EditText etStadt;
@@ -68,6 +69,8 @@ public class InputInvoiceView extends BaseActivity {
 
 	// current contact
 	ContactDTO myContact = new ContactDTO();
+	// invoice info
+	InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
 
 	/*
 	 * (non-Javadoc)
@@ -172,6 +175,9 @@ public class InputInvoiceView extends BaseActivity {
 		if (action == ActionEventConstant.BROAD_CAST_CONTACT_OBJECT) {
 			updateContactDataForScreen((ContactDTO) bundle
 					.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT));
+		} else if (action == ActionEventConstant.BROAD_CAST_INVOICE_OBJECT) {
+			invoiceInfo = (InvoiceOrderNumberInfoView) bundle
+					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
 		}
 		super.receiveBroadcast(action, bundle);
 	}
@@ -328,6 +334,12 @@ public class InputInvoiceView extends BaseActivity {
 			ivAdd.setVisibility(View.INVISIBLE);
 			btThema.setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	public void updateInvoiceDataForScreen(){
+		etAddress.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress);
+		etCompanyInfo.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactName);
+		etCustomerInfo
 	}
 
 	/**

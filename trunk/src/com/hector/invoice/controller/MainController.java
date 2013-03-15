@@ -66,6 +66,10 @@ public class MainController extends AbstractController {
 					MainModelServices.getInstance()
 							.requestUpdateOrCreateContact(e);
 					break;
+				case ActionEventConstant.REQUEST_GET_LIST_INVOICE_ORDER:
+					MainModelServices.getInstance().requestGetListInvoiceOrder(
+							e);
+					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
 					break;
