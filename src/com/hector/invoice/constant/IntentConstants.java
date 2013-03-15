@@ -17,9 +17,9 @@ public class IntentConstants {
 	// intent current tab selected
 	public static final String INTENT_CURRENT_TAB_SELECTED = "currentTabSelected";
 	// intent action of broad cast
-	public static final String INTENT_BROAD_CAST_ACTION = "jobaids.action";
+	public static final String INTENT_BROAD_CAST_ACTION = "invoice.action";
 	// intent hash code for broad cast
-	public static final String INTENT_BROAD_CAST_HASH_CODE = "jobaids.hashCode";
+	public static final String INTENT_BROAD_CAST_HASH_CODE = "invoice.hashCode";
 	public static final String INTENT_TYPE = "INTENT_TYPE";
 	public static final String INTENT_TABLE_NAME = "INTENT_TABLE_NAME";
 	public static final String INTENT_PAGE = "INTENT_PAGE";

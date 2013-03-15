@@ -170,7 +170,8 @@ public class InputInvoiceView extends BaseActivity {
 	public void receiveBroadcast(int action, Bundle bundle) {
 		// TODO Auto-generated method stub
 		if (action == ActionEventConstant.BROAD_CAST_CONTACT_OBJECT) {
-
+			updateContactDataForScreen((ContactDTO) bundle
+					.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT));
 		}
 		super.receiveBroadcast(action, bundle);
 	}

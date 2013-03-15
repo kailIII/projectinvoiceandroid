@@ -38,7 +38,7 @@ public abstract class BaseActivity extends Activity implements
 		OnCancelListener, OnClickListener {
 
 	// define name action for broadcast
-	public static final String INVOICE_ACTION = "com.jobaid.jobaids.common.action";
+	public static final String INVOICE_ACTION = "com.hector.invoice.common.action";
 
 	// dialog hien thi khi request
 	private static ProgressDialog progressDlg;

@@ -63,7 +63,8 @@ public class MainController extends AbstractController {
 					MainModelServices.getInstance().requestDeleteContact(e);
 					break;
 				case ActionEventConstant.REQUEST_UPDATE_CREATE_CONTACT:
-					MainModelServices.getInstance().requestUpdateOrCreateContact(e);
+					MainModelServices.getInstance()
+							.requestUpdateOrCreateContact(e);
 					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
@@ -96,6 +97,7 @@ public class MainController extends AbstractController {
 			intent = new Intent(sender, InputInvoiceView.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
+			sender.finish();
 			break;
 		}
 		case ActionEventConstant.SHOW_CONTACT_LIST_VIEW: {
@@ -107,6 +109,14 @@ public class MainController extends AbstractController {
 			break;
 		}
 		case ActionEventConstant.SHOW_CRATE_CONTACT_VIEW: {
+			BaseActivity sender = (BaseActivity) e.sender;
+			extras = (Bundle) e.viewData;
+			intent = new Intent(sender, CreateUpdateContactInfoView.class);
+			intent.putExtras(extras);
+			sender.startActivity(intent);
+			break;
+		}
+		case ActionEventConstant.SHOW_INVOICE_LIST_VIEW: {
 			BaseActivity sender = (BaseActivity) e.sender;
 			extras = (Bundle) e.viewData;
 			intent = new Intent(sender, CreateUpdateContactInfoView.class);
