@@ -132,6 +132,7 @@ public class InvoiceOrderListView extends BaseActivity {
 			data.putSerializable(IntentConstants.INTENT_INVOICE_INFO,
 					invoiceInfo);
 			sendBroadcast(ActionEventConstant.BROAD_CAST_INVOICE_OBJECT, data);
+			this.finish();
 			break;
 		default:
 			break;

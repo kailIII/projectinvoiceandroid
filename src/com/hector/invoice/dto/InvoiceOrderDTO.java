@@ -27,20 +27,20 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 	public long invoiceOrderId;
 	// invoice name
 	public String invoiceName;
-	// ten lop
+	// contactId
 	public long contactId;
-	// ten lop de search
+	// contactName
 	public String contactName;
-	// nam hoc
+	// project
 	public String project;
-	// khoi hoc
+	// orderedOn
 	public String orderedOn;
-	// phan ban
+	// delivery
 	public String delivery;
-	// giao vien chu nhiem
+	// customerNumber
 	public String customerNumber;
-	// buoi hoc (sang / chieu)
-	public String invoiceOrderNumber; // 1: Male / 0: FeMale
+	// invoiceOrderNumber
+	public String invoiceOrderNumber; 
 
 	public InvoiceOrderDTO() {
 		super(TableType.INVOICE_ORDER);

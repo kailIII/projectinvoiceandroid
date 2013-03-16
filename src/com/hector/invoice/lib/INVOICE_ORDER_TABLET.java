@@ -296,7 +296,7 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
-		queryGetlistContact.append("select IO. from INVOICE_ORDER_TABLET ");
+		queryGetlistContact.append("select IO.*, CT.* from INVOICE_ORDER_TABLET IO LEFT JOIN CONTACT_TABLET CT ON IO.CONTACT_ID = CT.CONTACT_ID");
 
 		String[] paramsGetListProduct = new String[] {};
 		paramsGetListProduct = listParams

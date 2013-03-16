@@ -116,7 +116,7 @@ public class ContactlistView extends BaseActivity {
 	 */
 	public void renderLayout() {
 		ContactAdapter myAdapter = new ContactAdapter(this,
-				this.listContactInfo.listContact, this);
+				this.listContactInfo.listContact, this, isGetContactObj);
 		lvListContact.setAdapter(myAdapter);
 	}
 
@@ -244,6 +244,7 @@ public class ContactlistView extends BaseActivity {
 						IntentConstants.INTENT_CONTACT_OBJECT, myData);
 				sendBroadcast(ActionEventConstant.BROAD_CAST_CONTACT_OBJECT,
 						dataObject);
+				this.finish();
 			}
 		} else if (eventType == ActionEventConstant.ACTION_CLICK_DELETE_CONTACT) {
 			ContactDTO myData = (ContactDTO) data;

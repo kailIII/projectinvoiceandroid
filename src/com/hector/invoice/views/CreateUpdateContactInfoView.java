@@ -176,7 +176,8 @@ public class CreateUpdateContactInfoView extends BaseActivity {
 		ActionEvent event = modelEvent.getActionEvent();
 		switch (event.action) {
 		case ActionEventConstant.REQUEST_UPDATE_CREATE_CONTACT:
-			int result = (Integer) modelEvent.getModelData();
+			int result = Integer.valueOf(String.valueOf(modelEvent
+					.getModelData()));
 			if (result == 1) {
 				this.finish();
 			}
