@@ -46,11 +46,15 @@ public class ActionEventConstant {
 	public static final int ACTION_CLICK_ROW_INVOICE_ORDER = 15;
 	// request get detail invoice
 	public static final int REQUEST_GET_DETAIL_INVOICE = 16;
+	// request update company info
+	public static final int REQUEST_UPDATE_COMPANY_INFO = 17;
 
 	// broad cast
 	public static final int BROAD_CAST_CONTACT_OBJECT = 1;
 	// broad cast invoice info
 	public static final int BROAD_CAST_INVOICE_OBJECT = 2;
+	// broad cast update company info success
+	public static final int BROAD_CAST_UPDATE_COMPANYINFO_SUCCESS = 3;
 
 	// action show main menu view
 	public static final int SHOW_MAIN_MENU = 2;

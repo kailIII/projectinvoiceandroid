@@ -31,4 +31,11 @@
     <string name="text_lb_header_tb_einze">Einzelpreis</string> <!-- Female -->
     <string name="text_lb_header_tb_gesamt">Gesamt</string> <!-- Female -->
 
+    <string name="TEXT_CHOOSE_FROM_PHONE">Choose image from your phone</string>
+    <string name="TEXT_TAKE_NEW_PHOTO">Take new image</string>
+    <string name="TEXT_CHOOSE_ALBUM_TO_SAVE">Choose image for product</string>
+    <string name="IMG_MAX_SIZE">Image size must not exceed</string>
+    <string name="IMG_INVALID_FORMAT">Upload incorrect image format (*. Bmp, *. Gif, *. Jpg, *. Jpeg, *. Png)</string>
+    <string name="ERROR_OUT_MEMORY">Your phone is not enough memory to perform this feature. Please try again later!</string>
+
 </resources>

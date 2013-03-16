@@ -37,10 +37,10 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 	public static final String SEX = "SEX";
 
 	// COMPANY TABLE
-	public static final String CONTACT_TABLET = "CONTACT_TABLET";
+	public static final String CONTACT_TABLE = "CONTACT_TABLE";
 
 	public CONTACT_TABLET(SQLiteDatabase mDB) {
-		this.tableName = CONTACT_TABLET;
+		this.tableName = CONTACT_TABLE;
 		this.columns = new String[] { CONTACT_ID, CONTACT_NAME,
 				CONTACT_ADDRESS, CONTACT_PLZ, CONTACT_STADT, FIRST_NAME,
 				LAST_NAME, SEX };
@@ -264,7 +264,7 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 		}
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
-		queryGetlistContact.append("select * from CONTACT_TABLET ");
+		queryGetlistContact.append("select * from CONTACT_TABLE ");
 		String getCountContact = " select count(*) as total_row from ("
 				+ queryGetlistContact.toString() + ") ";
 

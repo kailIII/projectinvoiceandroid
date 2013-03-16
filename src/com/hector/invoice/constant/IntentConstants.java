@@ -27,4 +27,5 @@ public class IntentConstants {
 	public static final String INTENT_GET_CONTACT_OBJECT = "intent.get.contact.object";
 	public static final String INTENT_INVOICE_ORDER_ID = "intent.invoice.order.id";
 	public static final String INTENT_INVOICE_INFO = "intent.invoice.info";
+	public static final String INTENT_COMPANY_INFO = "intent.company.info";
 }

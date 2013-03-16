@@ -39,10 +39,10 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 	public static final String TOTAL = "TOTAL"; // gesamt
 
 	// COMPANY TABLE
-	public static final String INVOICE_ORDER_DETAIL_TABLET = "INVOICE_ORDER_DETAIL_TABLET";
+	public static final String INVOICE_ORDER_DETAIL_TABLE = "INVOICE_ORDER_DETAIL_TABLE";
 
 	public INVOICE_ORDER_DETAIL_TABLET(SQLiteDatabase mDB) {
-		this.tableName = INVOICE_ORDER_DETAIL_TABLET;
+		this.tableName = INVOICE_ORDER_DETAIL_TABLE;
 		this.columns = new String[] { INVOICE_ORDER_DETAIL_ID,
 				INVOICE_ORDER_ID, POS, DESIGNATION, ART_NR, QUANTITY,
 				SINGLE_PRICE, TOTAL };
@@ -309,7 +309,7 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 		ArrayList<InvoiceOrderDetailDTO> listInvoice = new ArrayList<InvoiceOrderDetailDTO>();
 		StringBuffer queryGetlistContact = new StringBuffer();
 		queryGetlistContact
-				.append("select * from INVOICE_ORDER_DETAIL_TABLET where INVOICE_ORDER_ID = ? ");
+				.append("select * from INVOICE_ORDER_DETAIL_TABLE where INVOICE_ORDER_ID = ? ");
 
 		String[] paramsGetListProduct = new String[] { invoiceOrderId };
 

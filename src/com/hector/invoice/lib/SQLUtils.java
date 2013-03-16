@@ -974,6 +974,58 @@ public class SQLUtils {
 
 	/**
 	 * 
+	 * get company info
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: CompanyDTO
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public CompanyDTO getCompanyInfo(Bundle data) {
+		COMPANY_TABLE companyTable = new COMPANY_TABLE(mDB);
+		CompanyDTO companyInfo = new CompanyDTO();
+		try {
+			companyInfo = companyTable.getCompanyInfo(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return companyInfo;
+	}
+
+	/**
+	 * 
+	 * request update company info
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: int
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public int requestUpdateCompanyInfo(Bundle data) {
+		COMPANY_TABLE companyInfo = new COMPANY_TABLE(mDB);
+		CompanyDTO myContact = (CompanyDTO) data
+				.getSerializable(IntentConstants.INTENT_COMPANY_INFO);
+
+		try {
+			if (myContact.companyId >= 1) {
+				companyInfo.update(myContact);
+			} else {
+				companyInfo.insert(myContact);
+			}
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return 0;
+		}
+	}
+
+	/**
+	 * 
 	 * request update invoice info to DB
 	 * 
 	 * @author: HaiTC3

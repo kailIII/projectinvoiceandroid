@@ -33,6 +33,7 @@ import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
+import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
@@ -86,6 +87,10 @@ public class InputInvoiceView extends BaseActivity {
 
 	// invoice info
 	InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
+	// company info
+	CompanyDTO myCompanyInfo = new CompanyDTO();
+	// check load first
+	boolean isDoneLoadFirst = false;
 
 	/*
 	 * (non-Javadoc)
@@ -102,6 +107,39 @@ public class InputInvoiceView extends BaseActivity {
 		this.initViewControl();
 		// create file DB if not exist
 		SQLUtils.getInstance();
+
+		if (!isDoneLoadFirst) {
+			this.getCompanyInfo();
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hector.invoice.common.BaseActivity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+	/**
+	 * 
+	 * get company info
+	 * 
+	 * @author: HaiTC3
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void getCompanyInfo() {
+		ActionEvent action = new ActionEvent();
+		Bundle data = new Bundle();
+		action.viewData = data;
+		action.sender = this;
+		action.action = ActionEventConstant.GET_COMPANY_INFO;
+		MainController.getInstance().handleViewEvent(action);
 	}
 
 	/**
@@ -199,6 +237,8 @@ public class InputInvoiceView extends BaseActivity {
 			invoiceInfo = (InvoiceOrderNumberInfoView) bundle
 					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
 			this.updateInvoiceDataForScreen();
+		} else if (action == ActionEventConstant.BROAD_CAST_UPDATE_COMPANYINFO_SUCCESS) {
+			this.getCompanyInfo();
 		}
 		super.receiveBroadcast(action, bundle);
 	}
@@ -560,6 +600,12 @@ public class InputInvoiceView extends BaseActivity {
 		// TODO Auto-generated method stub
 		ActionEvent event = modelEvent.getActionEvent();
 		switch (event.action) {
+		case ActionEventConstant.GET_COMPANY_INFO:
+			this.myCompanyInfo = (CompanyDTO) modelEvent.getModelData();
+			if (this.myCompanyInfo != null) {
+				isDoneLoadFirst = true;
+			}
+			break;
 		case ActionEventConstant.REQUEST_SAVE_INVOICE:
 			int result = Integer.valueOf(String.valueOf(modelEvent
 					.getModelData()));

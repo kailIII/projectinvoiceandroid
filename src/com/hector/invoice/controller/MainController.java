@@ -17,6 +17,7 @@ import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.ErrorConstants;
 import com.hector.invoice.model.MainModelServices;
+import com.hector.invoice.views.CompanyInfoView;
 import com.hector.invoice.views.ContactlistView;
 import com.hector.invoice.views.CreateUpdateContactInfoView;
 import com.hector.invoice.views.InputInvoiceView;
@@ -76,8 +77,16 @@ public class MainController extends AbstractController {
 							e);
 					break;
 				case ActionEventConstant.REQUEST_GET_DETAIL_INVOICE:
-					MainModelServices.getInstance().getListInvoiceOrderDetail(
-							e);
+					MainModelServices.getInstance()
+							.getListInvoiceOrderDetail(e);
+					break;
+				case ActionEventConstant.GET_COMPANY_INFO:
+					MainModelServices.getInstance()
+							.getCompanyInfo(e);
+					break;
+				case ActionEventConstant.REQUEST_UPDATE_COMPANY_INFO:
+					MainModelServices.getInstance()
+					.requestUpdateCompanyInfo(e);
 					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
@@ -133,6 +142,14 @@ public class MainController extends AbstractController {
 			BaseActivity sender = (BaseActivity) e.sender;
 			extras = (Bundle) e.viewData;
 			intent = new Intent(sender, InvoiceOrderListView.class);
+			intent.putExtras(extras);
+			sender.startActivity(intent);
+			break;
+		}
+		case ActionEventConstant.SHOW_COMPANY_INFO_VIEW: {
+			BaseActivity sender = (BaseActivity) e.sender;
+			extras = (Bundle) e.viewData;
+			intent = new Intent(sender, CompanyInfoView.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
 			break;
