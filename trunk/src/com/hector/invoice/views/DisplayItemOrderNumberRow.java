@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.hector.invoice.R;
+import com.hector.invoice.common.StringUtil;
+import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 
 /**
  * Mo ta muc dich cua lop
@@ -46,6 +48,37 @@ public class DisplayItemOrderNumberRow extends LinearLayout {
 		etMenge = (EditText) view.findViewById(R.id.etMenge);
 		etEinze = (EditText) view.findViewById(R.id.etEinze);
 		etGesamt = (EditText) view.findViewById(R.id.etGesamt);
+	}
+
+	/**
+	 * 
+	 * update data for screen
+	 * 
+	 * @author: HaiTC3
+	 * @param invoiceDetail
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void updateLayoutWithData(InvoiceOrderDetailDTO invoiceDetail) {
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.pos)) {
+			etPos.setText(invoiceDetail.pos);
+		}
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.designation)) {
+			etBezeichnung.setText(invoiceDetail.designation);
+		}
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.art_nr)) {
+			etArtNr.setText(invoiceDetail.art_nr);
+		}
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.quantity)) {
+			etMenge.setText(invoiceDetail.quantity);
+		}
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.single_price)) {
+			etEinze.setText(invoiceDetail.single_price);
+		}
+		if (!StringUtil.isNullOrEmpty(invoiceDetail.total)) {
+			etGesamt.setText(invoiceDetail.total);
+		}
 	}
 
 }

@@ -18,6 +18,8 @@ import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.dto.InvoiceInfoDTO;
+import com.hector.invoice.dto.InvoiceOrderDetailDTO;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
@@ -943,5 +945,99 @@ public class SQLUtils {
 			e.printStackTrace();
 		}
 		return listInvoice;
+	}
+
+	/**
+	 * 
+	 * get list invoice order detail with invoice order id
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: ArrayList<InvoiceOrderDetailDTO>
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public ArrayList<InvoiceOrderDetailDTO> getListInvoiceOrderDetail(
+			Bundle data) {
+		INVOICE_ORDER_DETAIL_TABLET invoiceDetailTable = new INVOICE_ORDER_DETAIL_TABLET(
+				mDB);
+		ArrayList<InvoiceOrderDetailDTO> listInvoice = new ArrayList<InvoiceOrderDetailDTO>();
+		try {
+			listInvoice = invoiceDetailTable
+					.getListInvoiceDetailWithInvoiceOrderId(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listInvoice;
+	}
+
+	/**
+	 * 
+	 * request update invoice info to DB
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: int
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public int requestUpdateInvoiceInfoToDB(Bundle data) {
+		int result = 0;
+		InvoiceOrderNumberInfoView invoiceInfo = (InvoiceOrderNumberInfoView) data
+				.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
+		if (invoiceInfo != null) {
+			try {
+				long contactId = 0;
+				// request insert or update contact table
+				if (invoiceInfo.invoiceOrder.contactInvoice.contactId > 0) {
+					// update contact
+					ContactDTO contact = invoiceInfo.invoiceOrder.contactInvoice;
+					this.update(contact);
+				} else {
+					// insert new contact
+					ContactDTO contact = invoiceInfo.invoiceOrder.contactInvoice;
+					contactId = this.insertDTO(contact);
+				}
+
+				// request insert or update invoice order table
+				if (invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderId > 0) {
+					// update invoice order
+					this.update(invoiceInfo.invoiceOrder.invoiceOrderInfo);
+					// remove invoice order detail after insert
+					INVOICE_ORDER_DETAIL_TABLET invoiceOrderDetail = new INVOICE_ORDER_DETAIL_TABLET(
+							mDB);
+					invoiceOrderDetail
+							.deleteRowInvoiceDetail(String
+									.valueOf(invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderId));
+					// update invoice order detail
+					for (int i = 0, size = invoiceInfo.listOrderDetail.size(); i < size; i++) {
+						InvoiceOrderDetailDTO detail = invoiceInfo.listOrderDetail
+								.get(i);
+						invoiceOrderDetail.insert(detail);
+					}
+				} else {
+					// insert new invoice order
+					if (contactId > 0) {
+						invoiceInfo.invoiceOrder.invoiceOrderInfo.contactId = contactId;
+					}
+					long invoicrOrderId = this
+							.insertDTO(invoiceInfo.invoiceOrder.invoiceOrderInfo);
+					// update invoice order id for list invoice order detail
+					for (int i = 0, size = invoiceInfo.listOrderDetail.size(); i < size; i++) {
+						invoiceInfo.listOrderDetail.get(i).invoiceOrderId = invoicrOrderId;
+						this.insertDTO(invoiceInfo.listOrderDetail.get(i));
+					}
+				}
+			} catch (Exception e) {
+				result = 0;
+				// TODO: handle exception
+			} finally {
+				result = 1;
+			}
+		}
+
+		return result;
 	}
 }

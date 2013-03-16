@@ -15,6 +15,7 @@ import com.hector.invoice.constant.ErrorConstants;
 import com.hector.invoice.controller.MainController;
 import com.hector.invoice.dto.InvoiceInfoDTO;
 import com.hector.invoice.dto.InvoiceOrderDTO;
+import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 import com.hector.invoice.dto.ListContactViewDTO;
 import com.hector.invoice.dto.ListInvoiceNumberInfoView;
 import com.hector.invoice.lib.SQLUtils;
@@ -155,6 +156,71 @@ public class MainModelServices {
 			if (listInvoice != null) {
 				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
 				model.setModelData(listInvoice);
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * save invoice info to DB
+	 * 
+	 * @author: HaiTC3
+	 * @param event
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void requestSaveInvoiceInfoToDB(ActionEvent event) {
+
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			int result = SQLUtils.getInstance().requestUpdateInvoiceInfoToDB(
+					data);
+			if (result == 1) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(String.valueOf(result));
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * get list invoice order detail
+	 * 
+	 * @author: HaiTC3
+	 * @param event
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void getListInvoiceOrderDetail(ActionEvent event) {
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			ArrayList<InvoiceOrderDetailDTO> result = SQLUtils.getInstance()
+					.getListInvoiceOrderDetail(data);
+			if (result != null) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(result);
 				MainController.getInstance().handleModelEvent(model);
 			} else {
 				model.setModelCode(ErrorConstants.ERROR_COMMON);

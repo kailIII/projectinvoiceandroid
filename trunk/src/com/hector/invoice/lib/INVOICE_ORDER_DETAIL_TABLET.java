@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.hector.invoice.common.StringUtil;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.AbstractTableDTO;
+import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.InvoiceInfoDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 
 /**
@@ -178,6 +183,21 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 
 	/**
 	 * 
+	 * delete row with invoice order id
+	 * 
+	 * @author: HaiTC3
+	 * @param invoiceOrderId
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void deleteRowInvoiceDetail(String invoiceOrderId) {
+		String[] params = { String.valueOf(invoiceOrderId) };
+		delete(INVOICE_ORDER_ID + " = ?", params);
+	}
+
+	/**
+	 * 
 	 * get row in db flow id
 	 * 
 	 * @param id
@@ -272,4 +292,51 @@ public class INVOICE_ORDER_DETAIL_TABLET extends ABSTRACT_TABLE {
 		return editedValues;
 	}
 
+	/**
+	 * 
+	*  get list invoice detail with invoice order id
+	*  @author: HaiTC3
+	*  @param data
+	*  @return
+	*  @return: ArrayList<InvoiceOrderDetailDTO>
+	*  @throws:
+	*  @since: Mar 16, 2013
+	 */
+	public ArrayList<InvoiceOrderDetailDTO> getListInvoiceDetailWithInvoiceOrderId(
+			Bundle data) {
+		String invoiceOrderId = data
+				.getString(IntentConstants.INTENT_INVOICE_ORDER_ID);
+		ArrayList<InvoiceOrderDetailDTO> listInvoice = new ArrayList<InvoiceOrderDetailDTO>();
+		StringBuffer queryGetlistContact = new StringBuffer();
+		queryGetlistContact
+				.append("select * from INVOICE_ORDER_DETAIL_TABLET where INVOICE_ORDER_ID = ? ");
+
+		String[] paramsGetListProduct = new String[] { invoiceOrderId };
+
+		Cursor c = null;
+		try {
+			c = rawQuery(queryGetlistContact.toString(), paramsGetListProduct);
+
+			if (c != null) {
+
+				if (c.moveToFirst()) {
+					do {
+						InvoiceOrderDetailDTO invoiceInfo = new InvoiceOrderDetailDTO();
+
+						invoiceInfo.initLogDTOFromCursor(c);
+						listInvoice.add(invoiceInfo);
+					} while (c.moveToNext());
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+
+		return listInvoice;
+	}
 }

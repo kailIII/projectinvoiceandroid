@@ -20,6 +20,7 @@ import com.hector.invoice.model.MainModelServices;
 import com.hector.invoice.views.ContactlistView;
 import com.hector.invoice.views.CreateUpdateContactInfoView;
 import com.hector.invoice.views.InputInvoiceView;
+import com.hector.invoice.views.InvoiceOrderListView;
 
 /**
  * Mo ta muc dich cua lop
@@ -68,6 +69,14 @@ public class MainController extends AbstractController {
 					break;
 				case ActionEventConstant.REQUEST_GET_LIST_INVOICE_ORDER:
 					MainModelServices.getInstance().requestGetListInvoiceOrder(
+							e);
+					break;
+				case ActionEventConstant.REQUEST_SAVE_INVOICE:
+					MainModelServices.getInstance().requestSaveInvoiceInfoToDB(
+							e);
+					break;
+				case ActionEventConstant.REQUEST_GET_DETAIL_INVOICE:
+					MainModelServices.getInstance().getListInvoiceOrderDetail(
 							e);
 					break;
 				default:// test
@@ -123,7 +132,7 @@ public class MainController extends AbstractController {
 		case ActionEventConstant.SHOW_INVOICE_LIST_VIEW: {
 			BaseActivity sender = (BaseActivity) e.sender;
 			extras = (Bundle) e.viewData;
-			intent = new Intent(sender, CreateUpdateContactInfoView.class);
+			intent = new Intent(sender, InvoiceOrderListView.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
 			break;
