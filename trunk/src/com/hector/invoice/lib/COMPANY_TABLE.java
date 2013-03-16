@@ -10,10 +10,15 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.hector.invoice.common.StringUtil;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.AbstractTableDTO;
 import com.hector.invoice.dto.CompanyDTO;
+import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.ListContactViewDTO;
 
 /**
  * 
@@ -112,7 +117,7 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 		listColumn.add(CompanyId);
 
 		// column LOGO
-		ColumnTable logo = new ColumnTable(LOGO, ColumnTable.DATA_TYPE_TEXT,
+		ColumnTable logo = new ColumnTable(LOGO, ColumnTable.DATA_TYPE_BLOB,
 				false, false, true, false,
 				ColumnTable.DEFAULT_VALUE_CURRENT_NONE,
 				ColumnTable.ORDER_TYPE_ASC);
@@ -421,5 +426,43 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 			editedValues.put(STAFF_SALE, dto.staffSale);
 		}
 		return editedValues;
+	}
+
+	/**
+	 * 
+	 * get company info
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: CompanyDTO
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public CompanyDTO getCompanyInfo(Bundle data) {
+		CompanyDTO companyInfo = new CompanyDTO();
+		StringBuffer queryGetlistContact = new StringBuffer();
+		queryGetlistContact.append("select * from COMPANY_TABLE limit 1 ");
+
+		String[] paramsGetListProduct = new String[] {};
+
+		Cursor c = null;
+		try {
+			c = rawQuery(queryGetlistContact.toString(), paramsGetListProduct);
+
+			if (c != null) {
+
+				if (c.moveToFirst()) {
+					companyInfo.initLogDTOFromCursor(c);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+		return companyInfo;
 	}
 }

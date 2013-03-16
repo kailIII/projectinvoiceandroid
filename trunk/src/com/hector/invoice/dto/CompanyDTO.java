@@ -19,11 +19,11 @@ public class CompanyDTO extends AbstractTableDTO {
 	private static final long serialVersionUID = 1L;
 	public static final int SEX_MALE = 1;
 	public static final int SEX_FEMALE = 0;
-	
+
 	// ma lop
 	public long companyId;
 	// ten lop
-	public String logo;
+	public byte[] logo;
 	// ten lop de search
 	public String companyName;
 	// nam hoc
@@ -78,7 +78,7 @@ public class CompanyDTO extends AbstractTableDTO {
 			companyId = c.getLong(c.getColumnIndex(COMPANY_TABLE.COMPANY_ID));
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.LOGO) >= 0) {
-			logo = c.getString(c.getColumnIndex(COMPANY_TABLE.LOGO));
+			logo = c.getBlob(c.getColumnIndex(COMPANY_TABLE.LOGO));
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.COMPANY_NAME) >= 0) {
 			companyName = c.getString(c

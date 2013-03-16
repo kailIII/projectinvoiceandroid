@@ -5,7 +5,10 @@
 
 package com.hector.invoice.common;
 
+import java.io.File;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,6 +42,9 @@ public abstract class BaseActivity extends Activity implements
 
 	// define name action for broadcast
 	public static final String INVOICE_ACTION = "com.hector.invoice.common.action";
+
+	public static final int RQ_TAKE_PHOTO = 999;
+	public static final int REQ_CODE_PICK_IMAGE = 1338;
 
 	// dialog hien thi khi request
 	private static ProgressDialog progressDlg;
@@ -335,4 +341,33 @@ public abstract class BaseActivity extends Activity implements
 		}
 	}
 
+	/**
+	 * 
+	 * show dialog
+	 * 
+	 * @param @param mes
+	 * @param @return
+	 * @return: AlertDialog
+	 * @author: HaiTC3
+	 * @date: Mar 6, 2013
+	 */
+	public AlertDialog showDialog(final String mes) {
+		AlertDialog alertDialog = null;
+		try {
+			alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setMessage(mes);
+			alertDialog.setButton("Close",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							return;
+						}
+					});
+			alertDialog.show();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return alertDialog;
+	}
 }

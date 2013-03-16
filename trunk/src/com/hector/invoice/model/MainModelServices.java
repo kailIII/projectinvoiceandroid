@@ -13,6 +13,7 @@ import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ErrorConstants;
 import com.hector.invoice.controller.MainController;
+import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.InvoiceInfoDTO;
 import com.hector.invoice.dto.InvoiceOrderDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
@@ -221,6 +222,69 @@ public class MainModelServices {
 			if (result != null) {
 				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
 				model.setModelData(result);
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * get company info
+	 * 
+	 * @author: HaiTC3
+	 * @param event
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void getCompanyInfo(ActionEvent event) {
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			CompanyDTO companyInfo = SQLUtils.getInstance()
+					.getCompanyInfo(data);
+			if (companyInfo != null) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(companyInfo);
+				MainController.getInstance().handleModelEvent(model);
+			} else {
+				model.setModelCode(ErrorConstants.ERROR_COMMON);
+				MainController.getInstance().handleErrorModelEvent(model);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	/**
+	 * 
+	 * update company info
+	 * 
+	 * @author: HaiTC3
+	 * @param event
+	 * @return: void
+	 * @throws:
+	 * @since: Mar 16, 2013
+	 */
+	public void requestUpdateCompanyInfo(ActionEvent event) {
+		ModelEvent model = new ModelEvent();
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		try {
+			int result = SQLUtils.getInstance().requestUpdateCompanyInfo(data);
+			if (result == 1) {
+				model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+				model.setModelData(String.valueOf(result));
 				MainController.getInstance().handleModelEvent(model);
 			} else {
 				model.setModelCode(ErrorConstants.ERROR_COMMON);

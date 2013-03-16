@@ -37,10 +37,10 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 	public static final String INVOICE_ORDER_NUMBER = "INVOICE_ORDER_NUMBER"; // Rechnungsnummer
 
 	// COMPANY TABLE
-	public static final String INVOICE_ORDER_TABLET = "INVOICE_ORDER_TABLET";
+	public static final String INVOICE_ORDER_TABLE = "INVOICE_ORDER_TABLE";
 
 	public INVOICE_ORDER_TABLET(SQLiteDatabase mDB) {
-		this.tableName = INVOICE_ORDER_TABLET;
+		this.tableName = INVOICE_ORDER_TABLE;
 		this.columns = new String[] { INVOICE_ORDER_ID, INVOICE_ORDER_NAME,
 				CONTACT_ID, CONTACT_NAME, PROJECT, ORDERED_ON, DELIVERY,
 				CUSTOMER_NUMBER, INVOICE_ORDER_NUMBER };
@@ -296,7 +296,7 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
-		queryGetlistContact.append("select IO.*, CT.* from INVOICE_ORDER_TABLET IO LEFT JOIN CONTACT_TABLET CT ON IO.CONTACT_ID = CT.CONTACT_ID");
+		queryGetlistContact.append("select IO.*, CT.* from INVOICE_ORDER_TABLE IO LEFT JOIN CONTACT_TABLE CT ON IO.CONTACT_ID = CT.CONTACT_ID");
 
 		String[] paramsGetListProduct = new String[] {};
 		paramsGetListProduct = listParams
