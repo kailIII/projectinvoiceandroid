@@ -5,6 +5,9 @@
 
 package com.hector.invoice.views;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -91,6 +94,8 @@ public class InputInvoiceView extends BaseActivity {
 	CompanyDTO myCompanyInfo = new CompanyDTO();
 	// check load first
 	boolean isDoneLoadFirst = false;
+	// file name
+	String fileNameExport = "";
 
 	/*
 	 * (non-Javadoc)
@@ -441,6 +446,12 @@ public class InputInvoiceView extends BaseActivity {
 	public void createNewOrderNumber() {
 		DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
 				this, tblListOrderNumber);
+		rowOrder.etPos.setText(String.valueOf(tblListOrderNumber
+				.getChildCount()));
+		rowOrder.etMenge.setText("0.0");
+		rowOrder.etEinze.setText("0.0");
+		rowOrder.etGesamt.setText("0");
+		rowOrder.etMenge.requestFocus();
 		tblListOrderNumber.addView(rowOrder);
 	}
 
@@ -455,6 +466,12 @@ public class InputInvoiceView extends BaseActivity {
 	 */
 	public void updateAllControl() {
 		if (this.isCreatingInvoice) {
+
+			Date currentDateTime = new Date();
+			SimpleDateFormat format = null;
+			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
+			this.fileNameExport = format.format(currentDateTime);
+
 			// clear data
 			this.invoiceInfo = new InvoiceOrderNumberInfoView();
 			this.etAddress.setText("");
@@ -466,7 +483,7 @@ public class InputInvoiceView extends BaseActivity {
 			this.etPLZ.setText("");
 			this.etProject.setText("");
 			this.etStadt.setText("");
-			this.tvInvoiceNumber.setText("");
+			this.tvInvoiceNumber.setText(fileNameExport);
 
 			View headerView = tblListOrderNumber.getChildAt(0);
 			tblListOrderNumber.removeAllViews();

@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/page_padding"
-        android:background="@color/COLOR_GRAY_DONE"
+        android:background="@drawable/bar_bottom_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 

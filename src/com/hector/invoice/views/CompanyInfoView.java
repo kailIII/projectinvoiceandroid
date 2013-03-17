@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,7 +21,9 @@ import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
@@ -36,6 +39,7 @@ import com.hector.invoice.constant.Constants;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
 import com.hector.invoice.dto.CompanyDTO;
+import com.hector.invoice.dto.ContactDTO;
 
 /**
  * Company info view screen
@@ -52,6 +56,26 @@ public class CompanyInfoView extends BaseActivity {
 	ImageView ivCompanyAvatar;
 	CompanyDTO companyInfo = new CompanyDTO();
 	public File takenPhoto;
+	EditText etFirma;
+	EditText etAddress;
+	EditText etPLZ;
+	EditText etStadt;
+	EditText etCO;
+	EditText etTel;
+	EditText etFax;
+	EditText etEmail;
+	EditText etUSt;
+	EditText etBankName;
+	EditText etKontonr;
+	EditText etBLZ;
+	EditText etBank;
+	EditText etMehrwertsteuerText;
+	EditText etMehrwertsteuerWert;
+	EditText etRechnungsnr;
+	EditText etSacbearbeiter;
+
+	RadioButton rbMale;
+	RadioButton rbFeMale;
 
 	/*
 	 * (non-Javadoc)
@@ -111,6 +135,26 @@ public class CompanyInfoView extends BaseActivity {
 		btCreate.setOnClickListener(this);
 		ivCompanyAvatar = (ImageView) findViewById(R.id.ivCompanyAvatar);
 		ivCompanyAvatar.setOnClickListener(this);
+		etFirma = (EditText) findViewById(R.id.etFirma);
+		etAddress = (EditText) findViewById(R.id.etAddress);
+		etPLZ = (EditText) findViewById(R.id.etPLZ);
+		etStadt = (EditText) findViewById(R.id.etStadt);
+		etCO = (EditText) findViewById(R.id.etCO);
+		etTel = (EditText) findViewById(R.id.etTel);
+		etFax = (EditText) findViewById(R.id.etFax);
+		etEmail = (EditText) findViewById(R.id.etEmail);
+		etUSt = (EditText) findViewById(R.id.etUSt);
+		etBankName = (EditText) findViewById(R.id.etBankName);
+		etKontonr = (EditText) findViewById(R.id.etKontonr);
+		etBLZ = (EditText) findViewById(R.id.etBLZ);
+		etBank = (EditText) findViewById(R.id.etBank);
+		etMehrwertsteuerText = (EditText) findViewById(R.id.etMehrwertsteuerText);
+		etMehrwertsteuerWert = (EditText) findViewById(R.id.etMehrwertsteuerWert);
+		etRechnungsnr = (EditText) findViewById(R.id.etRechnungsnr);
+		etSacbearbeiter = (EditText) findViewById(R.id.etSacbearbeiter);
+
+		rbMale = (RadioButton) findViewById(R.id.rbMale);
+		rbFeMale = (RadioButton) findViewById(R.id.rbFeMale);
 	}
 
 	/**
@@ -141,6 +185,7 @@ public class CompanyInfoView extends BaseActivity {
 	 * @since: Mar 16, 2013
 	 */
 	public void requestUpdateCompanyInfo() {
+		generalDataForCompany();
 		ActionEvent action = new ActionEvent();
 		Bundle data = new Bundle();
 		data.putSerializable(IntentConstants.INTENT_COMPANY_INFO,
@@ -153,6 +198,45 @@ public class CompanyInfoView extends BaseActivity {
 
 	/**
 	 * 
+	 * general data for update company
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 17, 2013
+	 */
+	public void generalDataForCompany() {
+		if (this.companyInfo == null) {
+			this.companyInfo = new CompanyDTO();
+		}
+		this.companyInfo.companyName = etFirma.getText().toString();
+
+		this.companyInfo.companyAddress = etAddress.getText().toString();
+		this.companyInfo.companyPLZ = etPLZ.getText().toString();
+		this.companyInfo.companyPLZ = etStadt.getText().toString();
+		this.companyInfo.certificateOfOrigin = etCO.getText().toString();
+		this.companyInfo.telephone = etTel.getText().toString();
+		this.companyInfo.fax = etFax.getText().toString();
+		this.companyInfo.email = etEmail.getText().toString();
+		this.companyInfo.unitedStatesT = etUSt.getText().toString();
+		this.companyInfo.bankCompanyName = etBankName.getText().toString();
+		this.companyInfo.bankAcctnum = etKontonr.getText().toString();
+		this.companyInfo.bankBLZ = etBLZ.getText().toString();
+		this.companyInfo.bankName = etBank.getText().toString();
+		this.companyInfo.vatText = etMehrwertsteuerText.getText().toString();
+		this.companyInfo.vatValue = etMehrwertsteuerWert.getText().toString();
+		this.companyInfo.invoiceConf = etRechnungsnr.getText().toString();
+		this.companyInfo.staffSale = etSacbearbeiter.getText().toString();
+
+		if (this.rbFeMale.isChecked()) {
+			this.companyInfo.sex = ContactDTO.SEX_REMALE;
+		} else {
+			this.companyInfo.sex = ContactDTO.SEX_MALE;
+		}
+	}
+
+	/**
+	 * 
 	 * render layout
 	 * 
 	 * @author: HaiTC3
@@ -161,7 +245,36 @@ public class CompanyInfoView extends BaseActivity {
 	 * @since: Mar 16, 2013
 	 */
 	public void renderLayout() {
+		if (this.companyInfo.logo != null) {
+			Bitmap bitmap = BitmapFactory.decodeByteArray(
+					this.companyInfo.logo, 0, this.companyInfo.logo.length);
+			this.ivCompanyAvatar.setImageBitmap(bitmap);
+		}
+		etFirma.setText(this.companyInfo.companyName);
+		etAddress.setText(this.companyInfo.companyAddress);
+		etPLZ.setText(this.companyInfo.companyPLZ);
+		etStadt.setText(this.companyInfo.companyPLZ);
+		etCO.setText(this.companyInfo.certificateOfOrigin);
+		etTel.setText(this.companyInfo.telephone);
+		etFax.setText(this.companyInfo.fax);
+		etEmail.setText(this.companyInfo.email);
+		etUSt.setText(this.companyInfo.unitedStatesT);
+		etBankName.setText(this.companyInfo.bankCompanyName);
+		etKontonr.setText(this.companyInfo.bankAcctnum);
+		etBLZ.setText(this.companyInfo.bankBLZ);
+		etBank.setText(this.companyInfo.bankName);
+		etMehrwertsteuerText.setText(this.companyInfo.vatText);
+		etMehrwertsteuerWert.setText(this.companyInfo.vatValue);
+		etRechnungsnr.setText(this.companyInfo.invoiceConf);
+		etSacbearbeiter.setText(this.companyInfo.staffSale);
 
+		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
+			rbMale.setChecked(true);
+			rbFeMale.setChecked(false);
+		} else {
+			rbMale.setChecked(false);
+			rbFeMale.setChecked(true);
+		}
 	}
 
 	/*
@@ -326,8 +439,9 @@ public class CompanyInfoView extends BaseActivity {
 					Bitmap bm = validator.getBitmap();
 					try {
 						ivCompanyAvatar.setImageBitmap(bm);
-						byte[] bytearray = ImageUtil.getByteArrayOfBitmapDoNotRemoveRes(bm,
-								200, 200);
+						byte[] bytearray = ImageUtil
+								.getByteArrayOfBitmapDoNotRemoveRes(bm, 200,
+										200);
 						// update avatar
 						if (this.companyInfo == null) {
 							this.companyInfo = new CompanyDTO();
@@ -373,8 +487,9 @@ public class CompanyInfoView extends BaseActivity {
 						if (this.companyInfo == null) {
 							this.companyInfo = new CompanyDTO();
 						}
-						byte[] bytearray = ImageUtil.getByteArrayOfBitmapDoNotRemoveRes(bm,
-								200, 200);
+						byte[] bytearray = ImageUtil
+								.getByteArrayOfBitmapDoNotRemoveRes(bm, 200,
+										200);
 						// update avatar
 						this.companyInfo.logo = bytearray;
 					} catch (Throwable e) {

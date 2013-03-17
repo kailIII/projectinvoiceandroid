@@ -33,4 +33,8 @@ public interface Constants {
 	public static final int MAX_FULL_IMAGE_WIDTH = 600;
 	public static final int MAX_FULL_IMAGE_HEIGHT = 600;
 	public static final int MAX_IMAGE_ONE_UPLOAD = 5;
+	
+	public static final int TAB_EXPORT_RECHNUNG = 1;
+	public static final int TAB_EXPORT_LIEFERSCHEIN = 2;
+	public static final int TAB_EXPORT_ANGEBOT = 3;
 }

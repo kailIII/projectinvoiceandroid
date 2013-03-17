@@ -46,8 +46,30 @@ public class DisplayItemOrderNumberRow extends LinearLayout {
 		etBezeichnung = (EditText) view.findViewById(R.id.etBezeichnung);
 		etArtNr = (EditText) view.findViewById(R.id.etArtNr);
 		etMenge = (EditText) view.findViewById(R.id.etMenge);
+		etMenge.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				double menge = Double.valueOf(etMenge.getText().toString());
+				double einze = Double.valueOf(etEinze.getText().toString());
+				etGesamt.setText(String.valueOf(menge * einze));
+			}
+		});
 		etEinze = (EditText) view.findViewById(R.id.etEinze);
+		etEinze.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+
+				double menge = Double.valueOf(etMenge.getText().toString());
+				double einze = Double.valueOf(etEinze.getText().toString());
+				etGesamt.setText(String.valueOf(menge * einze));
+			}
+		});
 		etGesamt = (EditText) view.findViewById(R.id.etGesamt);
+		etGesamt.setEnabled(false);
 	}
 
 	/**

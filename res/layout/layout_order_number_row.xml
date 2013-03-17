@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/BLACK"
+    android:minHeight="40dip"
     android:orientation="horizontal" >
 
     <EditText
@@ -58,7 +59,7 @@
         android:layout_weight="1"
         android:background="@color/WHITE"
         android:gravity="center"
-        android:inputType="none"
+        android:inputType="number"
         android:maxLength="9"
         android:singleLine="true" />
 
@@ -72,7 +73,7 @@
         android:layout_weight="1"
         android:background="@color/WHITE"
         android:gravity="center"
-        android:inputType="none"
+        android:inputType="number"
         android:maxLength="9"
         android:singleLine="true" />
 
