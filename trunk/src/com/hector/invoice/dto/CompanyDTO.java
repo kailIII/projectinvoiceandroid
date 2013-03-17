@@ -34,6 +34,8 @@ public class CompanyDTO extends AbstractTableDTO {
 	public String companyCity;
 	// giao vien chu nhiem
 	public String certificateOfOrigin;
+	// telephone
+	public String telephone;
 	// buoi hoc (sang / chieu)
 	public int sex; // 1: Male / 0: FeMale
 	// hoc tieng dan toc
@@ -61,6 +63,7 @@ public class CompanyDTO extends AbstractTableDTO {
 
 	public CompanyDTO() {
 		super(TableType.LIST_COMPANY);
+		vatValue = "0";
 	}
 
 	/**
@@ -102,6 +105,9 @@ public class CompanyDTO extends AbstractTableDTO {
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.SEX) >= 0) {
 			sex = c.getInt(c.getColumnIndex(COMPANY_TABLE.SEX));
+		}
+		if (c.getColumnIndex(COMPANY_TABLE.TELEPHONE) >= 0) {
+			telephone = c.getString(c.getColumnIndex(COMPANY_TABLE.TELEPHONE));
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.FAX) >= 0) {
 			fax = c.getString(c.getColumnIndex(COMPANY_TABLE.FAX));
