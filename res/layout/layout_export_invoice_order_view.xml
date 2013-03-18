@@ -56,8 +56,9 @@
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/BLUE"
+                android:background="@drawable/bar_bottom_bg"
                 android:gravity="center"
+                android:padding="0dip"
                 android:orientation="horizontal" />
 
             <FrameLayout

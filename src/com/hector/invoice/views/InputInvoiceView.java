@@ -83,6 +83,7 @@ public class InputInvoiceView extends BaseActivity {
 	RadioButton rbFeMale;
 
 	EditText etInvoiceName;
+	String invoiceName = "";
 	Button btOK;
 	Button btCancel;
 	// check creating invoice
@@ -96,6 +97,9 @@ public class InputInvoiceView extends BaseActivity {
 	boolean isDoneLoadFirst = false;
 	// file name
 	String fileNameExport = "";
+	String fileNameExport_R = "R_";
+	String fileNameExport_L = "L_";
+	String fileNameExport_A = "A_";
 
 	/*
 	 * (non-Javadoc)
@@ -261,6 +265,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivContact) {
 			this.gotoContactListView(false); // show list contact view
 		} else if (v == ivExport) {
+			this.createPDFFile();
 			showExportInvoiceScreen(); // export invoice
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
@@ -277,6 +282,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == btSelectAnsprechpartner) {
 			gotoContactListView(true);
 		} else if (v == btOK) {
+			invoiceName = etInvoiceName.getText().toString();
 			this.requestSaveInvoice();
 		} else if (v == btCancel) {
 			if (alertProductDetail != null && alertProductDetail.isShowing()) {
@@ -344,8 +350,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else {
 			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.contactName = this.invoiceInfo.invoiceOrder.contactInvoice.contactName;
 		}
-		String invoiceName = etInvoiceName.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceName = invoiceName;
+		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceName = this.invoiceName;
 
 		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.project = etProject
 				.getText().toString();
@@ -470,7 +475,7 @@ public class InputInvoiceView extends BaseActivity {
 			Date currentDateTime = new Date();
 			SimpleDateFormat format = null;
 			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
-			this.fileNameExport = format.format(currentDateTime);
+			this.fileNameExport += format.format(currentDateTime);
 
 			// clear data
 			this.invoiceInfo = new InvoiceOrderNumberInfoView();
@@ -675,5 +680,18 @@ public class InputInvoiceView extends BaseActivity {
 			window.setGravity(Gravity.CENTER);
 		}
 		alertProductDetail.show();
+	}
+
+	public void createPDFFile() {
+		this.generalInvoiceDataSaveToDB();
+		this.fileNameExport_R += this.fileNameExport + ".pdf";
+		this.fileNameExport_L += this.fileNameExport + ".pdf";
+		this.fileNameExport_A += this.fileNameExport + ".pdf";
+		convertPDF pdf = new convertPDF(this, invoiceInfo, this.myCompanyInfo);
+		pdf.createFilePDF_R(this.fileNameExport_R);
+		pdf.createFilePDF_L(this.fileNameExport_L);
+		pdf.createFilePDF_A(this.fileNameExport_A);
+		
+//		convertPDF.getinstance(this, this.invoiceInfo).createPDF();
 	}
 }

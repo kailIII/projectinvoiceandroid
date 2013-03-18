@@ -6,11 +6,9 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <TextView
+    <WebView
+        android:id="@+id/wbContent"
         android:layout_width="fill_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="rechnung" />
+        android:layout_height="fill_parent" />
 
 </LinearLayout>
