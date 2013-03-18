@@ -40,7 +40,7 @@
         </receiver>
 
         <activity
-            android:name="com.hector.invoice.views.InputInvoiceView"
+            android:name="com.hector.invoice.views.TabExportInvoiceOrder"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +48,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--         <activity
+            android:name="com.hector.invoice.views.InputInvoiceView"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> -->
         <activity
             android:name="com.hector.invoice.views.ContactlistView"
             android:label="@string/app_name" >
