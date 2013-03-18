@@ -120,7 +120,7 @@ public class LieferscheinExportView extends BaseFragment implements
 	}
 
 	public void renderLayout() {
-		this.llParentScreen.removeAllViews();
+//		this.llParentScreen.removeAllViews();
 
 	}
 

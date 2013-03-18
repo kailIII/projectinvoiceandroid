@@ -85,7 +85,7 @@ public class RechnungExportView extends BaseFragment implements
 	}
 
 	public void renderLayout() {
-		this.llParentScreen.removeAllViews();
+//		this.llParentScreen.removeAllViews();
 	}
 
 	/*
