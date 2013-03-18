@@ -22,6 +22,7 @@ import com.hector.invoice.views.ContactlistView;
 import com.hector.invoice.views.CreateUpdateContactInfoView;
 import com.hector.invoice.views.InputInvoiceView;
 import com.hector.invoice.views.InvoiceOrderListView;
+import com.hector.invoice.views.TabExportInvoiceOrder;
 
 /**
  * Mo ta muc dich cua lop
@@ -150,6 +151,14 @@ public class MainController extends AbstractController {
 			BaseActivity sender = (BaseActivity) e.sender;
 			extras = (Bundle) e.viewData;
 			intent = new Intent(sender, CompanyInfoView.class);
+			intent.putExtras(extras);
+			sender.startActivity(intent);
+			break;
+		}
+		case ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN: {
+			BaseActivity sender = (BaseActivity) e.sender;
+			extras = (Bundle) e.viewData;
+			intent = new Intent(sender, TabExportInvoiceOrder.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
 			break;

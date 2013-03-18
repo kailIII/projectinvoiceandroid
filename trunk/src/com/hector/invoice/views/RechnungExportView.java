@@ -4,20 +4,26 @@
  */
 package com.hector.invoice.views;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseFragment;
 import com.hector.invoice.common.BaseFragmentActivity;
+import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.common.OnEventControlListener;
 import com.hector.invoice.constant.ActionEventConstant;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
+import com.hector.invoice.lib.ExternalStorage;
 
 /**
  * Mo ta muc dich cua lop (interface)
@@ -67,12 +73,38 @@ public class RechnungExportView extends BaseFragment implements
 		if (container == null) {
 			return null;
 		}
-		View view1 = (View) inflater.inflate(R.layout.layout_page_rechnung_export,
-				container, false);
-//		llParentScreen = (LinearLayout) view1.findViewById(R.id.lvListContact);
+		View view1 = (View) inflater.inflate(
+				R.layout.layout_page_rechnung_export, container, false);
+		// llParentScreen = (LinearLayout)
+		// view1.findViewById(R.id.lvListContact);
 		if (!isLoadedData) {
 			this.initData();
 		}
+
+		WebView mWebView = (WebView) view1.findViewById(R.id.wbContent);
+		mWebView.getSettings().setJavaScriptEnabled(true);
+		mWebView.getSettings().setPluginsEnabled(true);
+		
+		mWebView.setContentDescription("application/pdf");
+//		mWebView.getSettings().setLoadsImagesAutomatically(true);
+//		mWebView.getSettings().setAppCacheEnabled(true);
+		
+//		File file = new File(ExternalStorage.getFileDBPath(
+//				InvoiceInfo.getInstance()
+//				.getAppContext())
+//		.getAbsolutePath() + "/def.webarchive");
+//		Uri path = Uri.fromFile(file);
+//        
+//		mWebView.loadUrl(path.toString());
+		
+//		mWebView.loadUrl("file:///" +
+//				ExternalStorage.getFileDBPath(
+//						InvoiceInfo.getInstance().getAppContext())
+//						.getAbsolutePath() +  "/def.webarchive");
+//		mWebView.loadUrl("file:///data/data/com.hector.invoice/cache/DATABASE/" + "MyPDFFILE.pdf");
+		mWebView.loadUrl("http://hcmpc.vn/customer/upload/taive/TrinhTuThanhToanTienDienQuaATM.pdf");
+		// setContentView(mWebView);
+
 		return view1;
 	}
 
@@ -85,7 +117,7 @@ public class RechnungExportView extends BaseFragment implements
 	}
 
 	public void renderLayout() {
-//		this.llParentScreen.removeAllViews();
+		// this.llParentScreen.removeAllViews();
 	}
 
 	/*
