@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.telephony.TelephonyManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,8 @@ import com.hector.invoice.common.TabFactory;
 import com.hector.invoice.common.TabInfo;
 import com.hector.invoice.constant.Constants;
 import com.hector.invoice.constant.IntentConstants;
+import com.hector.invoice.dto.CompanyDTO;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 
 /**
  * Mo ta muc dich cua lop (interface)
@@ -57,6 +58,8 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 	RelativeLayout rllMainTopMenu;
 	TextView tvDescriptionTopic;
 	TextView tvTopicTitle;
+	InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
+	CompanyDTO myCompany = new CompanyDTO();
 
 	/*
 	 * (non-Javadoc)
@@ -71,6 +74,15 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 		setContentView(R.layout.layout_export_invoice_order_view);
 
 		this.initControlView();
+		Bundle data = this.getIntent().getExtras();
+		if (data.getSerializable(IntentConstants.INTENT_INVOICE_INFO) != null) {
+			this.invoiceInfo = (InvoiceOrderNumberInfoView) data
+					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
+		}
+		if (data.getSerializable(IntentConstants.INTENT_COMPANY_INFO) != null) {
+			this.myCompany = (CompanyDTO) data
+					.getSerializable(IntentConstants.INTENT_COMPANY_INFO);
+		}
 		this.initialiseTabHost(savedInstanceState);
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState
@@ -124,8 +136,8 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 	private void intialiseViewPager() {
 
 		List<Fragment> fragments = new Vector<Fragment>();
-		RechnungExportView view1 = RechnungExportView
-				.newInstance("bundle from parent");
+		RechnungExportView view1 = RechnungExportView.newInstance(
+				"bundle from parent", this.invoiceInfo, this.myCompany);
 		LieferscheinExportView view2 = LieferscheinExportView
 				.newInstance("bundle from parent");
 		AngebotExportView view3 = AngebotExportView

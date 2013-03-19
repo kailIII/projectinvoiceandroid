@@ -4,7 +4,7 @@
 package com.hector.invoice.views;
 
 /**
- * @author Duchha
+ * @author Hai
  *
  */
 
@@ -14,9 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 
 import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.dto.CompanyDTO;
@@ -216,11 +213,11 @@ public class convertPDF {
 		// chuong 1
 		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 
-		Paragraph subPara = new Paragraph("Giới thiệu", subFont);
+		Paragraph subPara = new Paragraph("text", subFont);
 		Section subCatPart = catPart.addSection(subPara);
-		subCatPart.add(new Paragraph("Chào mừng các ban đến với zinduchuynh"));
+		subCatPart.add(new Paragraph("Wel come to HaiTC"));
 
-		// subPara = new Paragraph("Bắt đầu", subFont);
+		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
 		// subCatPart = catPart.addSection(subPara);
 		String line = "Firma" + "				" + this.companyInfo.companyName;
 		subCatPart.add(new Paragraph(line));
@@ -325,7 +322,7 @@ public class convertPDF {
 		line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total + vat);
 		subCatPart.add(new Paragraph(line));
 
-//		subCatPart.add(new Paragraph("Import thư viện"));
+//		subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
 //		subCatPart.add(new Paragraph("Run program"));
 //
 //		// Add a list
@@ -355,7 +352,7 @@ public class convertPDF {
 		Section subCatPart = catPart.addSection(subPara);
 		subCatPart.add(new Paragraph("Welcome to pdf"));
 		
-		// subPara = new Paragraph("Bắt đầu", subFont);
+		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
 		// subCatPart = catPart.addSection(subPara);
 		String line = "Firma" + "				" + this.companyInfo.companyName;
 		subCatPart.add(new Paragraph(line));
@@ -473,7 +470,7 @@ public class convertPDF {
 		subCatPart.add(new Paragraph(line));
 		
 		
-//		subCatPart.add(new Paragraph("Import thư viện"));
+//		subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
 //		subCatPart.add(new Paragraph("Run program"));
 //		
 //		// Add a list
@@ -502,11 +499,11 @@ public class convertPDF {
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 
-		c1 = new PdfPCell(new Phrase("Tên Người Dùng"));
+		c1 = new PdfPCell(new Phrase("TÃªn NgÆ°á»�i DÃ¹ng"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 
-		c1 = new PdfPCell(new Phrase("Điện Thoại"));
+		c1 = new PdfPCell(new Phrase("Ä�iá»‡n Thoáº¡i"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 
@@ -535,11 +532,11 @@ public class convertPDF {
 	// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	// table.addCell(c1);
 	//
-	// c1 = new PdfPCell(new Phrase("Tên Người Dùng"));
+	// c1 = new PdfPCell(new Phrase("TÃªn NgÆ°á»�i DÃ¹ng"));
 	// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	// table.addCell(c1);
 	//
-	// c1 = new PdfPCell(new Phrase("Điện Thoại"));
+	// c1 = new PdfPCell(new Phrase("Ä�iá»‡n Thoáº¡i"));
 	// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	// table.addCell(c1);
 	//
