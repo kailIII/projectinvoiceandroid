@@ -36,11 +36,16 @@ public class DisplayItemOrderNumberRow extends LinearLayout {
 	 * @param context
 	 * @param attrs
 	 */
-	public DisplayItemOrderNumberRow(Context context, View aRow) {
+	public DisplayItemOrderNumberRow(Context context, View aRow, int type) {
 		super(context);
 		LayoutInflater vi = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = vi.inflate(R.layout.layout_order_number_row, this);
+		if (type == 0) {
+			view = vi.inflate(R.layout.layout_order_number_row, this);
+		}
+		else{
+			view = vi.inflate(R.layout.layout_order_number_row_2, this);
+		}
 
 		etPos = (EditText) view.findViewById(R.id.etPos);
 		etBezeichnung = (EditText) view.findViewById(R.id.etBezeichnung);

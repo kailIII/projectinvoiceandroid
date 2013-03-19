@@ -67,7 +67,9 @@ public class ExternalStorage {
 	// thu muc file buffer dong bo du lieu
 	public static final String INVOICE_SYNDATA_FOLDER = "SYN_DATA";
 	// thu muc database trong cache VNM
-	public static final String INVOICE_DATABASE_FOLDER = EXTERNAL_CACHE_DIR + "DATABASE";
+	public static final String INVOICE_DATABASE_FOLDER = EXTERNAL_CACHE_DIR
+			+ "DATABASE";
+	public static final String INVOICE_PDF_FOLDER = EXTERNAL_CACHE_DIR + "PDF";
 
 	/**
 	 * 
@@ -235,6 +237,19 @@ public class ExternalStorage {
 		// return getDatabasePath(context);
 		// }
 		File path = new File(INVOICE_DATABASE_FOLDER);
+		if (!path.exists()) {
+			path.mkdir();
+		}
+		return path;
+	}
+
+	public static File getFilePDFPath(Context context) {
+		// if (MemoryUtils.isSdPresent()){
+		// return new File(SDCARD_PATH );
+		// }else {
+		// return getDatabasePath(context);
+		// }
+		File path = new File(INVOICE_PDF_FOLDER);
 		if (!path.exists()) {
 			path.mkdir();
 		}

@@ -4,20 +4,30 @@
  */
 package com.hector.invoice.views;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseFragment;
 import com.hector.invoice.common.BaseFragmentActivity;
 import com.hector.invoice.common.OnEventControlListener;
 import com.hector.invoice.constant.ActionEventConstant;
+import com.hector.invoice.dto.CompanyDTO;
+import com.hector.invoice.dto.ContactDTO;
+import com.hector.invoice.dto.InvoiceOrderDetailDTO;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 
 /**
  * Mo ta muc dich cua lop (interface)
@@ -34,10 +44,20 @@ public class LieferscheinExportView extends BaseFragment implements
 
 	ArrayList<Integer> listIconItem2;
 
-	boolean isLoadedData = false;
+	TextView tvContent1;
+	TextView tvContent2;
+	TextView tvContent3;
+	ImageView ivLogo;
+	LinearLayout tblListOrderNumber;
 
-	public static LieferscheinExportView newInstance(String title) {
+	static InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
+	static CompanyDTO companyInfo = new CompanyDTO();
+
+	public static LieferscheinExportView newInstance(String title,
+			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany) {
 		LieferscheinExportView f = new LieferscheinExportView();
+		invoiceInfo = data;
+		companyInfo = dataCompany;
 		Bundle args = new Bundle();
 		args.putString("title", title);
 		f.setArguments(args);
@@ -70,12 +90,18 @@ public class LieferscheinExportView extends BaseFragment implements
 		}
 		View view1 = (View) inflater.inflate(
 				R.layout.layout_page_lieferschein_export, container, false);
-		// llParentScreen = (LinearLayout)
-		// view1.findViewById(R.id.lvListContact);
-		if (!isLoadedData) {
-			this.initData();
-		}
+		this.initView(view1);
+		this.initData();
 		return view1;
+	}
+
+	public void initView(View v) {
+		tvContent1 = (TextView) v.findViewById(R.id.tvContent1);
+		tvContent2 = (TextView) v.findViewById(R.id.tvContent2);
+		tvContent3 = (TextView) v.findViewById(R.id.tvContent3);
+		ivLogo = (ImageView) v.findViewById(R.id.ivLogo);
+		tblListOrderNumber = (LinearLayout) v
+				.findViewById(R.id.tblListOrderNumber);
 	}
 
 	/**
@@ -88,39 +114,86 @@ public class LieferscheinExportView extends BaseFragment implements
 	 * @date: Nov 3, 2012
 	 */
 	public void initData() {
-		// init object 1
-		this.initDataForObject1();
-		// init object 2
-		this.initDataForObject2();
-		isLoadedData = true;
-	}
+		// show logo
+		if (this.companyInfo.logo != null && this.companyInfo.logo.length > 0) {
+			Bitmap bm = BitmapFactory.decodeByteArray(this.companyInfo.logo, 0,
+					this.companyInfo.logo.length);
+			ivLogo.setImageBitmap(bm);
+		}
 
-	/**
-	 * 
-	 * init data for object 1
-	 * 
-	 * @return: void
-	 * @throws:
-	 * @author: HaiTC3
-	 * @date: Nov 3, 2012
-	 */
-	public void initDataForObject1() {
-	}
+		// show content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Firma \n ");
+		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.firstName
+				+ "\n");
+		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
+			strContent1.append("Herr "
+					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
+		} else {
+			strContent1.append("Frau "
+					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
+		}
+		strContent1
+				.append(invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+						+ "\n");
+		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.contactPLZ);
+		strContent1
+				.append(invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
 
-	/**
-	 * 
-	 * init data for object 2
-	 * 
-	 * @return: void
-	 * @throws:
-	 * @author: HaiTC3
-	 * @date: Nov 3, 2012
-	 */
-	public void initDataForObject2() {
+		tvContent1.setText(strContent1.toString());
+
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
+		strContent2.append(companyInfo.companyName + "\n");
+		strContent2.append(companyInfo.companyAddress + "\n");
+		strContent2.append(companyInfo.companyPLZ + " "
+				+ companyInfo.companyCity + "\n \n ");
+		strContent2.append("lhre Ansprechpartner/in \n");
+		if (companyInfo.sex == ContactDTO.SEX_MALE) {
+			strContent2
+					.append("Herr " + companyInfo.certificateOfOrigin + "\n");
+		} else {
+			strContent2.append("Faur" + companyInfo.certificateOfOrigin + "\n");
+		}
+		strContent2.append("Tel: " + this.companyInfo.telephone + "\n");
+		strContent2.append("Fax: " + this.companyInfo.fax + "\n");
+		strContent2.append("Email: " + this.companyInfo.email + "\n");
+		tvContent2.setText(strContent2.toString());
+
+		// content 3
+		StringBuffer strContent3 = new StringBuffer();
+		strContent3.append("Bestellt am: "
+				+ invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn + "\n");
+		strContent3.append("Lieferdatum: "
+				+ invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery + "\n");
+		strContent3.append("Kunden-Nr.: "
+				+ invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber
+				+ "\n");
+		strContent3.append("Lieferschein-Nr: " + "file name" + "\n");
+		tvContent3.setText(strContent3.toString());
+
+		for (int i = 0, size = this.invoiceInfo.listOrderDetail.size(); i < size; i++) {
+			InvoiceOrderDetailDTO dto = this.invoiceInfo.listOrderDetail.get(i);
+
+			DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
+					parentActivity, tblListOrderNumber, 0);
+			rowOrder.etPos.setText(dto.pos);
+			rowOrder.etPos.setEnabled(false);
+			rowOrder.etMenge.setText(dto.quantity);
+			rowOrder.etMenge.setEnabled(false);
+			rowOrder.etArtNr.setText(dto.art_nr);
+			rowOrder.etArtNr.setEnabled(false);
+			rowOrder.etBezeichnung.setText(dto.designation);
+			rowOrder.etBezeichnung.setEnabled(false);
+			rowOrder.etEinze.setVisibility(View.GONE);
+			rowOrder.etGesamt.setVisibility(View.GONE);
+
+			tblListOrderNumber.addView(rowOrder);
+		}
 	}
 
 	public void renderLayout() {
-//		this.llParentScreen.removeAllViews();
+		// this.llParentScreen.removeAllViews();
 
 	}
 
@@ -131,9 +204,7 @@ public class LieferscheinExportView extends BaseFragment implements
 	 */
 	@Override
 	public void onResume() {
-		if (this.isLoadedData) {
-			this.renderLayout();
-		}
+		this.renderLayout();
 		super.onResume();
 	}
 

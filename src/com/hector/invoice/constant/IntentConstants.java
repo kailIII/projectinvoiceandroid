@@ -28,4 +28,7 @@ public class IntentConstants {
 	public static final String INTENT_INVOICE_ORDER_ID = "intent.invoice.order.id";
 	public static final String INTENT_INVOICE_INFO = "intent.invoice.info";
 	public static final String INTENT_COMPANY_INFO = "intent.company.info";
+	public static final String INTENT_FILE_NAME_PDF1 = "intent.filename.1";
+	public static final String INTENT_FILE_NAME_PDF2 = "intent.filename.2";
+	public static final String INTENT_FILE_NAME_PDF3 = "intent.filename.3";
 }

@@ -82,12 +82,10 @@ public class MainController extends AbstractController {
 							.getListInvoiceOrderDetail(e);
 					break;
 				case ActionEventConstant.GET_COMPANY_INFO:
-					MainModelServices.getInstance()
-							.getCompanyInfo(e);
+					MainModelServices.getInstance().getCompanyInfo(e);
 					break;
 				case ActionEventConstant.REQUEST_UPDATE_COMPANY_INFO:
-					MainModelServices.getInstance()
-					.requestUpdateCompanyInfo(e);
+					MainModelServices.getInstance().requestUpdateCompanyInfo(e);
 					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
@@ -157,6 +155,7 @@ public class MainController extends AbstractController {
 		}
 		case ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN: {
 			BaseActivity sender = (BaseActivity) e.sender;
+			sender.closeProgressDialog();
 			extras = (Bundle) e.viewData;
 			intent = new Intent(sender, TabExportInvoiceOrder.class);
 			intent.putExtras(extras);

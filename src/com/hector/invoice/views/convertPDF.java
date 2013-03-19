@@ -8,12 +8,14 @@ package com.hector.invoice.views;
  *
  */
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.dto.CompanyDTO;
@@ -68,21 +70,21 @@ public class convertPDF {
 	}
 
 	public void createFilePDF_R(String fileName) {
-		fi = new File(ExternalStorage.getFileDBPath(
+		fi = new File(ExternalStorage.getFilePDFPath(
 				InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
 				fileName);
 		createPDF_R();
 	}
 
 	public void createFilePDF_L(String fileName) {
-		fi = new File(ExternalStorage.getFileDBPath(
+		fi = new File(ExternalStorage.getFilePDFPath(
 				InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
 				fileName);
 		createPDF_L();
 	}
 
 	public void createFilePDF_A(String fileName) {
-		fi = new File(ExternalStorage.getFileDBPath(
+		fi = new File(ExternalStorage.getFilePDFPath(
 				InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
 				fileName);
 		createPDF_A();
@@ -121,8 +123,7 @@ public class convertPDF {
 			addMetaData(document);
 
 			createImage(document);
-
-//			addTitlePage(document);
+			// addTitlePage(document);
 			addContent_L(document);
 			document.close();
 		} catch (Exception e) {
@@ -322,38 +323,36 @@ public class convertPDF {
 		line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total + vat);
 		subCatPart.add(new Paragraph(line));
 
-//		subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
-//		subCatPart.add(new Paragraph("Run program"));
-//
-//		// Add a list
-//		createList(subCatPart);
-//
-//		Paragraph paragraph = new Paragraph();
-//		addEmptyLine(paragraph, 5);
-//		subCatPart.add(paragraph);
-//
-//		// Add a table
-//		createTable(subCatPart);
+		// subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
+		// subCatPart.add(new Paragraph("Run program"));
+		//
+		// // Add a list
+		// createList(subCatPart);
+		//
+		// Paragraph paragraph = new Paragraph();
+		// addEmptyLine(paragraph, 5);
+		// subCatPart.add(paragraph);
+		//
+		// // Add a table
+		// createTable(subCatPart);
 
 		// Now add all this to the document
 		document.add(catPart);
 		document.newPage();
 
 	}
+
 	private void addContent_L(Document document) throws DocumentException {
-		
+
 		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
 		anchor.setName("ESTIMATING APP");
-		
+
 		// chuong 1
 		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-		
-		Paragraph subPara = new Paragraph("introduce", subFont);
+
+		Paragraph subPara = new Paragraph("", subFont);
 		Section subCatPart = catPart.addSection(subPara);
-		subCatPart.add(new Paragraph("Welcome to pdf"));
-		
-		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
-		// subCatPart = catPart.addSection(subPara);
+
 		String line = "Firma" + "				" + this.companyInfo.companyName;
 		subCatPart.add(new Paragraph(line));
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
@@ -371,122 +370,119 @@ public class convertPDF {
 					+ this.companyInfo.companyCity;
 		}
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " "
 				+ this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + "lhre Ansprechpartner/in";
 		subCatPart.add(new Paragraph(line));
-		
+
 		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
 			line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
 		} else {
 			line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
 		}
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + "Tel: " + this.companyInfo.telephone;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + "Fax: " + this.companyInfo.fax;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + "Email: " + this.companyInfo.email;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + this.companyInfo.unitedStatesT;
 		subCatPart.add(new Paragraph(line));
-		
-		
-		
-		line = "							" + "Bestellt am: " + this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn;
+
+		line = "							" + "Bestellt am: "
+				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn;
 		subCatPart.add(new Paragraph(line));
-		
-		line = "							" + "lieferdatum: " + this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery;
+
+		line = "							" + "lieferdatum: "
+				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery;
 		subCatPart.add(new Paragraph(line));
-		
+
 		subCatPart.add(new Paragraph("Lieferschein", catFont));
-		
-		line = "							" + "Kunden-Nr: " + this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber;
+
+		line = "							" + "Kunden-Nr: "
+				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber;
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "							" + "Leiferschein-Nr: " + "file name L";
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "Kontrollieren Sie die Liefernung auf Vollstandigkeit und Beschadigungen .";
 		subCatPart.add(new Paragraph(line));
 		line = "Sollten Sie Grund zur Beanstandung haben, setzen Sie sich bitte umgehend mit uns in Verbindung.";
 		subCatPart.add(new Paragraph(line));
 		line = "Reklamationen konnen nur am Tag der Lieferung angenommen werden.";
 		subCatPart.add(new Paragraph(line));
-		
-		
-//		Date currentDateTime = new Date();
-//		SimpleDateFormat format = null;
-//		format = new SimpleDateFormat("dd.MM.yyyy");
-//		line = "							" + "Datum: " + format.format(currentDateTime);
-//		subCatPart.add(new Paragraph(line));
-//		
-//		line = "							" + "Rechnungsnr: " + "file name";
-//		subCatPart.add(new Paragraph(line));
-		
+
+		// Date currentDateTime = new Date();
+		// SimpleDateFormat format = null;
+		// format = new SimpleDateFormat("dd.MM.yyyy");
+		// line = "							" + "Datum: " + format.format(currentDateTime);
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "Rechnungsnr: " + "file name";
+		// subCatPart.add(new Paragraph(line));
+
 		PdfPTable table = new PdfPTable(5);
 		PdfPCell c1 = new PdfPCell(new Phrase("Pos"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
-		
-		
+
 		c1 = new PdfPCell(new Phrase("Menge"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
-		
+
 		c1 = new PdfPCell(new Phrase("Art.-Nr."));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
-		
+
 		c1 = new PdfPCell(new Phrase("Bezeichnung"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
-		
+
 		table.setHeaderRows(1);
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
-			
+
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).art_nr);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
 		}
 		subCatPart.add(table);
-		
-		
+
 		line = "Die Ware bleibt bis zur vollstandigen Bezahlung unser Eigentum.";
 		subCatPart.add(new Paragraph(line));
-		
+
 		line = "Ich habe die Ware im ordnungsgemaBen Zustand erhalten.";
 		subCatPart.add(new Paragraph(line));
-		
-		
-//		subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
-//		subCatPart.add(new Paragraph("Run program"));
-//		
-//		// Add a list
-//		createList(subCatPart);
-//		
-//		Paragraph paragraph = new Paragraph();
-//		addEmptyLine(paragraph, 5);
-//		subCatPart.add(paragraph);
-//		
-//		// Add a table
-//		createTable(subCatPart);
-		
+
+		// subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
+		// subCatPart.add(new Paragraph("Run program"));
+		//
+		// // Add a list
+		// createList(subCatPart);
+		//
+		// Paragraph paragraph = new Paragraph();
+		// addEmptyLine(paragraph, 5);
+		// subCatPart.add(paragraph);
+		//
+		// // Add a table
+		// createTable(subCatPart);
+
 		// Now add all this to the document
 		document.add(catPart);
 		document.newPage();
-		
+
 	}
 
 	// private static void createTable(Section subCatPart, ArrayList<Contact>
@@ -499,11 +495,11 @@ public class convertPDF {
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 
-		c1 = new PdfPCell(new Phrase("TÃªn NgÆ°á»�i DÃ¹ng"));
+		c1 = new PdfPCell(new Phrase("test"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 
-		c1 = new PdfPCell(new Phrase("Ä�iá»‡n Thoáº¡i"));
+		c1 = new PdfPCell(new Phrase("asdasd"));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c1);
 

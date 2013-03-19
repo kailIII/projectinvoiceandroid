@@ -17,6 +17,7 @@ import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.common.ModelEvent;
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
@@ -83,6 +84,7 @@ public class InvoiceOrderListView extends BaseActivity {
 	 * @date: Mar 15, 2013
 	 */
 	public void requestGetListInvoiceOrder() {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		ActionEvent action = new ActionEvent();
 		Bundle data = new Bundle();
 		action.viewData = data;
@@ -120,6 +122,7 @@ public class InvoiceOrderListView extends BaseActivity {
 			if (listInvoice.size() > 0) {
 				renderLayout();
 			}
+			this.closeProgressDialog();
 			break;
 		case ActionEventConstant.REQUEST_GET_DETAIL_INVOICE:
 			ArrayList<InvoiceOrderDetailDTO> listInvoiceDetail = (ArrayList<InvoiceOrderDetailDTO>) modelEvent
@@ -131,6 +134,7 @@ public class InvoiceOrderListView extends BaseActivity {
 			data.putSerializable(IntentConstants.INTENT_INVOICE_INFO,
 					invoiceInfo);
 			sendBroadcast(ActionEventConstant.BROAD_CAST_INVOICE_OBJECT, data);
+			this.closeProgressDialog();
 			this.finish();
 			break;
 		default:
@@ -179,6 +183,7 @@ public class InvoiceOrderListView extends BaseActivity {
 	 * @date: Mar 15, 2013
 	 */
 	public void requestGetDetailInvoice(InvoiceInfoDTO invoiceInfo) {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		this.currentInvoice = invoiceInfo;
 		ActionEvent action = new ActionEvent();
 		Bundle data = new Bundle();
@@ -200,6 +205,7 @@ public class InvoiceOrderListView extends BaseActivity {
 	@Override
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
 		// TODO Auto-generated method stub
+		this.closeProgressDialog();
 		super.handleErrorModelViewEvent(modelEvent);
 	}
 

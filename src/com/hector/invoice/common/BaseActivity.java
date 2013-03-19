@@ -228,6 +228,16 @@ public abstract class BaseActivity extends Activity implements
 		}
 	}
 
+	public void showProgressDialog(String content) {
+		if (progressDlg != null && progressDlg.isShowing()) {
+			closeProgressDialog();
+		}
+		progressDlg = ProgressDialog.show(this, "", content, true, true);
+		progressDlg.setCancelable(true);
+		progressDlg.setCanceledOnTouchOutside(false);
+		progressDlg.setOnCancelListener(this);
+	}
+
 	/**
 	 * 
 	 * close progress dialog

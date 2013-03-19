@@ -19,15 +19,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="@dimen/page_margin_right"
-            android:contentDescription="new invoice"
-            android:background="@drawable/image_button_new_selector" />
+            android:layout_marginRight="10dip"
+            android:background="@drawable/image_button_new_selector"
+            android:contentDescription="new invoice" />
 
         <ImageView
             android:id="@+id/ivOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/page_margin_right"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
             android:contentDescription="open invoice"
             android:src="@drawable/image_button_open_selector" />
 
@@ -35,7 +36,8 @@
             android:id="@+id/ivSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/page_margin_right"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
             android:contentDescription="save invoice"
             android:src="@drawable/image_button_save_selector" />
 
@@ -43,17 +45,19 @@
             android:id="@+id/ivExport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
             android:contentDescription="export"
             android:src="@drawable/image_button_export_selector" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/svContent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llBottomMenu"
-        android:padding="@dimen/page_padding"
         android:layout_below="@id/llTopMenu"
-        android:background="@color/TRANSPARENT" >
+        android:background="@color/TRANSPARENT"
+        android:padding="@dimen/page_padding" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -64,11 +68,11 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/page_margin_bottom"
+                android:layout_marginTop="@dimen/page_margin_top"
                 android:background="@color/TRANSPARENT"
                 android:gravity="center_vertical"
                 android:minHeight="40dip"
-                android:layout_marginTop="@dimen/page_margin_top"
-                android:layout_marginBottom="@dimen/page_margin_bottom"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -87,8 +91,8 @@
                         android:id="@+id/btSelectAnsprechpartner"
                         style="@style/CustomButton"
                         android:layout_width="150dp"
-                        android:layout_gravity="center"
                         android:layout_height="@dimen/height_of_button"
+                        android:layout_gravity="center"
                         android:text="Ansprechpartner"
                         android:textColor="@color/BLACK" />
                 </LinearLayout>

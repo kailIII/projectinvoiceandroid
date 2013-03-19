@@ -50,18 +50,6 @@ public class RechnungExportView extends BaseFragment implements
 	TextView tvContent5;
 	TextView tvContent6;
 	TextView tvContent7;
-	TextView tvContent8;
-	TextView tvContent9;
-	TextView tvContent10;
-	TextView tvContent11;
-	TextView tvContent12;
-	TextView tvContent13;
-	TextView tvContent14;
-	TextView tvContent15;
-	TextView tvContent16;
-	TextView tvContent17;
-	TextView tvContent18;
-	TextView tvContent19;
 	ImageView ivLogo;
 	LinearLayout tblListOrderNumber;
 
@@ -106,45 +94,7 @@ public class RechnungExportView extends BaseFragment implements
 		View view1 = (View) inflater.inflate(
 				R.layout.layout_page_rechnung_export, container, false);
 		this.initView(view1);
-		// llParentScreen = (LinearLayout)
-		// view1.findViewById(R.id.lvListContact);
 		this.initData();
-
-		// WebView mWebView = (WebView) view1.findViewById(R.id.wbContent);
-		//
-		// mWebView.setWebViewClient(new myClient());
-		// mWebView.getSettings().setJavaScriptEnabled(true);
-		// mWebView.getSettings().setLightTouchEnabled(true);
-		// mWebView.getSettings().setUserAgentString("0");
-		// mWebView.getSettings().setUseWideViewPort(true);
-		//
-		// mWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" +
-		// "file:///data/data/com.hector.invoice/cache/DATABASE/MWS-Bugs.pdf");
-
-		// mWebView.getSettings().setJavaScriptEnabled(true);
-		// mWebView.getSettings().setPluginsEnabled(true);
-		//
-		// mWebView.setContentDescription("application/pdf");
-		// mWebView.getSettings().setLoadsImagesAutomatically(true);
-		// mWebView.getSettings().setAppCacheEnabled(true);
-
-		// File file = new File(ExternalStorage.getFileDBPath(
-		// InvoiceInfo.getInstance()
-		// .getAppContext())
-		// .getAbsolutePath() + "/def.webarchive");
-		// Uri path = Uri.fromFile(file);
-		//
-		// mWebView.loadUrl(path.toString());
-
-		// mWebView.loadUrl("file:///" +
-		// ExternalStorage.getFileDBPath(
-		// InvoiceInfo.getInstance().getAppContext())
-		// .getAbsolutePath() + "/def.webarchive");
-		// mWebView.loadUrl("file:///data/data/com.hector.invoice/cache/DATABASE/"
-		// + "MyPDFFILE.pdf");
-		// mWebView.loadUrl("http://hcmpc.vn/customer/upload/taive/TrinhTuThanhToanTienDienQuaATM.pdf");
-		// setContentView(mWebView);
-
 		return view1;
 	}
 
@@ -156,82 +106,76 @@ public class RechnungExportView extends BaseFragment implements
 		tvContent5 = (TextView) v.findViewById(R.id.tvContent5);
 		tvContent6 = (TextView) v.findViewById(R.id.tvContent6);
 		tvContent7 = (TextView) v.findViewById(R.id.tvContent7);
-		tvContent8 = (TextView) v.findViewById(R.id.tvContent8);
-		tvContent9 = (TextView) v.findViewById(R.id.tvContent9);
-		tvContent10 = (TextView) v.findViewById(R.id.tvContent10);
-		tvContent11 = (TextView) v.findViewById(R.id.tvContent11);
-		tvContent12 = (TextView) v.findViewById(R.id.tvContent12);
-		tvContent13 = (TextView) v.findViewById(R.id.tvContent13);
-		tvContent14 = (TextView) v.findViewById(R.id.tvContent14);
-		tvContent15 = (TextView) v.findViewById(R.id.tvContent15);
-		tvContent16 = (TextView) v.findViewById(R.id.tvContent16);
 		ivLogo = (ImageView) v.findViewById(R.id.ivLogo);
 		tblListOrderNumber = (LinearLayout) v
 				.findViewById(R.id.tblListOrderNumber);
 	}
 
 	public void initData() {
+		// show logo
 		if (this.companyInfo.logo != null && this.companyInfo.logo.length > 0) {
 			Bitmap bm = BitmapFactory.decodeByteArray(this.companyInfo.logo, 0,
 					this.companyInfo.logo.length);
 			ivLogo.setImageBitmap(bm);
 		}
 
-		tvContent1.setText(this.companyInfo.companyName);
-		tvContent2
-				.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactName);
-		tvContent3.setText(this.companyInfo.companyAddress);
-		String st = "";
-		if (this.invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			st = "Herr "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName;
+		// show content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Firma \n ");
+		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.firstName
+				+ "\n");
+		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
+			strContent1.append("Herr "
+					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
 		} else {
-			st = "Frau "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName;
+			strContent1.append("Frau "
+					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
 		}
-		tvContent4.setText(st);
-		tvContent5.setText(this.companyInfo.companyPLZ + " "
-				+ this.companyInfo.companyCity);
+		strContent1
+				.append(invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+						+ "\n");
+		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.contactPLZ);
+		strContent1
+				.append(invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
 
-		tvContent6
-				.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress);
+		tvContent1.setText(strContent1.toString());
 
-		tvContent7
-				.setText(this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
-						+ " "
-						+ this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
-
-		tvContent8.setText("lhre Ansprechpartner/in");
-
-		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
-			st = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
+		strContent2.append(companyInfo.companyName + "\n");
+		strContent2.append(companyInfo.companyAddress + "\n");
+		strContent2.append(companyInfo.companyPLZ + " "
+				+ companyInfo.companyCity + "\n \n ");
+		strContent2.append("lhre Ansprechpartner/in \n");
+		if (companyInfo.sex == ContactDTO.SEX_MALE) {
+			strContent2
+					.append("Herr " + companyInfo.certificateOfOrigin + "\n");
 		} else {
-			st = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
+			strContent2.append("Faur" + companyInfo.certificateOfOrigin + "\n");
 		}
-		tvContent9.setText(st);
-		tvContent10.setText("Tel: " + this.companyInfo.telephone);
-		tvContent11.setText("Fax: " + this.companyInfo.fax);
+		strContent2.append("Tel: " + this.companyInfo.telephone + "\n");
+		strContent2.append("Fax: " + this.companyInfo.fax + "\n");
+		strContent2.append("Email: " + this.companyInfo.email + "\n");
+		strContent2.append(this.companyInfo.unitedStatesT + "\n");
+		tvContent2.setText(strContent2.toString());
 
-		tvContent12.setText("Email: " + this.companyInfo.email);
-
-		tvContent13.setText(this.companyInfo.unitedStatesT);
-
-		tvContent14.setText("Rechnung");
-
+		// content 3
+		StringBuffer strContent3 = new StringBuffer();
 		Date currentDateTime = new Date();
 		SimpleDateFormat format = null;
 		format = new SimpleDateFormat("dd.MM.yyyy");
-		String line = "							" + "Datum: " + format.format(currentDateTime);
-		tvContent15.setText(line);
+		String line = "Datum: " + format.format(currentDateTime);
+		strContent3.append(line + "\n");
+		strContent3.append("Rechnungsnr: " + "file name" + "\n");
+		tvContent3.setText(strContent3.toString());
 
-		tvContent16.setText("Rechnungsnr: " + "file name");
-
+		// table
 		double total = 0;
 		for (int i = 0, size = this.invoiceInfo.listOrderDetail.size(); i < size; i++) {
 			InvoiceOrderDetailDTO dto = this.invoiceInfo.listOrderDetail.get(i);
 
 			DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
-					parentActivity, tblListOrderNumber);
+					parentActivity, tblListOrderNumber, 0);
 			rowOrder.etPos.setText(dto.pos);
 			rowOrder.etPos.setEnabled(false);
 			rowOrder.etBezeichnung.setText(dto.designation);
@@ -247,6 +191,34 @@ public class RechnungExportView extends BaseFragment implements
 
 			tblListOrderNumber.addView(rowOrder);
 		}
+
+		// content 4
+		StringBuffer strContent4 = new StringBuffer();
+		strContent4.append("Zwischensumme		" + String.valueOf(total) + "\n");
+		double newTotal = Integer.parseInt(companyInfo.vatValue) * total;
+		strContent4.append(companyInfo.vatText + "		"
+				+ Integer.parseInt(companyInfo.vatValue) * total);
+		tvContent4.setText(strContent4.toString());
+
+		// content 5
+		StringBuffer strContent5 = new StringBuffer();
+		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal));
+		tvContent5.setText(strContent5.toString());
+
+		// content 6
+		StringBuffer strContent6 = new StringBuffer();
+		strContent6.append(companyInfo.bankName);
+		tvContent6.setText(strContent6.toString());
+
+		// content 7
+		StringBuffer strContent7 = new StringBuffer();
+		strContent7.append("BLZ: " + companyInfo.bankBLZ + "\n");
+		strContent7.append("Konto-Nr: " + companyInfo.bankAcctnum + "\n");
+		strContent7.append("Bank: " + companyInfo.bankCompanyName + "\n \n");
+		strContent7.append("Wir danken fur den Auftrag. " + "\n \n ");
+		strContent7.append("Mit freundlichen Grussen " + "\n \n");
+		strContent7.append(companyInfo.staffSale + "\n");
+		tvContent7.setText(strContent7.toString());
 
 	}
 

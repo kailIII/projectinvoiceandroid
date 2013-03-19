@@ -15,6 +15,7 @@ import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.common.ModelEvent;
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
@@ -97,6 +98,7 @@ public class ContactlistView extends BaseActivity {
 	 * @since: Mar 5, 2013
 	 */
 	public void requestGetListContact() {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		ActionEvent action = new ActionEvent();
 		Bundle data = new Bundle();
 		action.viewData = data;
@@ -138,8 +140,10 @@ public class ContactlistView extends BaseActivity {
 			if (this.listContactInfo != null) {
 				this.renderLayout();
 			}
+			this.closeProgressDialog();
 			break;
 		case ActionEventConstant.REQUEST_DELETE_CONTACT:
+			this.closeProgressDialog();
 			int result = (Integer) modelEvent.getModelData();
 			if (result == 1) {
 				this.requestGetListContact();
@@ -161,6 +165,7 @@ public class ContactlistView extends BaseActivity {
 	@Override
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
 		// TODO Auto-generated method stub
+		this.closeProgressDialog();
 		super.handleErrorModelViewEvent(modelEvent);
 	}
 
@@ -213,6 +218,7 @@ public class ContactlistView extends BaseActivity {
 	 * @date: Mar 14, 2013
 	 */
 	public void requestDeleteContact(ContactDTO myContact) {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		ActionEvent event = new ActionEvent();
 		Bundle data = new Bundle();
 		if (myContact != null) {
