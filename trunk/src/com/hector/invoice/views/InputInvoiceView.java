@@ -415,6 +415,10 @@ public class InputInvoiceView extends BaseActivity {
 	public void showExportInvoiceScreen() {
 		ActionEvent event = new ActionEvent();
 		Bundle data = new Bundle();
+		data.putSerializable(IntentConstants.INTENT_INVOICE_INFO,
+				this.invoiceInfo);
+		data.putSerializable(IntentConstants.INTENT_COMPANY_INFO,
+				this.myCompanyInfo);
 		event.viewData = data;
 		event.sender = this;
 		event.action = ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN;
@@ -691,7 +695,7 @@ public class InputInvoiceView extends BaseActivity {
 		pdf.createFilePDF_R(this.fileNameExport_R);
 		pdf.createFilePDF_L(this.fileNameExport_L);
 		pdf.createFilePDF_A(this.fileNameExport_A);
-		
-//		convertPDF.getinstance(this, this.invoiceInfo).createPDF();
+
+		// convertPDF.getinstance(this, this.invoiceInfo).createPDF();
 	}
 }
