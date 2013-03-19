@@ -13,7 +13,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:inputType="none"
-        android:maxLength="1"
         android:singleLine="true" />
 
     <LinearLayout

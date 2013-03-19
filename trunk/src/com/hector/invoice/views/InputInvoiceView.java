@@ -5,6 +5,7 @@
 
 package com.hector.invoice.views;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,12 +28,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.ActionEvent;
 import com.hector.invoice.common.BaseActivity;
+import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.common.ModelEvent;
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
@@ -40,6 +44,7 @@ import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
 import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
+import com.hector.invoice.lib.ExternalStorage;
 import com.hector.invoice.lib.SQLUtils;
 
 /**
@@ -100,6 +105,7 @@ public class InputInvoiceView extends BaseActivity {
 	String fileNameExport_R = "R_";
 	String fileNameExport_L = "L_";
 	String fileNameExport_A = "A_";
+	ScrollView svContent;
 
 	/*
 	 * (non-Javadoc)
@@ -195,6 +201,9 @@ public class InputInvoiceView extends BaseActivity {
 		tblListOrderNumber = (LinearLayout) findViewById(R.id.tblListOrderNumber);
 		rbFeMale = (RadioButton) findViewById(R.id.rbFeMale);
 		rbMale = (RadioButton) findViewById(R.id.rbMale);
+
+		svContent = (ScrollView) findViewById(R.id.svContent);
+		svContent.setVisibility(View.INVISIBLE);
 		this.updateAllControl();
 	}
 
@@ -243,6 +252,8 @@ public class InputInvoiceView extends BaseActivity {
 			updateContactDataForScreen((ContactDTO) bundle
 					.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT));
 		} else if (action == ActionEventConstant.BROAD_CAST_INVOICE_OBJECT) {
+			this.svContent.setVisibility(View.VISIBLE);
+			this.isCreatingInvoice = true;
 			invoiceInfo = (InvoiceOrderNumberInfoView) bundle
 					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
 			this.updateInvoiceDataForScreen();
@@ -265,10 +276,12 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivContact) {
 			this.gotoContactListView(false); // show list contact view
 		} else if (v == ivExport) {
+			this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 			this.createPDFFile();
 			showExportInvoiceScreen(); // export invoice
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
+			this.svContent.setVisibility(View.VISIBLE);
 			this.updateAllControl(); // update all control
 		} else if (v == ivOpen) {
 			showInvoiceList(); // show list invoice
@@ -303,6 +316,7 @@ public class InputInvoiceView extends BaseActivity {
 	 * @date: Mar 14, 2013
 	 */
 	public void requestSaveInvoice() {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		generalInvoiceDataSaveToDB();
 		ActionEvent event = new ActionEvent();
 		Bundle data = new Bundle();
@@ -419,6 +433,12 @@ public class InputInvoiceView extends BaseActivity {
 				this.invoiceInfo);
 		data.putSerializable(IntentConstants.INTENT_COMPANY_INFO,
 				this.myCompanyInfo);
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF1,
+				this.fileNameExport_R);
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF2,
+				this.fileNameExport_L);
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF3,
+				this.fileNameExport_A);
 		event.viewData = data;
 		event.sender = this;
 		event.action = ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN;
@@ -454,7 +474,7 @@ public class InputInvoiceView extends BaseActivity {
 	 */
 	public void createNewOrderNumber() {
 		DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
-				this, tblListOrderNumber);
+				this, tblListOrderNumber, 0);
 		rowOrder.etPos.setText(String.valueOf(tblListOrderNumber
 				.getChildCount()));
 		rowOrder.etMenge.setText("0.0");
@@ -560,7 +580,7 @@ public class InputInvoiceView extends BaseActivity {
 						.get(i);
 
 				DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
-						this, tblListOrderNumber);
+						this, tblListOrderNumber, 0);
 				rowOrder.updateLayoutWithData(invoiceDetail);
 				tblListOrderNumber.addView(rowOrder);
 			}
@@ -633,6 +653,7 @@ public class InputInvoiceView extends BaseActivity {
 			}
 			break;
 		case ActionEventConstant.REQUEST_SAVE_INVOICE:
+			this.closeProgressDialog();
 			int result = Integer.valueOf(String.valueOf(modelEvent
 					.getModelData()));
 			if (result == 1) {
@@ -655,6 +676,7 @@ public class InputInvoiceView extends BaseActivity {
 	@Override
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
 		// TODO Auto-generated method stub
+		this.closeProgressDialog();
 		super.handleErrorModelViewEvent(modelEvent);
 	}
 
@@ -686,8 +708,26 @@ public class InputInvoiceView extends BaseActivity {
 		alertProductDetail.show();
 	}
 
+	/**
+	 * 
+	 * create file pdf
+	 * 
+	 * @param
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Mar 20, 2013
+	 */
 	public void createPDFFile() {
+		// delete file before create
+		File fi = new File(ExternalStorage.getFilePDFPath(
+				InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
+				"");
+		this.deleteDirectory(fi);
+
+		// general data to save to DB
 		this.generalInvoiceDataSaveToDB();
+
+		// create file pdf
 		this.fileNameExport_R += this.fileNameExport + ".pdf";
 		this.fileNameExport_L += this.fileNameExport + ".pdf";
 		this.fileNameExport_A += this.fileNameExport + ".pdf";
@@ -695,7 +735,31 @@ public class InputInvoiceView extends BaseActivity {
 		pdf.createFilePDF_R(this.fileNameExport_R);
 		pdf.createFilePDF_L(this.fileNameExport_L);
 		pdf.createFilePDF_A(this.fileNameExport_A);
+	}
 
-		// convertPDF.getinstance(this, this.invoiceInfo).createPDF();
+	/**
+	 * 
+	 * delete all file in folder pdf
+	 * 
+	 * @param @param path
+	 * @param @return
+	 * @return: boolean
+	 * @author: HaiTC3
+	 * @date: Mar 20, 2013
+	 */
+	public boolean deleteDirectory(File path) {
+		// TODO Auto-generated method stub
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
+				}
+			}
+		}
+		return true;
+		// return (path.delete());
 	}
 }

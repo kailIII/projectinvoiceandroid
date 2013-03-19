@@ -185,6 +185,7 @@ public class CompanyInfoView extends BaseActivity {
 	 * @since: Mar 16, 2013
 	 */
 	public void requestUpdateCompanyInfo() {
+		this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 		generalDataForCompany();
 		ActionEvent action = new ActionEvent();
 		Bundle data = new Bundle();
@@ -297,6 +298,7 @@ public class CompanyInfoView extends BaseActivity {
 			}
 			break;
 		case ActionEventConstant.REQUEST_UPDATE_COMPANY_INFO:
+			this.closeProgressDialog();
 			int result = Integer.parseInt(String.valueOf(modelEvent
 					.getModelData()));
 			if (result == 1) {
@@ -322,6 +324,7 @@ public class CompanyInfoView extends BaseActivity {
 	 */
 	@Override
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
+		this.closeProgressDialog();
 		// TODO Auto-generated method stub
 		super.handleErrorModelViewEvent(modelEvent);
 	}

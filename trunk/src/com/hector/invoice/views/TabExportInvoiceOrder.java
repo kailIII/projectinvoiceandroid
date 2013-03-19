@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseFragmentActivity;
 import com.hector.invoice.common.ImageUtil;
+import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.common.PagerAdapter;
 import com.hector.invoice.common.TabFactory;
 import com.hector.invoice.common.TabInfo;
@@ -35,6 +37,7 @@ import com.hector.invoice.constant.Constants;
 import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
+import com.hector.invoice.lib.ExternalStorage;
 
 /**
  * Mo ta muc dich cua lop (interface)
@@ -60,6 +63,9 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 	TextView tvTopicTitle;
 	InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
 	CompanyDTO myCompany = new CompanyDTO();
+	String fileNamePDF_R = "";
+	String fileNamePDF_L = "";
+	String fileNamePDF_A = "";
 
 	/*
 	 * (non-Javadoc)
@@ -83,6 +89,19 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			this.myCompany = (CompanyDTO) data
 					.getSerializable(IntentConstants.INTENT_COMPANY_INFO);
 		}
+		if (data.getString(IntentConstants.INTENT_FILE_NAME_PDF1) != null) {
+			this.fileNamePDF_R = data
+					.getString(IntentConstants.INTENT_FILE_NAME_PDF1);
+		}
+		if (data.getString(IntentConstants.INTENT_FILE_NAME_PDF2) != null) {
+			this.fileNamePDF_L = data
+					.getString(IntentConstants.INTENT_FILE_NAME_PDF2);
+		}
+		if (data.getString(IntentConstants.INTENT_FILE_NAME_PDF3) != null) {
+			this.fileNamePDF_A = data
+					.getString(IntentConstants.INTENT_FILE_NAME_PDF3);
+		}
+
 		this.initialiseTabHost(savedInstanceState);
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState
@@ -138,10 +157,10 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 		List<Fragment> fragments = new Vector<Fragment>();
 		RechnungExportView view1 = RechnungExportView.newInstance(
 				"bundle from parent", this.invoiceInfo, this.myCompany);
-		LieferscheinExportView view2 = LieferscheinExportView
-				.newInstance("bundle from parent");
-		AngebotExportView view3 = AngebotExportView
-				.newInstance("bundle from parent");
+		LieferscheinExportView view2 = LieferscheinExportView.newInstance(
+				"bundle from parent", this.invoiceInfo, this.myCompany);
+		AngebotExportView view3 = AngebotExportView.newInstance(
+				"bundle from parent", this.invoiceInfo, this.myCompany);
 
 		fragments.add(view1);
 		fragments.add(view2);
@@ -385,6 +404,32 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 		if (v == btBack) {
 			// return to main menu view
 			this.onBackPressed();
+		} else if (v == btEmail) {
+			String filelocation = "";
+			if (currentScreenIndex == Constants.TAB_EXPORT_RECHNUNG) {
+				filelocation = ExternalStorage.getFilePDFPath(
+						InvoiceInfo.getInstance().getAppContext())
+						.getAbsolutePath()
+						+ this.fileNamePDF_R;
+			} else if (currentScreenIndex == Constants.TAB_EXPORT_LIEFERSCHEIN) {
+				filelocation = ExternalStorage.getFilePDFPath(
+						InvoiceInfo.getInstance().getAppContext())
+						.getAbsolutePath()
+						+ this.fileNamePDF_L;
+			} else if (currentScreenIndex == Constants.TAB_EXPORT_ANGEBOT) {
+				filelocation = ExternalStorage.getFilePDFPath(
+						InvoiceInfo.getInstance().getAppContext())
+						.getAbsolutePath()
+						+ this.fileNamePDF_A;
+			}
+
+			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+			sharingIntent.setType("application/pdf");
+			String to[] = new String[] { "@email.com" };
+			sharingIntent.putExtra(Intent.EXTRA_EMAIL, to);
+			sharingIntent.putExtra(Intent.EXTRA_STREAM, filelocation);
+			sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+			startActivity(Intent.createChooser(sharingIntent, "Send email"));
 		}
 	}
 
