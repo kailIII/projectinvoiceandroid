@@ -13,8 +13,8 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:layout_marginBottom="1dip"
-        android:layout_marginRight="1dip"
         android:layout_marginLeft="1dip"
+        android:layout_marginRight="1dip"
         android:layout_weight="1"
         android:background="@color/WHITE"
         android:gravity="center"
@@ -91,5 +91,14 @@
         android:inputType="none"
         android:maxLength="9"
         android:singleLine="true" />
+
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/WHITE"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_delete" />
 
 </LinearLayout>

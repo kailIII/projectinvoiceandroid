@@ -21,7 +21,6 @@ import com.hector.invoice.R;
 import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.dto.InvoiceInfoDTO;
-import com.hector.invoice.dto.InvoiceOrderDTO;
 
 /**
  * adapter for invoice order

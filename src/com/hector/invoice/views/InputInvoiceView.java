@@ -669,6 +669,31 @@ public class InputInvoiceView extends BaseActivity {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.hector.invoice.common.BaseActivity#onEvent(int,
+	 * android.view.View, java.lang.Object)
+	 */
+	@Override
+	public void onEvent(int eventType, View control, Object data) {
+		// TODO Auto-generated method stub
+		if (eventType == ActionEventConstant.ACTION_DELETE_INVOICE_DETAIL) {
+			InvoiceOrderDetailDTO currentDate = (InvoiceOrderDetailDTO) data;
+
+			for (int i = 1, size = tblListOrderNumber.getChildCount(); i < size; i++) {
+				DisplayItemOrderNumberRow rowOrder = (DisplayItemOrderNumberRow) tblListOrderNumber
+						.getChildAt(i);
+				if (rowOrder.invoiceDetailData == currentDate) {
+					tblListOrderNumber.removeViewAt(i);
+					break;
+				}
+			}
+
+		}
+		super.onEvent(eventType, control, data);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * com.hector.invoice.common.BaseActivity#handleErrorModelViewEvent(com.
 	 * hector.invoice.common.ModelEvent)
