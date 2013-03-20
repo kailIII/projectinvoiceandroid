@@ -48,6 +48,7 @@ public class ActionEventConstant {
 	public static final int REQUEST_GET_DETAIL_INVOICE = 16;
 	// request update company info
 	public static final int REQUEST_UPDATE_COMPANY_INFO = 17;
+	public static final int ACTION_DELETE_INVOICE_DETAIL = 18;
 
 	// broad cast
 	public static final int BROAD_CAST_CONTACT_OBJECT = 1;
