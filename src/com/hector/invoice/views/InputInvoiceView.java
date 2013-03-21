@@ -253,6 +253,8 @@ public class InputInvoiceView extends BaseActivity {
 					.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT));
 		} else if (action == ActionEventConstant.BROAD_CAST_INVOICE_OBJECT) {
 			this.svContent.setVisibility(View.VISIBLE);
+			this.ivSave.setVisibility(View.VISIBLE);
+			this.ivExport.setVisibility(View.VISIBLE);
 			this.isCreatingInvoice = true;
 			invoiceInfo = (InvoiceOrderNumberInfoView) bundle
 					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
