@@ -125,6 +125,22 @@ public class ContactlistView extends BaseActivity {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.hector.invoice.common.BaseActivity#receiveBroadcast(int,
+	 * android.os.Bundle)
+	 */
+	@Override
+	public void receiveBroadcast(int action, Bundle bundle) {
+		// TODO Auto-generated method stub
+		if (action == ActionEventConstant.BROAD_CAST_UPDATE_CONTACT_LIST) {
+			this.requestGetListContact();
+		} else {
+			super.receiveBroadcast(action, bundle);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * com.hector.invoice.common.BaseActivity#handleModelViewEvent(com.hector
 	 * .invoice.common.ModelEvent)

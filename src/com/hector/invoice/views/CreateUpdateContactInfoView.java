@@ -179,6 +179,9 @@ public class CreateUpdateContactInfoView extends BaseActivity {
 			int result = Integer.valueOf(String.valueOf(modelEvent
 					.getModelData()));
 			if (result == 1) {
+				sendBroadcast(
+						ActionEventConstant.BROAD_CAST_UPDATE_CONTACT_LIST,
+						new Bundle());
 				this.finish();
 			}
 			break;

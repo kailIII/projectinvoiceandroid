@@ -65,7 +65,7 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 					return false;
 				}
 			});
-		} else {
+		} else if (type == 1) {
 			view = vi.inflate(R.layout.layout_order_number_row_2, this);
 		}
 
@@ -79,8 +79,15 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
-				double menge = Double.valueOf(etMenge.getText().toString());
-				double einze = Double.valueOf(etEinze.getText().toString());
+
+				double menge = 0;
+				if (!StringUtil.isNullOrEmpty(etMenge.getText().toString())) {
+					Double.valueOf(etMenge.getText().toString());
+				}
+				double einze = 0;
+				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
+					Double.valueOf(etEinze.getText().toString());
+				}
 				etGesamt.setText(String.valueOf(menge * einze));
 			}
 		});
