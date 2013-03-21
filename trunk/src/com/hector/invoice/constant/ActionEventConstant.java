@@ -56,6 +56,8 @@ public class ActionEventConstant {
 	public static final int BROAD_CAST_INVOICE_OBJECT = 2;
 	// broad cast update company info success
 	public static final int BROAD_CAST_UPDATE_COMPANYINFO_SUCCESS = 3;
+	// broad cast update company info success
+	public static final int BROAD_CAST_UPDATE_CONTACT_LIST = 4;
 
 	// action show main menu view
 	public static final int SHOW_MAIN_MENU = 2;

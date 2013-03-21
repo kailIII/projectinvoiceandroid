@@ -3,8 +3,8 @@
     android:id="@+id/row"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/WHITE"
     android:orientation="horizontal"
+    android:background="@drawable/cus_row_selected"
     android:minHeight="40dip"
     android:padding="@dimen/page_padding" >
 

@@ -74,19 +74,20 @@ public class ContactAdapter extends BaseAdapter {
 			LayoutInflater li = (LayoutInflater) mContext
 					.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
 			vi = li.inflate(R.layout.layout_row_item_contact, null);
+			final ImageView ivDelete = (ImageView) vi
+					.findViewById(R.id.ivDelete);
 			vi.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					ivDelete.setVisibility(View.INVISIBLE);
 					listen.onEvent(
 							ActionEventConstant.ACTION_CLICK_ROW_CONTACT, null,
 							mContacts.get(position));
 				}
 			});
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
-			final ImageView ivDelete = (ImageView) vi
-					.findViewById(R.id.ivDelete);
 			vi.setOnLongClickListener(new OnLongClickListener() {
 
 				@Override
