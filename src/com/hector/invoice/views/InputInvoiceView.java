@@ -102,9 +102,9 @@ public class InputInvoiceView extends BaseActivity {
 	boolean isDoneLoadFirst = false;
 	// file name
 	String fileNameExport = "";
-	String fileNameExport_R = "R_";
-	String fileNameExport_L = "L_";
-	String fileNameExport_A = "A_";
+	String fileNameExport_R = "";
+	String fileNameExport_L = "";
+	String fileNameExport_A = "";
 	ScrollView svContent;
 
 	/*
@@ -296,6 +296,9 @@ public class InputInvoiceView extends BaseActivity {
 			gotoContactListView(true);
 		} else if (v == btOK) {
 			invoiceName = etInvoiceName.getText().toString();
+			if (alertProductDetail != null && alertProductDetail.isShowing()) {
+				alertProductDetail.dismiss();
+			}
 			this.requestSaveInvoice();
 		} else if (v == btCancel) {
 			if (alertProductDetail != null && alertProductDetail.isShowing()) {
@@ -495,11 +498,10 @@ public class InputInvoiceView extends BaseActivity {
 	 */
 	public void updateAllControl() {
 		if (this.isCreatingInvoice) {
-
 			Date currentDateTime = new Date();
 			SimpleDateFormat format = null;
 			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
-			this.fileNameExport += format.format(currentDateTime);
+			this.fileNameExport = format.format(currentDateTime);
 
 			// clear data
 			this.invoiceInfo = new InvoiceOrderNumberInfoView();
@@ -753,9 +755,9 @@ public class InputInvoiceView extends BaseActivity {
 		this.generalInvoiceDataSaveToDB();
 
 		// create file pdf
-		this.fileNameExport_R += this.fileNameExport + ".pdf";
-		this.fileNameExport_L += this.fileNameExport + ".pdf";
-		this.fileNameExport_A += this.fileNameExport + ".pdf";
+		this.fileNameExport_R = "R_" + this.fileNameExport + ".pdf";
+		this.fileNameExport_L = "L_" + this.fileNameExport + ".pdf";
+		this.fileNameExport_A = "A_" + this.fileNameExport + ".pdf";
 		convertPDF pdf = new convertPDF(this, invoiceInfo, this.myCompanyInfo);
 		pdf.createFilePDF_R(this.fileNameExport_R);
 		pdf.createFilePDF_L(this.fileNameExport_L);

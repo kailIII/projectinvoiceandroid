@@ -176,7 +176,7 @@ public class LieferscheinExportView extends BaseFragment implements
 			InvoiceOrderDetailDTO dto = this.invoiceInfo.listOrderDetail.get(i);
 
 			DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
-					parentActivity, tblListOrderNumber, 0);
+					parentActivity, tblListOrderNumber, 2);
 			rowOrder.etPos.setText(dto.pos);
 			rowOrder.etPos.setEnabled(false);
 			rowOrder.etMenge.setText(dto.quantity);

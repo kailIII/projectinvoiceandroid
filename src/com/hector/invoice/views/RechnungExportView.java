@@ -175,7 +175,7 @@ public class RechnungExportView extends BaseFragment implements
 			InvoiceOrderDetailDTO dto = this.invoiceInfo.listOrderDetail.get(i);
 
 			DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
-					parentActivity, tblListOrderNumber, 0);
+					parentActivity, tblListOrderNumber, 2);
 			rowOrder.etPos.setText(dto.pos);
 			rowOrder.etPos.setEnabled(false);
 			rowOrder.etBezeichnung.setText(dto.designation);

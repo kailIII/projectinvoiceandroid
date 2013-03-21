@@ -48,8 +48,10 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 		super(context);
 		LayoutInflater vi = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		if (type == 0) {
-			listener = (BaseActivity) context;
+		if (type == 0 && type == 2) {
+			if (type == 0) {
+				listener = (BaseActivity) context;
+			}
 			view = vi.inflate(R.layout.layout_order_number_row, this);
 			ivDelete = (ImageView) view.findViewById(R.id.ivDelete);
 			ivDelete.setOnClickListener(this);
