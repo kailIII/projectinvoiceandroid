@@ -140,7 +140,7 @@ public class convertPDF {
 
 			createImage(document);
 
-//			addTitlePage(document);
+			// addTitlePage(document);
 			addContent_A(document);
 			document.close();
 		} catch (Exception e) {
@@ -300,7 +300,7 @@ public class convertPDF {
 		table.addCell(c1);
 
 		table.setHeaderRows(1);
-		long total = 0;
+		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
 
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
@@ -308,15 +308,15 @@ public class convertPDF {
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).total);
-			total += Long
-					.parseLong(this.invoiceInfo.listOrderDetail.get(i).total);
+			total += Double
+					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
 		}
 		subCatPart.add(table);
 
 		line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
 		subCatPart.add(new Paragraph(line));
 
-		float vat = total * Integer.valueOf(this.companyInfo.vatValue);
+		double vat = total * Float.valueOf(this.companyInfo.vatValue);
 		line = "							" + this.companyInfo.vatText + "	" + String.valueOf(vat);
 		subCatPart.add(new Paragraph(line));
 
@@ -484,7 +484,7 @@ public class convertPDF {
 		document.newPage();
 
 	}
-	
+
 	private void addContent_A(Document document) throws DocumentException {
 
 		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
@@ -579,7 +579,7 @@ public class convertPDF {
 		table.addCell(c1);
 
 		table.setHeaderRows(1);
-		long total = 0;
+		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
 
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
@@ -587,15 +587,15 @@ public class convertPDF {
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price);
 			table.addCell(this.invoiceInfo.listOrderDetail.get(i).total);
-			total += Long
-					.parseLong(this.invoiceInfo.listOrderDetail.get(i).total);
+			total += Double
+					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
 		}
 		subCatPart.add(table);
 
 		line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
 		subCatPart.add(new Paragraph(line));
 
-		float vat = total * Integer.valueOf(this.companyInfo.vatValue);
+		double vat = total * Float.valueOf(this.companyInfo.vatValue);
 		line = "							" + this.companyInfo.vatText + "	" + String.valueOf(vat);
 		subCatPart.add(new Paragraph(line));
 

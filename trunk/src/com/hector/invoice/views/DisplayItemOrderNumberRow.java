@@ -48,7 +48,7 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 		super(context);
 		LayoutInflater vi = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		if (type == 0 && type == 2) {
+		if (type == 0 || type == 2) {
 			if (type == 0) {
 				listener = (BaseActivity) context;
 			}

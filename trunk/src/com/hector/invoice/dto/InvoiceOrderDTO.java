@@ -7,6 +7,7 @@ package com.hector.invoice.dto;
 
 import android.database.Cursor;
 
+import com.hector.invoice.constant.Constants;
 import com.hector.invoice.lib.INVOICE_ORDER_TABLET;
 
 /**
@@ -26,21 +27,21 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 	// ma lop
 	public long invoiceOrderId;
 	// invoice name
-	public String invoiceName;
+	public String invoiceName = Constants.STR_BLANK;
 	// contactId
 	public long contactId;
 	// contactName
-	public String contactName;
+	public String contactName = Constants.STR_BLANK;
 	// project
-	public String project;
+	public String project = Constants.STR_BLANK;
 	// orderedOn
-	public String orderedOn;
+	public String orderedOn = Constants.STR_BLANK;
 	// delivery
-	public String delivery;
+	public String delivery = Constants.STR_BLANK;
 	// customerNumber
-	public String customerNumber;
+	public String customerNumber = Constants.STR_BLANK;
 	// invoiceOrderNumber
-	public String invoiceOrderNumber; 
+	public String invoiceOrderNumber = Constants.STR_BLANK; 
 
 	public InvoiceOrderDTO() {
 		super(TableType.INVOICE_ORDER);
