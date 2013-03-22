@@ -2,6 +2,7 @@ package com.hector.invoice.dto;
 
 import android.database.Cursor;
 
+import com.hector.invoice.constant.Constants;
 import com.hector.invoice.lib.COMPANY_TABLE;
 
 /**
@@ -25,41 +26,41 @@ public class CompanyDTO extends AbstractTableDTO {
 	// ten lop
 	public byte[] logo;
 	// ten lop de search
-	public String companyName;
+	public String companyName = Constants.STR_BLANK;
 	// nam hoc
-	public String companyAddress;
+	public String companyAddress = Constants.STR_BLANK;
 	// khoi hoc
-	public String companyPLZ;
+	public String companyPLZ = Constants.STR_BLANK;
 	// phan ban
-	public String companyCity;
+	public String companyCity = Constants.STR_BLANK;
 	// giao vien chu nhiem
-	public String certificateOfOrigin;
+	public String certificateOfOrigin = Constants.STR_BLANK;
 	// telephone
-	public String telephone;
+	public String telephone = Constants.STR_BLANK;
 	// buoi hoc (sang / chieu)
 	public int sex; // 1: Male / 0: FeMale
 	// hoc tieng dan toc
-	public String fax;
+	public String fax = Constants.STR_BLANK;
 	// lop ghep (co / khong)
-	public String email;
+	public String email = Constants.STR_BLANK;
 	// ma lop ghep
-	public String unitedStatesT;
+	public String unitedStatesT = Constants.STR_BLANK;
 	// ngoai ngu 1
-	public String bankCompanyName;
+	public String bankCompanyName = Constants.STR_BLANK;
 	// ngoai ngu 2
-	public String bankAcctnum;
+	public String bankAcctnum = Constants.STR_BLANK;
 	// tin hoc
-	public String bankBLZ;
+	public String bankBLZ = Constants.STR_BLANK;
 	// hoc nghe pho thong
-	public String bankName;
+	public String bankName = Constants.STR_BLANK;
 	// thuoc diem truong
-	public String vatText;
+	public String vatText = Constants.STR_BLANK;
 	// tinh chat
-	public String vatValue;
+	public String vatValue = Constants.STR_BLANK;
 	// mo ta
-	public String invoiceConf;// mo ta
+	public String invoiceConf = Constants.STR_BLANK;// mo ta
 	// level id
-	public String staffSale;// mo ta
+	public String staffSale = Constants.STR_BLANK;// mo ta
 
 	public CompanyDTO() {
 		super(TableType.LIST_COMPANY);

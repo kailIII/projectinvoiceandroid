@@ -482,7 +482,7 @@ public class InputInvoiceView extends BaseActivity {
 				this, tblListOrderNumber, 0);
 		rowOrder.etPos.setText(String.valueOf(tblListOrderNumber
 				.getChildCount()));
-//		rowOrder.etMenge.setText("0");
+		rowOrder.etMenge.setText("0");
 		rowOrder.etEinze.setText("0");
 		rowOrder.etGesamt.setText("0");
 		rowOrder.etMenge.requestFocus();

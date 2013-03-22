@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -410,24 +411,25 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 				filelocation = ExternalStorage.getFilePDFPath(
 						InvoiceInfo.getInstance().getAppContext())
 						.getAbsolutePath()
-						+ this.fileNamePDF_R;
+						+ "/" + this.fileNamePDF_R;
 			} else if (currentScreenIndex == Constants.TAB_EXPORT_LIEFERSCHEIN) {
 				filelocation = ExternalStorage.getFilePDFPath(
 						InvoiceInfo.getInstance().getAppContext())
 						.getAbsolutePath()
-						+ this.fileNamePDF_L;
+						+ "/" + this.fileNamePDF_L;
 			} else if (currentScreenIndex == Constants.TAB_EXPORT_ANGEBOT) {
 				filelocation = ExternalStorage.getFilePDFPath(
 						InvoiceInfo.getInstance().getAppContext())
 						.getAbsolutePath()
-						+ this.fileNamePDF_A;
+						+ "/" + this.fileNamePDF_A;
 			}
 
 			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 			sharingIntent.setType("application/pdf");
 			String to[] = new String[] { "@email.com" };
 			sharingIntent.putExtra(Intent.EXTRA_EMAIL, to);
-			sharingIntent.putExtra(Intent.EXTRA_STREAM, filelocation);
+			Uri uri = Uri.parse("file://" +filelocation);
+			sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 			sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
 			startActivity(Intent.createChooser(sharingIntent, "Send email"));
 		}
