@@ -259,6 +259,11 @@ public class InputInvoiceView extends BaseActivity {
 			invoiceInfo = (InvoiceOrderNumberInfoView) bundle
 					.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
 			this.updateInvoiceDataForScreen();
+			// new file pdf
+			Date currentDateTime = new Date();
+			SimpleDateFormat format = null;
+			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
+			this.fileNameExport = format.format(currentDateTime);
 		} else if (action == ActionEventConstant.BROAD_CAST_UPDATE_COMPANYINFO_SUCCESS) {
 			this.getCompanyInfo();
 		}
@@ -680,11 +685,12 @@ public class InputInvoiceView extends BaseActivity {
 	public void onEvent(int eventType, View control, Object data) {
 		// TODO Auto-generated method stub
 		if (eventType == ActionEventConstant.ACTION_DELETE_INVOICE_DETAIL) {
-//			int pos = Integer.valueOf((String) data);
+			// int pos = Integer.valueOf((String) data);
 			for (int i = 1, size = tblListOrderNumber.getChildCount(); i < size; i++) {
 				DisplayItemOrderNumberRow rowOrder = (DisplayItemOrderNumberRow) tblListOrderNumber
 						.getChildAt(i);
-				if (rowOrder.etPos.getText().toString().equals(String.valueOf(data))) {
+				if (rowOrder.etPos.getText().toString()
+						.equals(String.valueOf(data))) {
 					tblListOrderNumber.removeViewAt(i);
 					break;
 				}
