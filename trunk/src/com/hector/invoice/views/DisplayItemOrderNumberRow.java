@@ -55,16 +55,12 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 			view = vi.inflate(R.layout.layout_order_number_row, this);
 			ivDelete = (ImageView) view.findViewById(R.id.ivDelete);
 			ivDelete.setOnClickListener(this);
-			view.setOnLongClickListener(new OnLongClickListener() {
-
-				@Override
-				public boolean onLongClick(View v) {
-					if (ivDelete != null && type == 0) {
-						ivDelete.setVisibility(View.VISIBLE);
-					}
-					return false;
-				}
-			});
+			if (ivDelete != null && type == 0) {
+				ivDelete.setVisibility(View.VISIBLE);
+			}
+			else{
+				ivDelete.setVisibility(View.GONE);
+			}
 		} else if (type == 1) {
 			view = vi.inflate(R.layout.layout_order_number_row_2, this);
 		}
@@ -149,7 +145,7 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 		// TODO Auto-generated method stub
 		if (v == ivDelete) {
 			listener.onEvent(ActionEventConstant.ACTION_DELETE_INVOICE_DETAIL,
-					v, invoiceDetailData);
+					v, etPos.getText().toString());
 		}
 	}
 

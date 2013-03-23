@@ -94,11 +94,14 @@
 
     <ImageView
         android:id="@+id/ivDelete"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/WHITE"
         android:visibility="gone"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="2dip"
+        android:layout_marginRight="1dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:background="@color/WHITE"
         android:src="@drawable/icon_delete" />
 
 </LinearLayout>

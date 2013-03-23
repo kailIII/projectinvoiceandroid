@@ -74,12 +74,12 @@
                 android:gravity="center_vertical"
                 android:minHeight="40dip"
                 android:orientation="horizontal" >
-<!-- 
+
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="" /> -->
+                    android:text="" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -483,6 +483,14 @@
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
                         android:text="@string/text_lb_header_tb_gesamt" />
+
+                    <TextView
+                        android:id="@+id/ivDelete"
+                        android:layout_width="53dip"
+                        android:layout_height="match_parent"
+                        android:background="@color/WHITE"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

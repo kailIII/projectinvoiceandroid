@@ -8,7 +8,7 @@ package com.hector.invoice.dto;
 import android.database.Cursor;
 
 import com.hector.invoice.constant.Constants;
-import com.hector.invoice.lib.INVOICE_ORDER_TABLET;
+import com.hector.invoice.lib.INVOICE_ORDER_TABLE;
 
 /**
  * Class description
@@ -58,41 +58,41 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 	 * @date: Dec 10, 2012
 	 */
 	public void initLogDTOFromCursor(Cursor c) {
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_ID) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_ID) >= 0) {
 			invoiceOrderId = c.getLong(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_ID));
+					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_ID));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_ID) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_ID) >= 0) {
 			contactId = c.getLong(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_ID));
+					.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_ID));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NAME) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NAME) >= 0) {
 			invoiceName = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NAME));
+					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NAME));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_NAME) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME) >= 0) {
 			contactName = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.CONTACT_NAME));
+					.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.PROJECT) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT) >= 0) {
 			project = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.PROJECT));
+					.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.ORDERED_ON) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON) >= 0) {
 			orderedOn = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.ORDERED_ON));
+					.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.DELIVERY) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY) >= 0) {
 			delivery = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.DELIVERY));
+					.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.CUSTOMER_NUMBER) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER) >= 0) {
 			customerNumber = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.CUSTOMER_NUMBER));
+					.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NUMBER) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER) >= 0) {
 			invoiceOrderNumber = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLET.INVOICE_ORDER_NUMBER));
+					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER));
 		}
 
 	}

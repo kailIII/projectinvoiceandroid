@@ -24,7 +24,7 @@ import com.hector.invoice.dto.InvoiceOrderDTO;
  * @version: 1.1
  * @since: 1.0 | Mar 3, 2013
  */
-public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
+public class INVOICE_ORDER_TABLE extends ABSTRACT_TABLE {
 
 	public static final String INVOICE_ORDER_ID = "INVOICE_ORDER_ID";
 	public static final String INVOICE_ORDER_NAME = "INVOICE_ORDER_NAME";// invoice name
@@ -39,7 +39,7 @@ public class INVOICE_ORDER_TABLET extends ABSTRACT_TABLE {
 	// COMPANY TABLE
 	public static final String INVOICE_ORDER_TABLE = "INVOICE_ORDER_TABLE";
 
-	public INVOICE_ORDER_TABLET(SQLiteDatabase mDB) {
+	public INVOICE_ORDER_TABLE(SQLiteDatabase mDB) {
 		this.tableName = INVOICE_ORDER_TABLE;
 		this.columns = new String[] { INVOICE_ORDER_ID, INVOICE_ORDER_NAME,
 				CONTACT_ID, CONTACT_NAME, PROJECT, ORDERED_ON, DELIVERY,
