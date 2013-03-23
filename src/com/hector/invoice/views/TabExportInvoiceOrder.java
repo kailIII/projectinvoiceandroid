@@ -172,7 +172,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 		this.mViewPager.setAdapter(this.mPagerAdapter);
 		this.mViewPager.setOnPageChangeListener(this);
 		mTabHost.getTabWidget().getChildAt(Constants.TAB_EXPORT_RECHNUNG)
-				.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+				.setBackgroundResource(R.drawable.bg_button_green);
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 		View tabview = createTabView(tabHost.getContext(), tabName, type);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+				LinearLayout.LayoutParams.MATCH_PARENT);
 		lp.weight = 1;
 		lp.gravity = Gravity.CENTER;
 		lp.setMargins(0, 0, 0, 0);
@@ -250,30 +250,30 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			tvTitleTab.setText("Rechnung");
 			if (!tvTitleTab.isSelected()) {
 				tvTitleTab.setBackgroundColor(ImageUtil
-						.getColor(R.color.COLOR_GRAY_DONE));
+						.getColor(R.color.TRANSPARENT));
 
 			} else {
-				tvTitleTab.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+				tvTitleTab.setBackgroundResource(R.drawable.bg_button_green);
 			}
 			break;
 		case Constants.TAB_EXPORT_LIEFERSCHEIN:
 			tvTitleTab.setText("LIEFERSCHEIN");
 			if (!tvTitleTab.isSelected()) {
 				tvTitleTab.setBackgroundColor(ImageUtil
-						.getColor(R.color.COLOR_GRAY_DONE));
+						.getColor(R.color.TRANSPARENT));
 
 			} else {
-				tvTitleTab.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+				tvTitleTab.setBackgroundResource(R.drawable.bg_button_green);
 			}
 			break;
 		case Constants.TAB_EXPORT_ANGEBOT:
 			tvTitleTab.setText("ANGEBOT");
 			if (!tvTitleTab.isSelected()) {
 				tvTitleTab.setBackgroundColor(ImageUtil
-						.getColor(R.color.COLOR_GRAY_DONE));
+						.getColor(R.color.TRANSPARENT));
 
 			} else {
-				tvTitleTab.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+				tvTitleTab.setBackgroundResource(R.drawable.bg_button_green);
 			}
 			break;
 		default:
@@ -296,38 +296,32 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 	public void updateIconWhenChangedTab(int index) {
 		if (index == Constants.TAB_EXPORT_RECHNUNG) {
 			mTabHost.getTabWidget().getChildAt(Constants.TAB_EXPORT_RECHNUNG)
-					.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+					.setBackgroundResource(R.drawable.bg_button_green);
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_LIEFERSCHEIN)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_ANGEBOT)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 		} else if (index == Constants.TAB_EXPORT_LIEFERSCHEIN) {
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_LIEFERSCHEIN)
-					.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+					.setBackgroundResource(R.drawable.bg_button_green);
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_RECHNUNG)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_ANGEBOT)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 		} else if (index == Constants.TAB_EXPORT_ANGEBOT) {
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_LIEFERSCHEIN)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 			mTabHost.getTabWidget()
 					.getChildAt(Constants.TAB_EXPORT_RECHNUNG)
-					.setBackgroundColor(
-							ImageUtil.getColor(R.color.COLOR_GRAY_DONE));
+					.setBackgroundColor(ImageUtil.getColor(R.color.TRANSPARENT));
 			mTabHost.getTabWidget().getChildAt(Constants.TAB_EXPORT_ANGEBOT)
-					.setBackgroundColor(ImageUtil.getColor(R.color.BLUE));
+					.setBackgroundResource(R.drawable.bg_button_green);
 		}
 
 	}
@@ -428,7 +422,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			sharingIntent.setType("application/pdf");
 			String to[] = new String[] { "@email.com" };
 			sharingIntent.putExtra(Intent.EXTRA_EMAIL, to);
-			Uri uri = Uri.parse("file://" +filelocation);
+			Uri uri = Uri.parse("file://" + filelocation);
 			sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 			sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
 			startActivity(Intent.createChooser(sharingIntent, "Send email"));

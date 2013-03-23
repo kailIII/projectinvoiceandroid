@@ -220,20 +220,21 @@ public class convertPDF {
 
 		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
 		// subCatPart = catPart.addSection(subPara);
-		String line = "Firma" + "				" + this.companyInfo.companyName;
+		String space = "                                                                              ";
+		String line = "Firma" + space + this.companyInfo.companyName;
 		subCatPart.add(new Paragraph(line));
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
-				+ "				" + this.companyInfo.companyAddress;
+				+ space + this.companyInfo.companyAddress;
 		subCatPart.add(new Paragraph(line));
 		if (this.invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
 			line = "Herr "
 					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
+					+ space + this.companyInfo.companyPLZ + " "
 					+ this.companyInfo.companyCity;
 		} else {
 			line = "Frau "
 					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
+					+ space + this.companyInfo.companyPLZ + " "
 					+ this.companyInfo.companyCity;
 		}
 		subCatPart.add(new Paragraph(line));
@@ -245,26 +246,26 @@ public class convertPDF {
 				+ this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "lhre Ansprechpartner/in";
+		line = space + "lhre Ansprechpartner/in";
 		subCatPart.add(new Paragraph(line));
 
 		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
-			line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
+			line = space + "Herr " + this.companyInfo.certificateOfOrigin;
 		} else {
-			line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
+			line = space + "Faur" + this.companyInfo.certificateOfOrigin;
 		}
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "Tel: " + this.companyInfo.telephone;
+		line = space + "Tel: " + this.companyInfo.telephone;
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "Fax: " + this.companyInfo.fax;
+		line = space + "Fax: " + this.companyInfo.fax;
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "Email: " + this.companyInfo.email;
+		line = space + "Email: " + this.companyInfo.email;
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + this.companyInfo.unitedStatesT;
+		line = space + this.companyInfo.unitedStatesT;
 		subCatPart.add(new Paragraph(line));
 
 		subCatPart.add(new Paragraph("Rechnung", catFont));
@@ -272,10 +273,10 @@ public class convertPDF {
 		Date currentDateTime = new Date();
 		SimpleDateFormat format = null;
 		format = new SimpleDateFormat("dd.MM.yyyy");
-		line = "							" + "Datum: " + format.format(currentDateTime);
+		line = space + "Datum: " + format.format(currentDateTime);
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "Rechnungsnr: " + "file name";
+		line = space + "Rechnungsnr: " + "file name";
 		subCatPart.add(new Paragraph(line));
 
 		PdfPTable table = new PdfPTable(5);
@@ -313,14 +314,14 @@ public class convertPDF {
 		}
 		subCatPart.add(table);
 
-		line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
+		line = space + "Zwischensumme: " + "	" + String.valueOf(total);
 		subCatPart.add(new Paragraph(line));
 
 		double vat = total * Float.valueOf(this.companyInfo.vatValue);
-		line = "							" + this.companyInfo.vatText + "	" + String.valueOf(vat);
+		line = space + this.companyInfo.vatText + "	" + String.valueOf(vat);
 		subCatPart.add(new Paragraph(line));
 
-		line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total + vat);
+		line = space + "Gesamtsumme: " + "	" + String.valueOf(total + vat);
 		subCatPart.add(new Paragraph(line));
 
 		// subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
