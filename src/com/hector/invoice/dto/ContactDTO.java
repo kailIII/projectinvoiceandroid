@@ -8,7 +8,7 @@ package com.hector.invoice.dto;
 import android.database.Cursor;
 
 import com.hector.invoice.common.StringUtil;
-import com.hector.invoice.lib.CONTACT_TABLET;
+import com.hector.invoice.lib.CONTACT_TABLE;
 
 /**
  * Class description
@@ -57,34 +57,34 @@ public class ContactDTO extends AbstractTableDTO {
 	 * @date: Mar 3, 2013
 	 */
 	public void initLogDTOFromCursor(Cursor c) {
-		if (c.getColumnIndex(CONTACT_TABLET.CONTACT_ID) >= 0) {
-			contactId = c.getLong(c.getColumnIndex(CONTACT_TABLET.CONTACT_ID));
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ID) >= 0) {
+			contactId = c.getLong(c.getColumnIndex(CONTACT_TABLE.CONTACT_ID));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.CONTACT_NAME) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_NAME) >= 0) {
 			contactName = c.getString(c
-					.getColumnIndex(CONTACT_TABLET.CONTACT_NAME));
+					.getColumnIndex(CONTACT_TABLE.CONTACT_NAME));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.CONTACT_ADDRESS) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS) >= 0) {
 			contactAddress = c.getString(c
-					.getColumnIndex(CONTACT_TABLET.CONTACT_ADDRESS));
+					.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.CONTACT_PLZ) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ) >= 0) {
 			contactPLZ = c.getString(c
-					.getColumnIndex(CONTACT_TABLET.CONTACT_PLZ));
+					.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.CONTACT_STADT) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_STADT) >= 0) {
 			contactStadt = c.getString(c
-					.getColumnIndex(CONTACT_TABLET.CONTACT_STADT));
+					.getColumnIndex(CONTACT_TABLE.CONTACT_STADT));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.FIRST_NAME) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.FIRST_NAME) >= 0) {
 			firstName = c
-					.getString(c.getColumnIndex(CONTACT_TABLET.FIRST_NAME));
+					.getString(c.getColumnIndex(CONTACT_TABLE.FIRST_NAME));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.LAST_NAME) >= 0) {
-			lastName = c.getString(c.getColumnIndex(CONTACT_TABLET.LAST_NAME));
+		if (c.getColumnIndex(CONTACT_TABLE.LAST_NAME) >= 0) {
+			lastName = c.getString(c.getColumnIndex(CONTACT_TABLE.LAST_NAME));
 		}
-		if (c.getColumnIndex(CONTACT_TABLET.SEX) >= 0) {
-			sex = c.getInt(c.getColumnIndex(CONTACT_TABLET.SEX));
+		if (c.getColumnIndex(CONTACT_TABLE.SEX) >= 0) {
+			sex = c.getInt(c.getColumnIndex(CONTACT_TABLE.SEX));
 		}
 	}
 

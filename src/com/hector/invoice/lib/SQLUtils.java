@@ -109,9 +109,9 @@ public class SQLUtils {
 	public static void createAllTableForDatabase() {
 		ArrayList<ABSTRACT_TABLE> listTable = new ArrayList<ABSTRACT_TABLE>();
 		COMPANY_TABLE tbListClass = new COMPANY_TABLE(mDB);
-		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
-		INVOICE_ORDER_TABLET invoiceOrderTable = new INVOICE_ORDER_TABLET(mDB);
-		INVOICE_ORDER_DETAIL_TABLET invoiceOrderDetailTable = new INVOICE_ORDER_DETAIL_TABLET(
+		CONTACT_TABLE contactTable = new CONTACT_TABLE(mDB);
+		INVOICE_ORDER_TABLE invoiceOrderTable = new INVOICE_ORDER_TABLE(mDB);
+		INVOICE_ORDER_DETAIL_TABLE invoiceOrderDetailTable = new INVOICE_ORDER_DETAIL_TABLE(
 				mDB);
 
 		listTable.add(tbListClass);
@@ -393,15 +393,15 @@ public class SQLUtils {
 			res = table.insert(tableDTO);
 		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
 				.getType())) {
-			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			CONTACT_TABLE table = new CONTACT_TABLE(mDB);
 			res = table.insert(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
 				.getType())) {
-			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			INVOICE_ORDER_TABLE table = new INVOICE_ORDER_TABLE(mDB);
 			res = table.insert(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
 				.equals(tableDTO.getType())) {
-			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+			INVOICE_ORDER_DETAIL_TABLE table = new INVOICE_ORDER_DETAIL_TABLE(
 					mDB);
 			res = table.insert(tableDTO);
 		}
@@ -427,15 +427,15 @@ public class SQLUtils {
 			res = table.update(tableDTO);
 		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
 				.getType())) {
-			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			CONTACT_TABLE table = new CONTACT_TABLE(mDB);
 			res = table.update(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
 				.getType())) {
-			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			INVOICE_ORDER_TABLE table = new INVOICE_ORDER_TABLE(mDB);
 			res = table.update(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
 				.equals(tableDTO.getType())) {
-			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+			INVOICE_ORDER_DETAIL_TABLE table = new INVOICE_ORDER_DETAIL_TABLE(
 					mDB);
 			res = table.update(tableDTO);
 		}
@@ -460,15 +460,15 @@ public class SQLUtils {
 			res = table.delete(tableDTO);
 		} else if (AbstractTableDTO.TableType.LIST_CONTACT.equals(tableDTO
 				.getType())) {
-			CONTACT_TABLET table = new CONTACT_TABLET(mDB);
+			CONTACT_TABLE table = new CONTACT_TABLE(mDB);
 			res = table.delete(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER.equals(tableDTO
 				.getType())) {
-			INVOICE_ORDER_TABLET table = new INVOICE_ORDER_TABLET(mDB);
+			INVOICE_ORDER_TABLE table = new INVOICE_ORDER_TABLE(mDB);
 			res = table.delete(tableDTO);
 		} else if (AbstractTableDTO.TableType.INVOICE_ORDER_DETAIL
 				.equals(tableDTO.getType())) {
-			INVOICE_ORDER_DETAIL_TABLET table = new INVOICE_ORDER_DETAIL_TABLET(
+			INVOICE_ORDER_DETAIL_TABLE table = new INVOICE_ORDER_DETAIL_TABLE(
 					mDB);
 			res = table.delete(tableDTO);
 		}
@@ -855,7 +855,7 @@ public class SQLUtils {
 	 */
 	public ListContactViewDTO getListContactFromDB(Bundle data) {
 		ListContactViewDTO listContact = new ListContactViewDTO();
-		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		CONTACT_TABLE contactTable = new CONTACT_TABLE(mDB);
 
 		try {
 			listContact = contactTable.getListContact(data);
@@ -879,7 +879,7 @@ public class SQLUtils {
 	 * @date: Mar 14, 2013
 	 */
 	public int requestDeleteContact(Bundle data) {
-		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		CONTACT_TABLE contactTable = new CONTACT_TABLE(mDB);
 		ContactDTO myContact = (ContactDTO) data
 				.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT);
 
@@ -904,7 +904,7 @@ public class SQLUtils {
 	 * @date: Mar 15, 2013
 	 */
 	public int requestCreateOrUpdateContact(Bundle data) {
-		CONTACT_TABLET contactTable = new CONTACT_TABLET(mDB);
+		CONTACT_TABLE contactTable = new CONTACT_TABLE(mDB);
 		ContactDTO myContact = (ContactDTO) data
 				.getSerializable(IntentConstants.INTENT_CONTACT_OBJECT);
 
@@ -937,7 +937,7 @@ public class SQLUtils {
 	 * @date: Mar 15, 2013
 	 */
 	public ArrayList<InvoiceInfoDTO> requestGetListInvoiceOrder(Bundle data) {
-		INVOICE_ORDER_TABLET invoiceTable = new INVOICE_ORDER_TABLET(mDB);
+		INVOICE_ORDER_TABLE invoiceTable = new INVOICE_ORDER_TABLE(mDB);
 		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
 		try {
 			listInvoice = invoiceTable.getListInvoiceOrder(data);
@@ -960,7 +960,7 @@ public class SQLUtils {
 	 */
 	public ArrayList<InvoiceOrderDetailDTO> getListInvoiceOrderDetail(
 			Bundle data) {
-		INVOICE_ORDER_DETAIL_TABLET invoiceDetailTable = new INVOICE_ORDER_DETAIL_TABLET(
+		INVOICE_ORDER_DETAIL_TABLE invoiceDetailTable = new INVOICE_ORDER_DETAIL_TABLE(
 				mDB);
 		ArrayList<InvoiceOrderDetailDTO> listInvoice = new ArrayList<InvoiceOrderDetailDTO>();
 		try {
@@ -1058,7 +1058,7 @@ public class SQLUtils {
 					// update invoice order
 					this.update(invoiceInfo.invoiceOrder.invoiceOrderInfo);
 					// remove invoice order detail after insert
-					INVOICE_ORDER_DETAIL_TABLET invoiceOrderDetail = new INVOICE_ORDER_DETAIL_TABLET(
+					INVOICE_ORDER_DETAIL_TABLE invoiceOrderDetail = new INVOICE_ORDER_DETAIL_TABLE(
 							mDB);
 					invoiceOrderDetail
 							.deleteRowInvoiceDetail(String

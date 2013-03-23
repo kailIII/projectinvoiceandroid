@@ -244,12 +244,13 @@ public class ExternalStorage {
 	}
 
 	public static File getFilePDFPath(Context context) {
-		// if (MemoryUtils.isSdPresent()){
-		// return new File(SDCARD_PATH );
-		// }else {
-		// return getDatabasePath(context);
-		// }
-		File path = new File(INVOICE_PDF_FOLDER);
+//		 if (MemoryUtils.isSdPresent()){
+//		 return new File(SDCARD_PATH );
+//		 }else {
+//		 return getDatabasePath(context);
+//		 }
+//		File path = new File(INVOICE_PDF_FOLDER);
+		File path = new File(SDCARD_PATH + "PDT");
 		if (!path.exists()) {
 			path.mkdir();
 		}

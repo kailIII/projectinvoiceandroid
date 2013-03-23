@@ -26,7 +26,7 @@ import com.hector.invoice.dto.ListContactViewDTO;
  * @version: 1.1
  * @since: 1.0 | Mar 3, 2013
  */
-public class CONTACT_TABLET extends ABSTRACT_TABLE {
+public class CONTACT_TABLE extends ABSTRACT_TABLE {
 	public static final String CONTACT_ID = "CONTACT_ID";
 	public static final String CONTACT_NAME = "CONTACT_NAME";
 	public static final String CONTACT_ADDRESS = "CONTACT_ADDRESS";
@@ -39,7 +39,7 @@ public class CONTACT_TABLET extends ABSTRACT_TABLE {
 	// COMPANY TABLE
 	public static final String CONTACT_TABLE = "CONTACT_TABLE";
 
-	public CONTACT_TABLET(SQLiteDatabase mDB) {
+	public CONTACT_TABLE(SQLiteDatabase mDB) {
 		this.tableName = CONTACT_TABLE;
 		this.columns = new String[] { CONTACT_ID, CONTACT_NAME,
 				CONTACT_ADDRESS, CONTACT_PLZ, CONTACT_STADT, FIRST_NAME,

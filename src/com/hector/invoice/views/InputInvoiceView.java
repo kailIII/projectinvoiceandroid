@@ -680,12 +680,11 @@ public class InputInvoiceView extends BaseActivity {
 	public void onEvent(int eventType, View control, Object data) {
 		// TODO Auto-generated method stub
 		if (eventType == ActionEventConstant.ACTION_DELETE_INVOICE_DETAIL) {
-			InvoiceOrderDetailDTO currentDate = (InvoiceOrderDetailDTO) data;
-
+//			int pos = Integer.valueOf((String) data);
 			for (int i = 1, size = tblListOrderNumber.getChildCount(); i < size; i++) {
 				DisplayItemOrderNumberRow rowOrder = (DisplayItemOrderNumberRow) tblListOrderNumber
 						.getChildAt(i);
-				if (rowOrder.invoiceDetailData == currentDate) {
+				if (rowOrder.etPos.getText().toString().equals(String.valueOf(data))) {
 					tblListOrderNumber.removeViewAt(i);
 					break;
 				}
