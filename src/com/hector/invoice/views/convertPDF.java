@@ -218,11 +218,13 @@ public class convertPDF {
 		Section subCatPart = catPart.addSection(subPara);
 		subCatPart.add(new Paragraph("Wel come to HaiTC"));
 
+		subPara.setIndentationRight(200);
+		
 		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
 		// subCatPart = catPart.addSection(subPara);
 		String space = "                                                                              ";
 		String line = "Firma" + space + this.companyInfo.companyName;
-		subCatPart.add(new Paragraph(line));
+		subCatPart.add(new Paragraph(100,line));
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
 				+ space + this.companyInfo.companyAddress;
 		subCatPart.add(new Paragraph(line));
