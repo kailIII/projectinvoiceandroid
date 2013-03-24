@@ -81,13 +81,13 @@ public class InvoiceOrderAdapter extends BaseAdapter {
 			});
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
 			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
-			tvName.setText(itemData.invoiceOrderInfo.contactName);
+			tvName.setText(itemData.invoiceOrderInfo.invoiceName);
 			ivDelete.setVisibility(View.GONE);
 			return vi;
 		} else {
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
 			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
-			tvName.setText(itemData.invoiceOrderInfo.contactName);
+			tvName.setText(itemData.invoiceOrderInfo.invoiceName);
 			ivDelete.setVisibility(View.GONE);
 		}
 

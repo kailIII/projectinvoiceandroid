@@ -250,7 +250,7 @@ public class ExternalStorage {
 //		 return getDatabasePath(context);
 //		 }
 //		File path = new File(INVOICE_PDF_FOLDER);
-		File path = new File(SDCARD_PATH + "PDT");
+		File path = new File(SDCARD_PATH + "PDF");
 		if (!path.exists()) {
 			path.mkdir();
 		}
