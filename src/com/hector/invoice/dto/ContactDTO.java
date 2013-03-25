@@ -63,28 +63,41 @@ public class ContactDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_NAME) >= 0) {
 			contactName = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_NAME));
+		} else {
+			contactName = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS) >= 0) {
 			contactAddress = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS));
+		}else {
+			contactAddress = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ) >= 0) {
 			contactPLZ = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ));
+		}else {
+			contactPLZ = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_STADT) >= 0) {
 			contactStadt = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_STADT));
+		}else {
+			contactStadt = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.FIRST_NAME) >= 0) {
-			firstName = c
-					.getString(c.getColumnIndex(CONTACT_TABLE.FIRST_NAME));
+			firstName = c.getString(c.getColumnIndex(CONTACT_TABLE.FIRST_NAME));
+		}else {
+			firstName = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.LAST_NAME) >= 0) {
 			lastName = c.getString(c.getColumnIndex(CONTACT_TABLE.LAST_NAME));
+		}else {
+			lastName = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.SEX) >= 0) {
 			sex = c.getInt(c.getColumnIndex(CONTACT_TABLE.SEX));
+		}else {
+			sex = SEX_MALE;
 		}
 	}
 

@@ -87,66 +87,102 @@ public class CompanyDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(COMPANY_TABLE.COMPANY_NAME) >= 0) {
 			companyName = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.COMPANY_NAME));
+		} else {
+			companyName = "";
 		}
+
 		if (c.getColumnIndex(COMPANY_TABLE.COMPANY_ADDRESS) >= 0) {
 			companyAddress = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.COMPANY_ADDRESS));
+		} else {
+			companyAddress = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.COMPANY_PLZ) >= 0) {
 			companyPLZ = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.COMPANY_PLZ));
+		} else {
+			companyPLZ = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.COMPANY_CITY) >= 0) {
 			companyCity = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.COMPANY_CITY));
+		} else {
+			companyCity = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.CERTIFICATE_OF_ORIGIN) >= 0) {
 			certificateOfOrigin = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.CERTIFICATE_OF_ORIGIN));
+		} else {
+			certificateOfOrigin = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.SEX) >= 0) {
 			sex = c.getInt(c.getColumnIndex(COMPANY_TABLE.SEX));
+		} else {
+			sex = ContactDTO.SEX_MALE;
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.TELEPHONE) >= 0) {
 			telephone = c.getString(c.getColumnIndex(COMPANY_TABLE.TELEPHONE));
+		} else {
+			telephone = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.FAX) >= 0) {
 			fax = c.getString(c.getColumnIndex(COMPANY_TABLE.FAX));
+		} else {
+			fax = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.EMAIL) >= 0) {
 			email = c.getString(c.getColumnIndex(COMPANY_TABLE.EMAIL));
+		} else {
+			email = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.UNITED_STATES_T) >= 0) {
 			unitedStatesT = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.UNITED_STATES_T));
+		} else {
+			unitedStatesT = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.BANK_COMPANY_NAME) >= 0) {
 			bankCompanyName = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.BANK_COMPANY_NAME));
+		} else {
+			bankCompanyName = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.BANK_ACCTNUM) >= 0) {
 			bankAcctnum = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.BANK_ACCTNUM));
+		} else {
+			bankAcctnum = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.BANK_BLZ) >= 0) {
 			bankBLZ = c.getString(c.getColumnIndex(COMPANY_TABLE.BANK_BLZ));
+		} else {
+			bankBLZ = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.BANK_NAME) >= 0) {
 			bankName = c.getString(c.getColumnIndex(COMPANY_TABLE.BANK_NAME));
+		} else {
+			bankName = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.VAT_TEXT) >= 0) {
 			vatText = c.getString(c.getColumnIndex(COMPANY_TABLE.VAT_TEXT));
+		} else {
+			vatText = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.VAT_VALUE) >= 0) {
 			vatValue = c.getString(c.getColumnIndex(COMPANY_TABLE.VAT_VALUE));
+		} else {
+			vatValue = "0";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.INVOICE_CONF) >= 0) {
 			invoiceConf = c.getString(c
 					.getColumnIndex(COMPANY_TABLE.INVOICE_CONF));
+		} else {
+			invoiceConf = "";
 		}
 		if (c.getColumnIndex(COMPANY_TABLE.STAFF_SALE) >= 0) {
 			staffSale = c.getString(c.getColumnIndex(COMPANY_TABLE.STAFF_SALE));
+		} else {
+			staffSale = "";
 		}
-
 	}
 }

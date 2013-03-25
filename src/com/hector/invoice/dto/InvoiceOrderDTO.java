@@ -41,7 +41,7 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 	// customerNumber
 	public String customerNumber = Constants.STR_BLANK;
 	// invoiceOrderNumber
-	public String invoiceOrderNumber = Constants.STR_BLANK; 
+	public String invoiceOrderNumber = Constants.STR_BLANK;
 
 	public InvoiceOrderDTO() {
 		super(TableType.INVOICE_ORDER);
@@ -69,30 +69,44 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NAME) >= 0) {
 			invoiceName = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NAME));
+		} else {
+			invoiceName = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME) >= 0) {
 			contactName = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME));
+		} else {
+			contactName = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT) >= 0) {
-			project = c.getString(c
-					.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT));
+			project = c
+					.getString(c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT));
+		} else {
+			project = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON) >= 0) {
 			orderedOn = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON));
+		} else {
+			orderedOn = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY) >= 0) {
 			delivery = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY));
+		} else {
+			delivery = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER) >= 0) {
 			customerNumber = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER));
+		} else {
+			customerNumber = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER) >= 0) {
 			invoiceOrderNumber = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER));
+		} else {
+			invoiceOrderNumber = "";
 		}
 
 	}

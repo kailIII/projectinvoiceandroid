@@ -25,8 +25,8 @@ public class InvoiceOrderDetailDTO extends AbstractTableDTO {
 	// ma lop
 	public long invoiceOrderDetailId;
 	public long invoiceOrderId;
-	public String pos  = Constants.STR_BLANK;
-	public String designation  = Constants.STR_BLANK;
+	public String pos = Constants.STR_BLANK;
+	public String designation = Constants.STR_BLANK;
 	public String art_nr = Constants.STR_BLANK;
 	public String quantity = Constants.STR_BLANK;
 	public String single_price = Constants.STR_BLANK;
@@ -59,26 +59,38 @@ public class InvoiceOrderDetailDTO extends AbstractTableDTO {
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS) >= 0) {
 			pos = c.getString(c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS));
+		} else {
+			pos = "1";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION) >= 0) {
 			designation = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION));
+		} else {
+			designation = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR) >= 0) {
 			art_nr = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR));
+		} else {
+			art_nr = "";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY) >= 0) {
 			quantity = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY));
+		} else {
+			quantity = "0";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.SINGLE_PRICE) >= 0) {
 			single_price = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.SINGLE_PRICE));
+		} else {
+			single_price = "0";
 		}
 		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.TOTAL) >= 0) {
 			total = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.TOTAL));
+		} else {
+			total = "0";
 		}
 
 	}
