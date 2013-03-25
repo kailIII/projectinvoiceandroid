@@ -356,16 +356,36 @@ public class InputInvoiceView extends BaseActivity {
 		}
 
 		// general invoice contact info
-		this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress = etAddress
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.contactInvoice.firstName = etAnsprechpartner
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.contactInvoice.contactName = etFirma
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ = etPLZ
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt = etStadt
-				.getText().toString();
+		if (!StringUtil.isNullOrEmpty(etAddress.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress = etAddress
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etAnsprechpartner.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.contactInvoice.firstName = etAnsprechpartner
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.contactInvoice.firstName = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etFirma.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactName = etFirma
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactName = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etPLZ.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ = etPLZ
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etStadt.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt = etStadt
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt = "";
+		}
 
 		// general invoice info
 		if (this.invoiceInfo.invoiceOrder.contactInvoice.contactId > 0) {
@@ -376,18 +396,42 @@ public class InputInvoiceView extends BaseActivity {
 		}
 		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceName = this.invoiceName;
 
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.project = etProject
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn = etBestellt
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber = etKunden
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery = etLieferdatum
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.contactName = etFirma
-				.getText().toString();
-		this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderNumber = tvInvoiceNumber
-				.getText().toString();
+		if (!StringUtil.isNullOrEmpty(etProject.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.project = etProject
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.project = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etBestellt.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn = etBestellt
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etKunden.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber = etKunden
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etLieferdatum.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery = etLieferdatum
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery = "";
+		}
+		if (!StringUtil.isNullOrEmpty(etFirma.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.contactName = etFirma
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.contactName = "";
+		}
+		if (!StringUtil.isNullOrEmpty(tvInvoiceNumber.getText().toString())) {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderNumber = tvInvoiceNumber
+					.getText().toString();
+		} else {
+			this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderNumber = "";
+		}
 
 		// general invoice detail
 		this.invoiceInfo.listOrderDetail.clear();
@@ -399,12 +443,38 @@ public class InputInvoiceView extends BaseActivity {
 				invoiceDetail.invoiceOrderId = this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderId;
 			}
 			invoiceDetail.pos = rowOrder.etPos.getText().toString();
-			invoiceDetail.designation = rowOrder.etBezeichnung.getText()
-					.toString();
-			invoiceDetail.art_nr = rowOrder.etArtNr.getText().toString();
-			invoiceDetail.quantity = rowOrder.etMenge.getText().toString();
-			invoiceDetail.single_price = rowOrder.etEinze.getText().toString();
-			invoiceDetail.total = rowOrder.etGesamt.getText().toString();
+			if (!StringUtil.isNullOrEmpty(rowOrder.etBezeichnung.getText()
+					.toString())) {
+				invoiceDetail.designation = rowOrder.etBezeichnung.getText()
+						.toString();
+			} else {
+				invoiceDetail.designation = "";
+			}
+			if (!StringUtil
+					.isNullOrEmpty(rowOrder.etArtNr.getText().toString())) {
+				invoiceDetail.art_nr = rowOrder.etArtNr.getText().toString();
+			} else {
+				invoiceDetail.art_nr = "";
+			}
+			if (!StringUtil
+					.isNullOrEmpty(rowOrder.etMenge.getText().toString())) {
+				invoiceDetail.quantity = rowOrder.etMenge.getText().toString();
+			} else {
+				invoiceDetail.quantity = "0";
+			}
+			if (!StringUtil
+					.isNullOrEmpty(rowOrder.etEinze.getText().toString())) {
+				invoiceDetail.single_price = rowOrder.etEinze.getText()
+						.toString();
+			} else {
+				invoiceDetail.single_price = "0";
+			}
+			if (!StringUtil.isNullOrEmpty(rowOrder.etGesamt.getText()
+					.toString())) {
+				invoiceDetail.total = rowOrder.etGesamt.getText().toString();
+			} else {
+				invoiceDetail.total = "0";
+			}
 			this.invoiceInfo.listOrderDetail.add(invoiceDetail);
 		}
 	}
