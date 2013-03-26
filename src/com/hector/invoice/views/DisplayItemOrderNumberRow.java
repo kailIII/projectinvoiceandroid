@@ -78,11 +78,11 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 
 				double menge = 0;
 				if (!StringUtil.isNullOrEmpty(etMenge.getText().toString())) {
-					Double.valueOf(etMenge.getText().toString());
+					menge = Double.valueOf(etMenge.getText().toString());
 				}
 				double einze = 0;
 				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
-					Double.valueOf(etEinze.getText().toString());
+					einze = Double.valueOf(etEinze.getText().toString());
 				}
 				etGesamt.setText(String.valueOf(menge * einze));
 			}
@@ -93,9 +93,14 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
-
-				double menge = Double.valueOf(etMenge.getText().toString());
-				double einze = Double.valueOf(etEinze.getText().toString());
+				double menge = 0;
+				if (!StringUtil.isNullOrEmpty(etMenge.getText().toString())) {
+					menge = Double.valueOf(etMenge.getText().toString());
+				}
+				double einze = 0;
+				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
+					einze = Double.valueOf(etEinze.getText().toString());
+				}
 				etGesamt.setText(String.valueOf(menge * einze));
 			}
 		});
