@@ -188,7 +188,7 @@ public class AngebotExportView extends BaseFragment implements
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
 		strContent4.append("Zwischensumme		" + String.valueOf(total) + "\n");
-		double newTotal = Integer.parseInt(companyInfo.vatValue) * total;
+		double newTotal = (Float.valueOf(companyInfo.vatValue) * total)/100;
 		strContent4.append(companyInfo.vatText + " von " + total + "	"
 				+ String.valueOf(newTotal));
 		tvContent4.setText(strContent4.toString());
