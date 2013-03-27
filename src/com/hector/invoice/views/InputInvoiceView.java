@@ -106,6 +106,7 @@ public class InputInvoiceView extends BaseActivity {
 	String fileNameExport_L = "";
 	String fileNameExport_A = "";
 	ScrollView svContent;
+	int count = 0;
 
 	/*
 	 * (non-Javadoc)
@@ -136,6 +137,7 @@ public class InputInvoiceView extends BaseActivity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+		this.closeProgressDialog();
 		super.onResume();
 	}
 
@@ -262,8 +264,17 @@ public class InputInvoiceView extends BaseActivity {
 			// new file pdf
 			Date currentDateTime = new Date();
 			SimpleDateFormat format = null;
-			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
-			this.fileNameExport = format.format(currentDateTime);
+			format = new SimpleDateFormat("yyyyMMdd");
+			if (this.count == 0) {
+				this.count++;
+			}
+			this.fileNameExport = format.format(currentDateTime) + "_"
+					+ this.count;
+			tvInvoiceNumber.setText(this.fileNameExport);
+			this.ivSave.setVisibility(View.VISIBLE);
+			this.ivExport.setVisibility(View.VISIBLE);
+			this.ivAdd.setVisibility(View.VISIBLE);
+			this.btThema.setVisibility(View.VISIBLE);
 		} else if (action == ActionEventConstant.BROAD_CAST_UPDATE_COMPANYINFO_SUCCESS) {
 			this.getCompanyInfo();
 		}
@@ -289,6 +300,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
 			this.svContent.setVisibility(View.VISIBLE);
+			this.count++;
 			this.updateAllControl(); // update all control
 		} else if (v == ivOpen) {
 			showInvoiceList(); // show list invoice
@@ -555,8 +567,17 @@ public class InputInvoiceView extends BaseActivity {
 	public void createNewOrderNumber() {
 		DisplayItemOrderNumberRow rowOrder = new DisplayItemOrderNumberRow(
 				this, tblListOrderNumber, 0);
-		rowOrder.etPos.setText(String.valueOf(tblListOrderNumber
-				.getChildCount()));
+		if (tblListOrderNumber.getChildCount() > 1) {
+			DisplayItemOrderNumberRow lastRow = (DisplayItemOrderNumberRow) tblListOrderNumber
+					.getChildAt(tblListOrderNumber.getChildCount() - 1);
+
+			int lastPos = Integer.valueOf(lastRow.etPos.getText().toString());
+			lastPos++;
+			rowOrder.etPos.setText(String.valueOf(lastPos));
+		} else {
+			rowOrder.etPos.setText(String.valueOf(tblListOrderNumber
+					.getChildCount()));
+		}
 		rowOrder.etMenge.setText("0");
 		rowOrder.etEinze.setText("0");
 		rowOrder.etGesamt.setText("0");
@@ -577,8 +598,9 @@ public class InputInvoiceView extends BaseActivity {
 		if (this.isCreatingInvoice) {
 			Date currentDateTime = new Date();
 			SimpleDateFormat format = null;
-			format = new SimpleDateFormat("yyyyMMdd_HH_mm");
-			this.fileNameExport = format.format(currentDateTime);
+			format = new SimpleDateFormat("yyyyMMdd");
+			this.fileNameExport = format.format(currentDateTime) + "_"
+					+ this.count;
 
 			// clear data
 			this.invoiceInfo = new InvoiceOrderNumberInfoView();
@@ -646,8 +668,8 @@ public class InputInvoiceView extends BaseActivity {
 		etLieferdatum
 				.setText(this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery);
 
-		tvInvoiceNumber
-				.setText(this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderNumber);
+		// tvInvoiceNumber
+		// .setText(this.invoiceInfo.invoiceOrder.invoiceOrderInfo.invoiceOrderNumber);
 
 		// update save order detail
 		if (this.invoiceInfo.listOrderDetail != null) {

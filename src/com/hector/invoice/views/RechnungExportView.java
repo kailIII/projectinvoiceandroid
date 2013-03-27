@@ -53,13 +53,16 @@ public class RechnungExportView extends BaseFragment implements
 	TextView tvContent7;
 	ImageView ivLogo;
 	LinearLayout tblListOrderNumber;
+	static String fileName = "";
 
 	static InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
 	static CompanyDTO companyInfo = new CompanyDTO();
 
 	public static RechnungExportView newInstance(String title,
-			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany) {
+			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany,
+			String filName) {
 		RechnungExportView f = new RechnungExportView();
+		fileName = filName;
 		invoiceInfo = data;
 		companyInfo = dataCompany;
 		Bundle args = new Bundle();
@@ -229,7 +232,7 @@ public class RechnungExportView extends BaseFragment implements
 		format = new SimpleDateFormat("dd.MM.yyyy");
 		String line = "Datum: " + format.format(currentDateTime);
 		strContent3.append(line + "\n");
-		strContent3.append("Rechnungsnr: " + "file name" + "\n");
+		strContent3.append("Rechnungsnr: " + fileName + "\n");
 		tvContent3.setText(strContent3.toString());
 
 		// table

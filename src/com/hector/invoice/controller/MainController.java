@@ -155,11 +155,11 @@ public class MainController extends AbstractController {
 		}
 		case ActionEventConstant.SHOW_EXPORT_INVOICE_SCREEN: {
 			BaseActivity sender = (BaseActivity) e.sender;
-			sender.closeProgressDialog();
 			extras = (Bundle) e.viewData;
 			intent = new Intent(sender, TabExportInvoiceOrder.class);
 			intent.putExtras(extras);
 			sender.startActivity(intent);
+//			sender.closeProgressDialog();
 			break;
 		}
 		default:

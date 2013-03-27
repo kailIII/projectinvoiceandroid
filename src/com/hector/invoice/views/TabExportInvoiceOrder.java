@@ -157,11 +157,11 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 
 		List<Fragment> fragments = new Vector<Fragment>();
 		RechnungExportView view1 = RechnungExportView.newInstance(
-				"bundle from parent", this.invoiceInfo, this.myCompany);
+				"bundle from parent", this.invoiceInfo, this.myCompany, this.fileNamePDF_R);
 		LieferscheinExportView view2 = LieferscheinExportView.newInstance(
-				"bundle from parent", this.invoiceInfo, this.myCompany);
+				"bundle from parent", this.invoiceInfo, this.myCompany, this.fileNamePDF_L);
 		AngebotExportView view3 = AngebotExportView.newInstance(
-				"bundle from parent", this.invoiceInfo, this.myCompany);
+				"bundle from parent", this.invoiceInfo, this.myCompany, this.fileNamePDF_A);
 
 		fragments.add(view1);
 		fragments.add(view2);

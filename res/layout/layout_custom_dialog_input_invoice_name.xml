@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:padding="@dimen/page_padding" >
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/page_margin"
+        android:gravity="center"
+        android:textColor="@color/WHITE" android:text="Datei Name"/>
+
     <EditText
         android:id="@+id/etInvoiceName"
         style="@style/CustomEditText"
@@ -29,7 +36,7 @@
             android:layout_height="@dimen/height_of_button"
             android:layout_gravity="right"
             android:layout_marginRight="50dip"
-            android:text="OK"
+            android:text="abbrechen"
             android:textColor="@color/BLACK" />
 
         <Button
@@ -38,7 +45,7 @@
             android:layout_width="100dp"
             android:layout_height="@dimen/height_of_button"
             android:layout_gravity="right"
-            android:text="Cancel"
+            android:text="speichern"
             android:textColor="@color/BLACK" />
     </LinearLayout>
 

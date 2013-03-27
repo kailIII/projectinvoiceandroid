@@ -52,11 +52,13 @@ public class AngebotExportView extends BaseFragment implements
 	LinearLayout tblListOrderNumber;
 	static InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
 	static CompanyDTO companyInfo = new CompanyDTO();
+	static String fileName = "";
 
 	public static AngebotExportView newInstance(String title,
-			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany) {
+			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany, String filName) {
 		AngebotExportView f = new AngebotExportView();
 		invoiceInfo = data;
+		fileName = filName;
 		companyInfo = dataCompany;
 		Bundle args = new Bundle();
 		args.putString("title", title);
@@ -192,7 +194,7 @@ public class AngebotExportView extends BaseFragment implements
 		format = new SimpleDateFormat("dd.MM.yyyy");
 		String line = "Datum: " + format.format(currentDateTime);
 		strContent3.append(line + "\n");
-		strContent3.append("Angebotsnr.: " + "file name" + "\n");
+		strContent3.append("Angebotsnr.: " + fileName + "\n");
 		tvContent3.setText(strContent3.toString());
 
 		// table
