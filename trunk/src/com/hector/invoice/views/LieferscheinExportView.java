@@ -49,14 +49,16 @@ public class LieferscheinExportView extends BaseFragment implements
 	TextView tvContent3;
 	ImageView ivLogo;
 	LinearLayout tblListOrderNumber;
+	static String fileName = "";
 
 	static InvoiceOrderNumberInfoView invoiceInfo = new InvoiceOrderNumberInfoView();
 	static CompanyDTO companyInfo = new CompanyDTO();
 
 	public static LieferscheinExportView newInstance(String title,
-			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany) {
+			InvoiceOrderNumberInfoView data, CompanyDTO dataCompany, String filName) {
 		LieferscheinExportView f = new LieferscheinExportView();
 		invoiceInfo = data;
+		fileName = filName;
 		companyInfo = dataCompany;
 		Bundle args = new Bundle();
 		args.putString("title", title);
@@ -206,7 +208,7 @@ public class LieferscheinExportView extends BaseFragment implements
 				.append("Kunden-Nr.: "
 						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber
 								: " ") + "\n");
-		strContent3.append("Lieferschein-Nr: " + "file name" + "\n");
+		strContent3.append("Lieferschein-Nr: " + fileName + "\n");
 		tvContent3.setText(strContent3.toString());
 
 		for (int i = 0, size = this.invoiceInfo.listOrderDetail.size(); i < size; i++) {

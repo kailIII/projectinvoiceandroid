@@ -8,11 +8,11 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="17" />
 
-    <permission
-        android:name="com.dev.meinewerk.action"
+     <permission
+        android:name="com.hector.invoice.common.action"
         android:description="@string/app_permision_info"
         android:label="@string/app_permision_name"
-        android:protectionLevel="dangerous" />
+        android:protectionLevel="dangerous" /> 
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
     </uses-permission>

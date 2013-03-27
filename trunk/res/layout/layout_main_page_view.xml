@@ -78,13 +78,14 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:text="" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="left"
                     android:orientation="vertical" >
 
                     <Button
@@ -92,7 +93,7 @@
                         style="@style/CustomButton"
                         android:layout_width="150dp"
                         android:layout_height="@dimen/height_of_button"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:text="Ansprechpartner"
                         android:textColor="@color/BLACK" />
                 </LinearLayout>
@@ -422,7 +423,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_Pos" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_Pos"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -434,7 +437,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_bezeichnung" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_bezeichnung"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -446,7 +451,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_art_nr" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_art_nr"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -458,7 +465,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_menge" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_menge"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -470,7 +479,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_einze" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_einze"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -482,7 +493,9 @@
                         android:background="@color/HEADER_TB_COLOR"
                         android:gravity="center"
                         android:padding="@dimen/page_padding"
-                        android:text="@string/text_lb_header_tb_gesamt" />
+                        android:singleLine="true"
+                        android:text="@string/text_lb_header_tb_gesamt"
+                        android:textColor="@color/WHITE" />
 
                     <TextView
                         android:id="@+id/ivDelete"
@@ -524,7 +537,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="50dip"
             android:layout_toRightOf="@id/ivAdd"
-            android:text="Thema"
+            android:text="Thema wählen"
             android:textColor="@color/BLACK" />
 
         <ImageView
