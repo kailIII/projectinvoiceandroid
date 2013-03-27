@@ -197,25 +197,29 @@ public class RechnungExportView extends BaseFragment implements
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
-					.append("Herr " + (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
-							: " ") + "\n");
+					.append("Herr "
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur" + (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
-							: " ") + "\n");
+					.append("Faur"
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		}
 		strContent2
-				.append("Tel: " + (this.companyInfo.telephone != null ? this.companyInfo.telephone
-						: " ") + "\n");
-		strContent2
-				.append("Fax: " + (this.companyInfo.fax != null ? this.companyInfo.fax
-						: " ") + "\n");
-		strContent2
-				.append("Email: " + (this.companyInfo.email != null ? this.companyInfo.email
+				.append("Tel: "
+						+ (this.companyInfo.telephone != null ? this.companyInfo.telephone
+								: " ") + "\n");
+		strContent2.append("Fax: "
+				+ (this.companyInfo.fax != null ? this.companyInfo.fax : " ")
+				+ "\n");
+		strContent2.append("Email: "
+				+ (this.companyInfo.email != null ? this.companyInfo.email
 						: " ") + "\n");
 		strContent2
 				.append((this.companyInfo.unitedStatesT != null ? this.companyInfo.unitedStatesT
-						: " ") + "\n");
+						: " ")
+						+ "\n");
 		tvContent2.setText(strContent2.toString());
 
 		// content 3
@@ -254,7 +258,11 @@ public class RechnungExportView extends BaseFragment implements
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
 		strContent4.append("Zwischensumme		" + String.valueOf(total) + "\n");
-		double newTotal = (Float.valueOf(companyInfo.vatValue) * total) / 100;
+		float vatValue = 0;
+		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
+			vatValue = Float.valueOf(companyInfo.vatValue);
+		}
+		double newTotal = (vatValue * total) / 100;
 		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
 				: " ") + "		" + String.valueOf(newTotal));
 		tvContent4.setText(strContent4.toString());
@@ -272,15 +280,16 @@ public class RechnungExportView extends BaseFragment implements
 
 		// content 7
 		StringBuffer strContent7 = new StringBuffer();
-		strContent7
-				.append("BLZ: " + (companyInfo.bankBLZ != null ? companyInfo.bankBLZ
+		strContent7.append("BLZ: "
+				+ (companyInfo.bankBLZ != null ? companyInfo.bankBLZ : " ")
+				+ "\n");
+		strContent7.append("Konto-Nr: "
+				+ (companyInfo.bankAcctnum != null ? companyInfo.bankAcctnum
 						: " ") + "\n");
 		strContent7
-				.append("Konto-Nr: " + (companyInfo.bankAcctnum != null ? companyInfo.bankAcctnum
-						: " ") + "\n");
-		strContent7
-				.append("Bank: " + (companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
-						: " ") + "\n \n");
+				.append("Bank: "
+						+ (companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
+								: " ") + "\n \n");
 		strContent7.append("Wir danken fur den Auftrag. " + "\n \n ");
 		strContent7.append("Mit freundlichen Grussen " + "\n \n");
 		strContent7
