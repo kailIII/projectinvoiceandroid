@@ -23,6 +23,7 @@ import com.hector.invoice.R;
 import com.hector.invoice.common.BaseFragment;
 import com.hector.invoice.common.BaseFragmentActivity;
 import com.hector.invoice.common.OnEventControlListener;
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
@@ -116,40 +117,72 @@ public class AngebotExportView extends BaseFragment implements
 		// show content 1
 		StringBuffer strContent1 = new StringBuffer();
 		strContent1.append("Firma \n ");
-		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.firstName
-				+ "\n");
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+						: " ")
+						+ "\n");
 		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			strContent1.append("Herr "
-					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
+			strContent1
+					.append("Herr "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
 		} else {
-			strContent1.append("Frau "
-					+ invoiceInfo.invoiceOrder.contactInvoice.firstName + "\n");
+			strContent1
+					.append("Frau "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
 		}
 		strContent1
-				.append(invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactAddress != null ? invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+						: " ")
 						+ "\n");
-		strContent1.append(invoiceInfo.invoiceOrder.contactInvoice.contactPLZ);
 		strContent1
-				.append(invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+						: ""));
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
+						: " "));
 
 		tvContent1.setText(strContent1.toString());
 
 		// content 2
 		StringBuffer strContent2 = new StringBuffer();
-		strContent2.append(companyInfo.companyName + "\n");
-		strContent2.append(companyInfo.companyAddress + "\n");
-		strContent2.append(companyInfo.companyPLZ + " "
-				+ companyInfo.companyCity + "\n \n ");
+		strContent2
+				.append((companyInfo.companyName != null ? companyInfo.companyName
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyPLZ != null ? companyInfo.companyPLZ
+						: " ")
+						+ " "
+						+ (companyInfo.companyCity != null ? companyInfo.companyCity
+								: " ") + "\n \n ");
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
-					.append("Herr " + companyInfo.certificateOfOrigin + "\n");
+					.append("Herr "
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		} else {
-			strContent2.append("Faur" + companyInfo.certificateOfOrigin + "\n");
+			strContent2
+					.append("Faur"
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		}
-		strContent2.append("Tel: " + this.companyInfo.telephone + "\n");
-		strContent2.append("Fax: " + this.companyInfo.fax + "\n");
-		strContent2.append("Email: " + this.companyInfo.email + "\n");
+		strContent2
+				.append("Tel: "
+						+ (this.companyInfo.telephone != null ? this.companyInfo.telephone
+								: " ") + "\n");
+		strContent2.append("Fax: "
+				+ (this.companyInfo.fax != null ? this.companyInfo.fax : " ")
+				+ "\n");
+		strContent2.append("Email: "
+				+ (this.companyInfo.email != null ? this.companyInfo.email
+						: " ") + "\n");
 		tvContent2.setText(strContent2.toString());
 
 		// content 3
@@ -188,9 +221,14 @@ public class AngebotExportView extends BaseFragment implements
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
 		strContent4.append("Zwischensumme		" + String.valueOf(total) + "\n");
-		double newTotal = (Float.valueOf(companyInfo.vatValue) * total)/100;
-		strContent4.append(companyInfo.vatText + " von " + total + "	"
-				+ String.valueOf(newTotal));
+		float vatValue = 0;
+		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
+			vatValue = Float.valueOf(companyInfo.vatValue);
+		}
+
+		double newTotal = (vatValue * total) / 100;
+		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
+				: "0 ") + " von " + total + "	" + String.valueOf(newTotal));
 		tvContent4.setText(strContent4.toString());
 
 		// content 5
