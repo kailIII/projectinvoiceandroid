@@ -232,7 +232,7 @@ public class RechnungExportView extends BaseFragment implements
 		format = new SimpleDateFormat("dd.MM.yyyy");
 		String line = "Datum: " + format.format(currentDateTime);
 		strContent3.append(line + "\n");
-		strContent3.append("Rechnungsnr: " + fileName + "\n");
+		strContent3.append("Rechnungsnr: " + fileName.substring(0, fileName.length()-4) + "\n");
 		tvContent3.setText(strContent3.toString());
 
 		// table
@@ -248,10 +248,10 @@ public class RechnungExportView extends BaseFragment implements
 			rowOrder.etBezeichnung.setEnabled(false);
 			rowOrder.etMenge.setText(dto.quantity);
 			rowOrder.etMenge.setEnabled(false);
-			rowOrder.etEinze.setText(dto.single_price);
+			rowOrder.etEinze.setText(dto.single_price + " Û");
 			rowOrder.etEinze.setEnabled(false);
 			total += Double.valueOf(dto.total);
-			rowOrder.etGesamt.setText(dto.total);
+			rowOrder.etGesamt.setText(dto.total + " Û");
 			rowOrder.etGesamt.setEnabled(false);
 			rowOrder.etArtNr.setVisibility(View.GONE);
 
@@ -260,19 +260,19 @@ public class RechnungExportView extends BaseFragment implements
 
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
-		strContent4.append("Zwischensumme		" + String.valueOf(total) + "\n");
+		strContent4.append("Zwischensumme		" + String.valueOf(total) + " Û" + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
 		}
 		double newTotal = (vatValue * total) / 100;
 		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
-				: " ") + "		" + String.valueOf(newTotal));
+				: " ") + "		" + String.valueOf(newTotal) + " Û");
 		tvContent4.setText(strContent4.toString());
 
 		// content 5
 		StringBuffer strContent5 = new StringBuffer();
-		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal));
+		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal) + " Û");
 		tvContent5.setText(strContent5.toString());
 
 		// content 6

@@ -9,7 +9,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="10dip" >
+        android:padding="20dip" >
 
         <ImageView
             android:id="@+id/ivLogo"

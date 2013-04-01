@@ -208,7 +208,7 @@ public class LieferscheinExportView extends BaseFragment implements
 				.append("Kunden-Nr.: "
 						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber
 								: " ") + "\n");
-		strContent3.append("Lieferschein-Nr: " + fileName + "\n");
+		strContent3.append("Lieferschein-Nr: " + fileName.substring(0, fileName.length()-4) + "\n");
 		tvContent3.setText(strContent3.toString());
 
 		for (int i = 0, size = this.invoiceInfo.listOrderDetail.size(); i < size; i++) {
