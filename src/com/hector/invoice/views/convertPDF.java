@@ -208,23 +208,25 @@ public class convertPDF {
 
 	private void addContent_R(Document document) throws DocumentException {
 
-		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
-		anchor.setName("ESTIMATING APP");
+//		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
+//		anchor.setName("ESTIMATING APP");
 
 		// chuong 1
-		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+		Chapter catPart = new Chapter(1);
+//		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 
-		Paragraph subPara = new Paragraph("text", subFont);
-		Section subCatPart = catPart.addSection(subPara);
-		subCatPart.add(new Paragraph("Wel come to HaiTC"));
-
-		subPara.setIndentationRight(200);
+//		Paragraph subPara = new Paragraph("", subFont);
+//		Paragraph subPara = new Paragraph("text", subFont);
+		Section subCatPart = catPart.addSection("");
+//		Section subCatPart = catPart.addSection(subPara);
+//		subCatPart.add(new Paragraph("Wel come to HaiTC"));
+//		subPara.setIndentationRight(400);
 		
 		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
 		// subCatPart = catPart.addSection(subPara);
 		String space = "                                                                              ";
 		String line = "Firma" + space + this.companyInfo.companyName;
-		subCatPart.add(new Paragraph(100,line));
+		subCatPart.add(new Paragraph(line));
 		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
 				+ space + this.companyInfo.companyAddress;
 		subCatPart.add(new Paragraph(line));
