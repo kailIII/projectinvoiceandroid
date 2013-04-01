@@ -87,6 +87,9 @@ public class MainController extends AbstractController {
 				case ActionEventConstant.REQUEST_UPDATE_COMPANY_INFO:
 					MainModelServices.getInstance().requestUpdateCompanyInfo(e);
 					break;
+				case ActionEventConstant.ACTION_CREATE_PDF:
+					MainModelServices.getInstance().actionCreatePDF(e);
+					break;
 				default:// test
 					// UserModel.getInstance().requestTest(e);
 					break;

@@ -60,43 +60,49 @@ public class ContactDTO extends AbstractTableDTO {
 		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ID) >= 0) {
 			contactId = c.getLong(c.getColumnIndex(CONTACT_TABLE.CONTACT_ID));
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_NAME) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_NAME) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.CONTACT_NAME)) != null) {
 			contactName = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_NAME));
 		} else {
 			contactName = "";
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS)) != null) {
 			contactAddress = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_ADDRESS));
-		}else {
+		} else {
 			contactAddress = "";
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ)) != null) {
 			contactPLZ = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_PLZ));
-		}else {
+		} else {
 			contactPLZ = "";
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_STADT) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.CONTACT_STADT) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.CONTACT_STADT)) != null) {
 			contactStadt = c.getString(c
 					.getColumnIndex(CONTACT_TABLE.CONTACT_STADT));
-		}else {
+		} else {
 			contactStadt = "";
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.FIRST_NAME) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.FIRST_NAME) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.FIRST_NAME)) != null) {
 			firstName = c.getString(c.getColumnIndex(CONTACT_TABLE.FIRST_NAME));
-		}else {
+		} else {
 			firstName = "";
 		}
-		if (c.getColumnIndex(CONTACT_TABLE.LAST_NAME) >= 0) {
+		if (c.getColumnIndex(CONTACT_TABLE.LAST_NAME) >= 0
+				&& c.getString(c.getColumnIndex(CONTACT_TABLE.LAST_NAME)) != null) {
 			lastName = c.getString(c.getColumnIndex(CONTACT_TABLE.LAST_NAME));
-		}else {
+		} else {
 			lastName = "";
 		}
 		if (c.getColumnIndex(CONTACT_TABLE.SEX) >= 0) {
 			sex = c.getInt(c.getColumnIndex(CONTACT_TABLE.SEX));
-		}else {
+		} else {
 			sex = SEX_MALE;
 		}
 	}

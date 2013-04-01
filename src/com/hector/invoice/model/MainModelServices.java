@@ -10,16 +10,18 @@ import java.util.ArrayList;
 import android.os.Bundle;
 
 import com.hector.invoice.common.ActionEvent;
+import com.hector.invoice.common.BaseActivity;
 import com.hector.invoice.common.ModelEvent;
 import com.hector.invoice.constant.ErrorConstants;
+import com.hector.invoice.constant.IntentConstants;
 import com.hector.invoice.controller.MainController;
 import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.InvoiceInfoDTO;
-import com.hector.invoice.dto.InvoiceOrderDTO;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
+import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 import com.hector.invoice.dto.ListContactViewDTO;
-import com.hector.invoice.dto.ListInvoiceNumberInfoView;
 import com.hector.invoice.lib.SQLUtils;
+import com.hector.invoice.views.convertPDF;
 
 /**
  * main model sẻvices
@@ -290,6 +292,42 @@ public class MainModelServices {
 				model.setModelCode(ErrorConstants.ERROR_COMMON);
 				MainController.getInstance().handleErrorModelEvent(model);
 			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.setModelCode(ErrorConstants.ERROR_COMMON);
+			MainController.getInstance().handleErrorModelEvent(model);
+		}
+	}
+
+	public void actionCreatePDF(ActionEvent event) {
+		ModelEvent model = new ModelEvent();
+		BaseActivity activity = (BaseActivity) event.sender;
+
+		model.setActionEvent(event);
+		Bundle data = (Bundle) event.viewData;
+		InvoiceOrderNumberInfoView invoiceInfo = (InvoiceOrderNumberInfoView) data
+				.getSerializable(IntentConstants.INTENT_INVOICE_INFO);
+		// company info
+		CompanyDTO myCompanyInfo = (CompanyDTO) data
+				.getSerializable(IntentConstants.INTENT_COMPANY_INFO);
+		// file name 1,2,3
+		String fileNameR = data
+				.getString(IntentConstants.INTENT_FILE_NAME_PDF1);
+		String fileNameL = data
+				.getString(IntentConstants.INTENT_FILE_NAME_PDF2);
+		String fileNameA = data
+				.getString(IntentConstants.INTENT_FILE_NAME_PDF3);
+		try {
+			// create file pdf
+			convertPDF pdf = new convertPDF(activity, invoiceInfo,
+					myCompanyInfo);
+			pdf.createFilePDF_R(fileNameR);
+			pdf.createFilePDF_L(fileNameL);
+			pdf.createFilePDF_A(fileNameA);
+
+			model.setModelCode(ErrorConstants.ERROR_CODE_SUCCESS);
+			model.setModelData(String.valueOf("1"));
+			MainController.getInstance().handleModelEvent(model);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			model.setModelCode(ErrorConstants.ERROR_COMMON);
