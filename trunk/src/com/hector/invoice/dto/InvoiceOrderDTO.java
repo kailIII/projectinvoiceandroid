@@ -72,37 +72,46 @@ public class InvoiceOrderDTO extends AbstractTableDTO {
 		} else {
 			invoiceName = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME) >= 0
+				&& c.getString(c
+						.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME)) != null) {
 			contactName = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.CONTACT_NAME));
 		} else {
 			contactName = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT) >= 0
+				&& c.getString(c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT)) != null) {
 			project = c
 					.getString(c.getColumnIndex(INVOICE_ORDER_TABLE.PROJECT));
 		} else {
 			project = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON) >= 0
+				&& c.getString(c.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON)) != null) {
 			orderedOn = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.ORDERED_ON));
 		} else {
 			orderedOn = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY) >= 0
+				&& c.getString(c.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY)) != null) {
 			delivery = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.DELIVERY));
 		} else {
 			delivery = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER) >= 0
+				&& c.getString(c
+						.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER)) != null) {
 			customerNumber = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.CUSTOMER_NUMBER));
 		} else {
 			customerNumber = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER) >= 0
+				&& c.getString(c
+						.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER)) != null) {
 			invoiceOrderNumber = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_TABLE.INVOICE_ORDER_NUMBER));
 		} else {

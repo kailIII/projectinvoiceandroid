@@ -57,24 +57,27 @@ public class InvoiceOrderDetailDTO extends AbstractTableDTO {
 					.getLong(c
 							.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.INVOICE_ORDER_ID));
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS) >= 0 && c.getString(c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS)) != null) {
 			pos = c.getString(c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.POS));
 		} else {
 			pos = "1";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION) >= 0 && c.getString(c
+				.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION)) != null ) {
 			designation = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.DESIGNATION));
 		} else {
 			designation = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR) >= 0 && c.getString(c
+				.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR)) != null ) {
 			art_nr = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.ART_NR));
 		} else {
 			art_nr = "";
 		}
-		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY) >= 0) {
+		if (c.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY) >= 0 && c.getString(c
+				.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY)) != null ) {
 			quantity = c.getString(c
 					.getColumnIndex(INVOICE_ORDER_DETAIL_TABLE.QUANTITY));
 		} else {

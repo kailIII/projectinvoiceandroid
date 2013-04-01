@@ -268,8 +268,13 @@ public class InputInvoiceView extends BaseActivity {
 			if (this.count == 0) {
 				this.count++;
 			}
-			this.fileNameExport = format.format(currentDateTime) + "_"
-					+ this.count;
+			if (this.count < 10) {
+				this.fileNameExport = format.format(currentDateTime) + "_0"
+						+ this.count;
+			} else {
+				this.fileNameExport = format.format(currentDateTime) + "_"
+						+ this.count;
+			}
 			tvInvoiceNumber.setText(this.fileNameExport);
 			this.ivSave.setVisibility(View.VISIBLE);
 			this.ivExport.setVisibility(View.VISIBLE);
@@ -296,7 +301,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivExport) {
 			this.showProgressDialog(StringUtil.getString(R.string.LOADING));
 			this.createPDFFile();
-			showExportInvoiceScreen(); // export invoice
+			// showExportInvoiceScreen(); // export invoice
 		} else if (v == ivNewInvoice) {
 			this.isCreatingInvoice = true;
 			this.svContent.setVisibility(View.VISIBLE);
@@ -599,8 +604,14 @@ public class InputInvoiceView extends BaseActivity {
 			Date currentDateTime = new Date();
 			SimpleDateFormat format = null;
 			format = new SimpleDateFormat("yyyyMMdd");
-			this.fileNameExport = format.format(currentDateTime) + "_"
-					+ this.count;
+			this.fileNameExport = "";
+			if (this.count < 10) {
+				this.fileNameExport = format.format(currentDateTime) + "_0"
+						+ this.count;
+			} else {
+				this.fileNameExport = format.format(currentDateTime) + "_"
+						+ this.count;
+			}
 
 			// clear data
 			this.invoiceInfo = new InvoiceOrderNumberInfoView();
@@ -753,6 +764,14 @@ public class InputInvoiceView extends BaseActivity {
 				isDoneLoadFirst = true;
 			}
 			break;
+		case ActionEventConstant.ACTION_CREATE_PDF:
+			String resultCreatePDF = (String) modelEvent.getModelData();
+			if (resultCreatePDF.equals("1")) {
+				showExportInvoiceScreen();
+			} else {
+				showDialog("Erstellen PDF Fehler. Bitte versuchen Sie es erneut");
+			}
+			break;
 		case ActionEventConstant.REQUEST_SAVE_INVOICE:
 			this.closeProgressDialog();
 			int result = Integer.valueOf(String.valueOf(modelEvent
@@ -803,6 +822,14 @@ public class InputInvoiceView extends BaseActivity {
 	public void handleErrorModelViewEvent(ModelEvent modelEvent) {
 		// TODO Auto-generated method stub
 		this.closeProgressDialog();
+		switch (modelEvent.getActionEvent().action) {
+		case ActionEventConstant.ACTION_CREATE_PDF:
+			showDialog("Erstellen PDF Fehler. Bitte versuchen Sie es erneut");
+			break;
+
+		default:
+			break;
+		}
 		super.handleErrorModelViewEvent(modelEvent);
 	}
 
@@ -844,23 +871,50 @@ public class InputInvoiceView extends BaseActivity {
 	 * @date: Mar 20, 2013
 	 */
 	public void createPDFFile() {
+		// create file pdf
+		this.fileNameExport_R = "R" + this.fileNameExport + ".pdf";
+		this.fileNameExport_L = "L" + this.fileNameExport + ".pdf";
+		this.fileNameExport_A = "A" + this.fileNameExport + ".pdf";
+		ActionEvent event = new ActionEvent();
+		event.sender = this;
+		Bundle data = new Bundle();
+		// general data to save to DB
+		this.generalInvoiceDataSaveToDB();
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF1, fileNameExport_R);
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF2, fileNameExport_L);
+		data.putString(IntentConstants.INTENT_FILE_NAME_PDF3, fileNameExport_A);
+		data.putSerializable(IntentConstants.INTENT_INVOICE_INFO,
+				this.invoiceInfo);
+		data.putSerializable(IntentConstants.INTENT_COMPANY_INFO,
+				this.myCompanyInfo);
 		// delete file before create
 		File fi = new File(ExternalStorage.getFilePDFPath(
 				InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
 				"");
 		this.deleteDirectory(fi);
+		event.action = ActionEventConstant.ACTION_CREATE_PDF;
+		event.viewData = data;
+		MainController.getInstance().handleViewEvent(event);
 
-		// general data to save to DB
-		this.generalInvoiceDataSaveToDB();
-
-		// create file pdf
-		this.fileNameExport_R = "R_" + this.fileNameExport + ".pdf";
-		this.fileNameExport_L = "L_" + this.fileNameExport + ".pdf";
-		this.fileNameExport_A = "A_" + this.fileNameExport + ".pdf";
-		convertPDF pdf = new convertPDF(this, invoiceInfo, this.myCompanyInfo);
-		pdf.createFilePDF_R(this.fileNameExport_R);
-		pdf.createFilePDF_L(this.fileNameExport_L);
-		pdf.createFilePDF_A(this.fileNameExport_A);
+		// // delete file before create
+		// File fi = new File(ExternalStorage.getFilePDFPath(
+		// InvoiceInfo.getInstance().getAppContext()).getAbsolutePath(),
+		// "");
+		// this.deleteDirectory(fi);
+		//
+		// // general data to save to DB
+		// this.generalInvoiceDataSaveToDB();
+		//
+		// // create file pdf
+		// this.fileNameExport_R = "R" + this.fileNameExport + ".pdf";
+		// this.fileNameExport_L = "L" + this.fileNameExport + ".pdf";
+		// this.fileNameExport_A = "A" + this.fileNameExport + ".pdf";
+		//
+		// convertPDF pdf = new convertPDF(this, invoiceInfo,
+		// this.myCompanyInfo);
+		// pdf.createFilePDF_R(this.fileNameExport_R);
+		// pdf.createFilePDF_L(this.fileNameExport_L);
+		// pdf.createFilePDF_A(this.fileNameExport_A);
 	}
 
 	/**

@@ -218,7 +218,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			String tabName, int type) {
 		View tabview = createTabView(tabHost.getContext(), tabName, type);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT);
 		lp.weight = 1;
 		lp.gravity = Gravity.CENTER;

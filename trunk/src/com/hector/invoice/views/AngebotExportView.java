@@ -229,8 +229,10 @@ public class AngebotExportView extends BaseFragment implements
 		}
 
 		double newTotal = (vatValue * total) / 100;
-		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
-				: "0 ") + " von " + total + "	" + String.valueOf(newTotal));
+//		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
+//				: "0 ") + " von " + total + "	" + String.valueOf(newTotal));
+		strContent4.append("Mehrwertsteuer " + (companyInfo.vatValue != null ? companyInfo.vatValue
+				: "0 ") + "% von " + total + "	" + String.valueOf(newTotal));
 		tvContent4.setText(strContent4.toString());
 
 		// content 5
