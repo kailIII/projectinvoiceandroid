@@ -17,6 +17,7 @@ import java.util.Date;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.hector.invoice.R;
 import com.hector.invoice.common.InvoiceInfo;
 import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.dto.CompanyDTO;
@@ -132,7 +133,9 @@ public class convertPDF {
 			Chapter catPart = new Chapter(1);
 			createImage(catPart);
 			// addTitlePage(document);
-			addContent_L(document);
+			addContent_L(catPart);
+
+			document.add(catPart);
 			document.close();
 		} catch (Exception e) {
 		}
@@ -141,16 +144,29 @@ public class convertPDF {
 
 	void createPDF_A() {
 		try {
+			
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(fi));
 			document.open();
 			addMetaData(document);
 			Chapter catPart = new Chapter(1);
 			createImage(catPart);
-
 			// addTitlePage(document);
-			addContent_A(document);
+			addContent_A(catPart);
+
+			document.add(catPart);
 			document.close();
+			
+//			Document document = new Document();
+//			PdfWriter.getInstance(document, new FileOutputStream(fi));
+//			document.open();
+//			addMetaData(document);
+//			Chapter catPart = new Chapter(1);
+//			createImage(catPart);
+//			addContent_L(catPart);
+//			// addTitlePage(document);
+//			addContent_A(catPart);
+//			document.close();
 		} catch (Exception e) {
 		}
 
@@ -215,16 +231,6 @@ public class convertPDF {
 	}
 
 	private void addContent_R(Chapter catPart) throws DocumentException {
-
-		// Anchor anchor = new Anchor("ESTIMATING APP", catFont);
-		// anchor.setName("ESTIMATING APP");
-
-		// chuong 1
-//		Chapter catPart = new Chapter(1);
-		// Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-
-		// Paragraph subPara = new Paragraph("", subFont);
-		// Paragraph subPara = new Paragraph("text", subFont);
 		Section subCatPart = catPart.addSection("");
 
 		// add content table 1
@@ -241,10 +247,6 @@ public class convertPDF {
 
 		// add content 4
 		createContentR_table4(subCatPart);
-
-//		document.add(catPart);
-//		document.newPage();
-
 	}
 
 	public void createContentR_table1(Section catpart) {
@@ -489,6 +491,54 @@ public class convertPDF {
 		catpart.add(table1);
 	}
 
+	public double createContentA_tableValue(Section catpart) {
+		PdfPTable table1 = new PdfPTable(5);
+
+		PdfPCell c1 = new PdfPCell(
+				new Phrase(
+						StringUtil.getString(R.string.text_lb_header_tb_Pos),
+						smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_menge),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_bezeichnung),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_einze),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_gesamt),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		double total = 0;
+		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
+
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price
+					+ " €");
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).total + " €");
+			total += Double
+					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
+		}
+
+		catpart.add(table1);
+		return total;
+	}
+
 	public double createContentR_tableValue(Section catpart) {
 		PdfPTable table1 = new PdfPTable(5);
 
@@ -526,88 +576,305 @@ public class convertPDF {
 		return total;
 	}
 
-	private void addContent_L(Document document) throws DocumentException {
+	private void addContent_L(Chapter catPart) throws DocumentException {
 
-		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
-		anchor.setName("ESTIMATING APP");
+		Section subCatPart = catPart.addSection("");
 
-		// chuong 1
-		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+		// add content table 1
+		createContentL_Content1(subCatPart);
 
-		Paragraph subPara = new Paragraph("", subFont);
-		Section subCatPart = catPart.addSection(subPara);
+		// add content table 2
+		createContentL_Content2(subCatPart);
 
-		String line = "Firma" + "				" + this.companyInfo.companyName;
-		subCatPart.add(new Paragraph(line));
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
-				+ "				" + this.companyInfo.companyAddress;
-		subCatPart.add(new Paragraph(line));
-		if (this.invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			line = "Herr "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
-					+ this.companyInfo.companyCity;
+		// add content 3
+		createContentL_Content3(subCatPart);
+
+		// add content 4
+		createContentL_tableValue(subCatPart);
+	}
+
+	public void createContentL_Content1(Section catpart) {
+
+		PdfPTable table1 = new PdfPTable(2);
+
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Firma \n ");
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+						: " ")
+						+ "\n");
+		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
+			strContent1
+					.append("Herr "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
 		} else {
-			line = "Frau "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
-					+ this.companyInfo.companyCity;
+			strContent1
+					.append("Frau "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
 		}
-		subCatPart.add(new Paragraph(line));
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactAddress != null ? invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+						: " ")
+						+ "\n");
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+						: " "));
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
+						: " "));
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress;
-		subCatPart.add(new Paragraph(line));
-
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " "
-				+ this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
-		subCatPart.add(new Paragraph(line));
-
-		line = "							" + "lhre Ansprechpartner/in";
-		subCatPart.add(new Paragraph(line));
-
-		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
-			line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
+		strContent2
+				.append((companyInfo.companyName != null ? companyInfo.companyName
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyPLZ != null ? companyInfo.companyPLZ
+						: " ")
+						+ " "
+						+ (companyInfo.companyCity != null ? companyInfo.companyCity
+								: " ") + "\n \n ");
+		strContent2.append("lhre Ansprechpartner/in \n");
+		if (companyInfo.sex == ContactDTO.SEX_MALE) {
+			strContent2
+					.append("Herr "
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		} else {
-			line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
+			strContent2
+					.append("Faur"
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
 		}
-		subCatPart.add(new Paragraph(line));
+		strContent2
+				.append("Tel: "
+						+ (this.companyInfo.telephone != null ? this.companyInfo.telephone
+								: " ") + "\n");
+		strContent2.append("Fax: "
+				+ (this.companyInfo.fax != null ? this.companyInfo.fax : " ")
+				+ "\n");
+		strContent2.append("Email: "
+				+ (this.companyInfo.email != null ? this.companyInfo.email
+						: " ") + "\n");
+		c1 = new PdfPCell(new Phrase(strContent2.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		line = "							" + "Tel: " + this.companyInfo.telephone;
-		subCatPart.add(new Paragraph(line));
+		catpart.add(table1);
+	}
 
-		line = "							" + "Fax: " + this.companyInfo.fax;
-		subCatPart.add(new Paragraph(line));
+	public void createContentL_Content2(Section catpart) {
 
-		line = "							" + "Email: " + this.companyInfo.email;
-		subCatPart.add(new Paragraph(line));
+		PdfPTable table1 = new PdfPTable(2);
 
-		line = "							" + this.companyInfo.unitedStatesT;
-		subCatPart.add(new Paragraph(line));
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
 
-		line = "							" + "Bestellt am: "
-				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn;
-		subCatPart.add(new Paragraph(line));
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
 
-		line = "							" + "lieferdatum: "
-				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery;
-		subCatPart.add(new Paragraph(line));
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Lieferschein");
+		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		subCatPart.add(new Paragraph("Lieferschein", catFont));
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
+		strContent2
+				.append("Bestellt am: "
+						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.orderedOn
+								: " ") + "\n");
+		strContent2
+				.append("Lieferdatum: "
+						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.delivery
+								: " ") + "\n");
+		strContent2
+				.append("Kunden-Nr.: "
+						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber
+								: " ") + "\n");
+		strContent2.append("Lieferschein-Nr: "
+				+ fileName_L.substring(0, fileName_L.length() - 4) + "\n");
+		c1 = new PdfPCell(new Phrase(strContent2.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		line = "							" + "Kunden-Nr: "
-				+ this.invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber;
-		subCatPart.add(new Paragraph(line));
+		catpart.add(table1);
+	}
 
-		line = "							" + "Leiferschein-Nr: " + "file name L";
-		subCatPart.add(new Paragraph(line));
+	public void createContentL_Content3(Section catpart) {
 
-		line = "Kontrollieren Sie die Liefernung auf Vollstandigkeit und Beschadigungen .";
-		subCatPart.add(new Paragraph(line));
-		line = "Sollten Sie Grund zur Beanstandung haben, setzen Sie sich bitte umgehend mit uns in Verbindung.";
-		subCatPart.add(new Paragraph(line));
-		line = "Reklamationen konnen nur am Tag der Lieferung angenommen werden.";
-		subCatPart.add(new Paragraph(line));
+		PdfPTable table1 = new PdfPTable(2);
 
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append(StringUtil.getString(R.string.TEXT1));
+		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		catpart.add(table1);
+	}
+
+	public void createContentL_tableValue(Section catpart) {
+		PdfPTable table1 = new PdfPTable(4);
+
+		PdfPCell c1 = new PdfPCell(
+				new Phrase(
+						StringUtil.getString(R.string.text_lb_header_tb_Pos),
+						smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_menge),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_art_nr),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		c1 = new PdfPCell(new Phrase(
+				StringUtil.getString(R.string.text_lb_header_tb_bezeichnung),
+				smallBold));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
+
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).art_nr);
+			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
+		}
+
+		catpart.add(table1);
+	}
+
+	private void addContent_A(Chapter catPart) throws DocumentException {
+
+		Section subCatPart = catPart.addSection("");
+
+		// add content table 1
+		createContentA_table1(subCatPart);
+
+		// add content table 2
+		createContentA_table2(subCatPart);
+
+		// add content 3
+		createContentA_table3(subCatPart);
+
+		// add content table 3
+		double total = createContentA_tableValue(subCatPart);
+
+		// add content 4
+		createContentA_table4(subCatPart, total);
+		
+		// add content 5
+		createContentA_table5(subCatPart);
+
+		// Anchor anchor = new Anchor("ESTIMATING APP", catFont);
+		// anchor.setName("ESTIMATING APP");
+		// // chuong 1
+		// Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+		//
+		// Paragraph subPara = new Paragraph("text", subFont);
+		// Section subCatPart = catPart.addSection(subPara);
+		// subCatPart.add(new Paragraph("Wel come to HaiTC"));
+		//
+		// // subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
+		// // subCatPart = catPart.addSection(subPara);
+		// String line = "Firma" + "				" + this.companyInfo.companyName;
+		// subCatPart.add(new Paragraph(line));
+		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
+		// + "				" + this.companyInfo.companyAddress;
+		// subCatPart.add(new Paragraph(line));
+		// if (this.invoiceInfo.invoiceOrder.contactInvoice.sex ==
+		// ContactDTO.SEX_MALE) {
+		// line = "Herr "
+		// + this.invoiceInfo.invoiceOrder.contactInvoice.firstName
+		// + "				" + this.companyInfo.companyPLZ + " "
+		// + this.companyInfo.companyCity;
+		// } else {
+		// line = "Frau "
+		// + this.invoiceInfo.invoiceOrder.contactInvoice.firstName
+		// + "				" + this.companyInfo.companyPLZ + " "
+		// + this.companyInfo.companyCity;
+		// }
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " "
+		// + this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "lhre Ansprechpartner/in";
+		// subCatPart.add(new Paragraph(line));
+		//
+		// if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
+		// line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
+		// } else {
+		// line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
+		// }
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "Tel: " + this.companyInfo.telephone;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "Fax: " + this.companyInfo.fax;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "Email: " + this.companyInfo.email;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + this.companyInfo.unitedStatesT;
+		// subCatPart.add(new Paragraph(line));
+		//
+		// subCatPart.add(new Paragraph("Rechnung", catFont));
+		//
 		// Date currentDateTime = new Date();
 		// SimpleDateFormat format = null;
 		// format = new SimpleDateFormat("dd.MM.yyyy");
@@ -616,193 +883,329 @@ public class convertPDF {
 		//
 		// line = "							" + "Rechnungsnr: " + "file name";
 		// subCatPart.add(new Paragraph(line));
-
-		PdfPTable table = new PdfPTable(5);
-		PdfPCell c1 = new PdfPCell(new Phrase("Pos"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		c1 = new PdfPCell(new Phrase("Menge"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		c1 = new PdfPCell(new Phrase("Art.-Nr."));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		c1 = new PdfPCell(new Phrase("Bezeichnung"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		table.setHeaderRows(1);
-		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
-
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).art_nr);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
-		}
-		subCatPart.add(table);
-
-		line = "Die Ware bleibt bis zur vollstandigen Bezahlung unser Eigentum.";
-		subCatPart.add(new Paragraph(line));
-
-		line = "Ich habe die Ware im ordnungsgemaBen Zustand erhalten.";
-		subCatPart.add(new Paragraph(line));
-
-		// subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
-		// subCatPart.add(new Paragraph("Run program"));
 		//
-		// // Add a list
-		// createList(subCatPart);
+		// PdfPTable table = new PdfPTable(5);
+		// PdfPCell c1 = new PdfPCell(new Phrase("Pos"));
+		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		// table.addCell(c1);
 		//
-		// Paragraph paragraph = new Paragraph();
-		// addEmptyLine(paragraph, 5);
-		// subCatPart.add(paragraph);
+		// c1 = new PdfPCell(new Phrase("Bezeichnung"));
+		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		// table.addCell(c1);
 		//
-		// // Add a table
-		// createTable(subCatPart);
-
-		// Now add all this to the document
-		document.add(catPart);
-		document.newPage();
+		// c1 = new PdfPCell(new Phrase("Menge"));
+		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		// table.addCell(c1);
+		//
+		// c1 = new PdfPCell(new Phrase("Einzelpreis"));
+		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		// table.addCell(c1);
+		//
+		// c1 = new PdfPCell(new Phrase("Gesamt"));
+		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		// table.addCell(c1);
+		//
+		// table.setHeaderRows(1);
+		// double total = 0;
+		// for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
+		//
+		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
+		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
+		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
+		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price);
+		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).total);
+		// total += Double
+		// .parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
+		// }
+		// subCatPart.add(table);
+		//
+		// line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
+		// subCatPart.add(new Paragraph(line));
+		//
+		// double vat = total * Float.valueOf(this.companyInfo.vatValue);
+		// line = "							" + this.companyInfo.vatText + "	" +
+		// String.valueOf(vat);
+		// subCatPart.add(new Paragraph(line));
+		//
+		// line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total +
+		// vat);
+		// subCatPart.add(new Paragraph(line));
+		//
+		// // subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
+		// // subCatPart.add(new Paragraph("Run program"));
+		// //
+		// // // Add a list
+		// // createList(subCatPart);
+		// //
+		// // Paragraph paragraph = new Paragraph();
+		// // addEmptyLine(paragraph, 5);
+		// // subCatPart.add(paragraph);
+		// //
+		// // // Add a table
+		// // createTable(subCatPart);
+		//
+		// // Now add all this to the document
+		// document.add(catPart);
+		// document.newPage();
 
 	}
 
-	private void addContent_A(Document document) throws DocumentException {
+	/**
+	*  Mo ta chuc nang cua ham
+	*  @author: HaiTC3
+	*  @param subCatPart
+	*  @return: void
+	*  @throws:
+	*  @since: Apr 3, 2013
+	*/
+	private void createContentA_table5(Section subCatPart) {
+		// TODO Auto-generated method stub
+		PdfPTable table1 = new PdfPTable(2);
 
-		Anchor anchor = new Anchor("ESTIMATING APP", catFont);
-		anchor.setName("ESTIMATING APP");
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
 
-		// chuong 1
-		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+		// content 1
+		c1 = new PdfPCell(new Phrase(StringUtil.getString(R.string.TEXT3)));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		Paragraph subPara = new Paragraph("text", subFont);
-		Section subCatPart = catPart.addSection(subPara);
-		subCatPart.add(new Paragraph("Wel come to HaiTC"));
+		subCatPart.add(table1);
+	}
 
-		// subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
-		// subCatPart = catPart.addSection(subPara);
-		String line = "Firma" + "				" + this.companyInfo.companyName;
-		subCatPart.add(new Paragraph(line));
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
-				+ "				" + this.companyInfo.companyAddress;
-		subCatPart.add(new Paragraph(line));
-		if (this.invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			line = "Herr "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
-					+ this.companyInfo.companyCity;
-		} else {
-			line = "Frau "
-					+ this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-					+ "				" + this.companyInfo.companyPLZ + " "
-					+ this.companyInfo.companyCity;
+	/**
+	 * Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @param subCatPart
+	 * @return: void
+	 * @throws:
+	 * @since: Apr 3, 2013
+	 */
+	private void createContentA_table4(Section subCatPart, double total) {
+
+		PdfPTable table1 = new PdfPTable(2);
+
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Zwischensumme		" + String.valueOf(total) + " Û"
+				+ "\n");
+		float vatValue = 0;
+		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
+			vatValue = Float.valueOf(companyInfo.vatValue);
 		}
-		subCatPart.add(new Paragraph(line));
 
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress;
-		subCatPart.add(new Paragraph(line));
+		double newTotal = (vatValue * total) / 100;
+		strContent1.append("Mehrwertsteuer "
+				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
+				+ "% 	von 	" + total + " Û" + "	" + String.valueOf(newTotal)
+				+ " Û");
+		strContent1.append("Gesamtsumme:		" + String.valueOf(total + newTotal)
+				+ " Û");
 
-		line = this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " "
-				+ this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
-		subCatPart.add(new Paragraph(line));
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		table1.addCell(c1);
 
-		line = "							" + "lhre Ansprechpartner/in";
-		subCatPart.add(new Paragraph(line));
+		subCatPart.add(table1);
+	}
 
-		if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
-			line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
-		} else {
-			line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
-		}
-		subCatPart.add(new Paragraph(line));
+	/**
+	 * Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @param subCatPart
+	 * @param total
+	 * @return: void
+	 * @throws:
+	 * @since: Apr 3, 2013
+	 */
+	private void createContentA_table3(Section subCatPart) {
+		// TODO Auto-generated method stub
 
-		line = "							" + "Tel: " + this.companyInfo.telephone;
-		subCatPart.add(new Paragraph(line));
+		PdfPTable table1 = new PdfPTable(2);
 
-		line = "							" + "Fax: " + this.companyInfo.fax;
-		subCatPart.add(new Paragraph(line));
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
 
-		line = "							" + "Email: " + this.companyInfo.email;
-		subCatPart.add(new Paragraph(line));
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append(StringUtil.getString(R.string.TEXT2));
+		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		line = "							" + this.companyInfo.unitedStatesT;
-		subCatPart.add(new Paragraph(line));
+		subCatPart.add(table1);
+	}
 
-		subCatPart.add(new Paragraph("Rechnung", catFont));
+	/**
+	 * Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @param subCatPart
+	 * @return: void
+	 * @throws:
+	 * @since: Apr 3, 2013
+	 */
+	private void createContentA_table2(Section subCatPart) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		PdfPTable table1 = new PdfPTable(2);
 
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Angebot");
+
+		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
 		Date currentDateTime = new Date();
 		SimpleDateFormat format = null;
 		format = new SimpleDateFormat("dd.MM.yyyy");
-		line = "							" + "Datum: " + format.format(currentDateTime);
-		subCatPart.add(new Paragraph(line));
+		String line = "Datum: " + format.format(currentDateTime);
+		strContent2.append(line + "\n");
+		strContent2.append("Angebotsnr.: "
+				+ fileName_A.substring(0, fileName_A.length() - 4) + "\n");
 
-		line = "							" + "Rechnungsnr: " + "file name";
-		subCatPart.add(new Paragraph(line));
+		c1 = new PdfPCell(new Phrase(strContent2.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		PdfPTable table = new PdfPTable(5);
-		PdfPCell c1 = new PdfPCell(new Phrase("Pos"));
+		subCatPart.add(table1);
+	}
+
+	/**
+	 * Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @param subCatPart
+	 * @return: void
+	 * @throws:
+	 * @since: Apr 3, 2013
+	 */
+	private void createContentA_table1(Section subCatPart) {
+		// TODO Auto-generated method stub
+		PdfPTable table1 = new PdfPTable(2);
+
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
+		table1.addCell(c1);
 
-		c1 = new PdfPCell(new Phrase("Bezeichnung"));
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
 
-		c1 = new PdfPCell(new Phrase("Menge"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		c1 = new PdfPCell(new Phrase("Einzelpreis"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		c1 = new PdfPCell(new Phrase("Gesamt"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(c1);
-
-		table.setHeaderRows(1);
-		double total = 0;
-		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
-
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price);
-			table.addCell(this.invoiceInfo.listOrderDetail.get(i).total);
-			total += Double
-					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append("Firma \n ");
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+						: " ")
+						+ "\n");
+		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
+			strContent1
+					.append("Herr "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
+		} else {
+			strContent1
+					.append("Frau "
+							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+									: " ") + "\n");
 		}
-		subCatPart.add(table);
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactAddress != null ? invoiceInfo.invoiceOrder.contactInvoice.contactAddress
+						: " ")
+						+ "\n");
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+						: ""));
+		strContent1
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
+						: " "));
 
-		line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
-		subCatPart.add(new Paragraph(line));
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		double vat = total * Float.valueOf(this.companyInfo.vatValue);
-		line = "							" + this.companyInfo.vatText + "	" + String.valueOf(vat);
-		subCatPart.add(new Paragraph(line));
+		// content 2
+		StringBuffer strContent2 = new StringBuffer();
+		strContent2
+				.append((companyInfo.companyName != null ? companyInfo.companyName
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
+						: " ")
+						+ "\n");
+		strContent2
+				.append((companyInfo.companyPLZ != null ? companyInfo.companyPLZ
+						: " ")
+						+ " "
+						+ (companyInfo.companyCity != null ? companyInfo.companyCity
+								: " ") + "\n \n ");
+		strContent2.append("lhre Ansprechpartner/in \n");
+		if (companyInfo.sex == ContactDTO.SEX_MALE) {
+			strContent2
+					.append("Herr "
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
+		} else {
+			strContent2
+					.append("Faur"
+							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
+									: " ") + "\n");
+		}
+		strContent2
+				.append("Tel: "
+						+ (this.companyInfo.telephone != null ? this.companyInfo.telephone
+								: " ") + "\n");
+		strContent2.append("Fax: "
+				+ (this.companyInfo.fax != null ? this.companyInfo.fax : " ")
+				+ "\n");
+		strContent2.append("Email: "
+				+ (this.companyInfo.email != null ? this.companyInfo.email
+						: " ") + "\n");
 
-		line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total + vat);
-		subCatPart.add(new Paragraph(line));
+		c1 = new PdfPCell(new Phrase(strContent2.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
 
-		// subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
-		// subCatPart.add(new Paragraph("Run program"));
-		//
-		// // Add a list
-		// createList(subCatPart);
-		//
-		// Paragraph paragraph = new Paragraph();
-		// addEmptyLine(paragraph, 5);
-		// subCatPart.add(paragraph);
-		//
-		// // Add a table
-		// createTable(subCatPart);
-
-		// Now add all this to the document
-		document.add(catPart);
-		document.newPage();
-
+		subCatPart.add(table1);
 	}
 
 	// private static void createTable(Section subCatPart, ArrayList<Contact>
