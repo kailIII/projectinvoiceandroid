@@ -4,9 +4,7 @@
  */
 package com.hector.invoice.views;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
