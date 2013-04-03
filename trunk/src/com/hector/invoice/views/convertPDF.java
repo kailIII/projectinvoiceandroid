@@ -132,7 +132,6 @@ public class convertPDF {
 			addMetaData(document);
 			Chapter catPart = new Chapter(1);
 			createImage(catPart);
-			// addTitlePage(document);
 			addContent_L(catPart);
 
 			document.add(catPart);
@@ -144,7 +143,7 @@ public class convertPDF {
 
 	void createPDF_A() {
 		try {
-			
+
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(fi));
 			document.open();
@@ -156,17 +155,7 @@ public class convertPDF {
 
 			document.add(catPart);
 			document.close();
-			
-//			Document document = new Document();
-//			PdfWriter.getInstance(document, new FileOutputStream(fi));
-//			document.open();
-//			addMetaData(document);
-//			Chapter catPart = new Chapter(1);
-//			createImage(catPart);
-//			addContent_L(catPart);
-//			// addTitlePage(document);
-//			addContent_A(catPart);
-//			document.close();
+
 		} catch (Exception e) {
 		}
 
@@ -231,22 +220,21 @@ public class convertPDF {
 	}
 
 	private void addContent_R(Chapter catPart) throws DocumentException {
-		Section subCatPart = catPart.addSection("");
 
 		// add content table 1
-		createContentR_table1(subCatPart);
+		createContentR_table1(catPart);
 
 		// add content table 2
-		createContentR_table2(subCatPart);
+		createContentR_table2(catPart);
 
 		// add content table 3
-		double total = createContentR_tableValue(subCatPart);
+		double total = createContentR_tableValue(catPart);
 
 		// add content 3
-		createContentR_table3(subCatPart, total);
+		createContentR_table3(catPart, total);
 
 		// add content 4
-		createContentR_table4(subCatPart);
+		createContentR_table4(catPart);
 	}
 
 	public void createContentR_table1(Section catpart) {
@@ -264,7 +252,7 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("\n\nFirma \n ");
 		if (!StringUtil
 				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.firstName)) {
 			strContent1
@@ -325,9 +313,9 @@ public class convertPDF {
 		// content 2
 		StringBuffer strContent2 = new StringBuffer();
 		if (!StringUtil.isNullOrEmpty(companyInfo.companyName)) {
-			strContent2.append(companyInfo.companyName + "\n");
+			strContent2.append("\n\n" + companyInfo.companyName + "\n");
 		} else {
-			strContent2.append(" " + "\n");
+			strContent2.append("\n\n " + "\n");
 		}
 		strContent2
 				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
@@ -364,7 +352,7 @@ public class convertPDF {
 		strContent2
 				.append((this.companyInfo.unitedStatesT != null ? this.companyInfo.unitedStatesT
 						: " ")
-						+ "\n");
+						+ "\n\n\n\n");
 
 		c1 = new PdfPCell(new Phrase(strContent2.toString()));
 		c1.setBorder(0);
@@ -389,7 +377,7 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Rechnungsnr");
+		strContent1.append("Rechnung");
 
 		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
 		c1.setBorder(0);
@@ -403,8 +391,10 @@ public class convertPDF {
 		format = new SimpleDateFormat("dd.MM.yyyy");
 		String line = "Datum: " + format.format(currentDateTime);
 		strContent2.append(line + "\n");
-		strContent2.append("Rechnungsnr: "
-				+ fileName_R.substring(0, fileName_R.length() - 4) + "\n");
+		strContent2
+				.append("Rechnungsnr: "
+						+ fileName_R.substring(0, fileName_R.length() - 4)
+						+ "\n\n\n\n");
 		c1 = new PdfPCell(new Phrase(strContent2.toString()));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -423,15 +413,19 @@ public class convertPDF {
 
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
-		strContent4.append("Zwischensumme          " + String.valueOf(total)
-				+ " €" + "\n");
+		strContent4.append("\n\n\nZwischensumme          "
+				+ String.valueOf(total) + " € " + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
 		}
 		double newTotal = (vatValue * total) / 100;
-		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
-				: " ") + "          " + String.valueOf(newTotal) + " €" + "\n");
+		strContent4
+				.append((companyInfo.vatText != null ? companyInfo.vatText
+						: " ")
+						+ "          "
+						+ String.valueOf(newTotal)
+						+ " € " + "\n");
 
 		c1 = new PdfPCell(new Phrase(strContent4.toString()));
 		c1.setBorder(0);
@@ -440,7 +434,7 @@ public class convertPDF {
 
 		StringBuffer dataNew = new StringBuffer();
 		dataNew.append("Gesamtsumme:          "
-				+ String.valueOf(total + newTotal) + " €");
+				+ String.valueOf(total + newTotal) + " € ");
 		c1 = new PdfPCell(new Phrase(dataNew.toString(), smallBold));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -525,12 +519,32 @@ public class convertPDF {
 		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
 
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price
-					+ " €");
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).total + " €");
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).pos));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).quantity));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).designation));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).single_price
+							+ " € "));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).total + " € "));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table1.addCell(c1);
+
 			total += Double
 					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
 		}
@@ -561,13 +575,32 @@ public class convertPDF {
 
 		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).pos));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
 
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price
-					+ " €");
-			table1.addCell(this.invoiceInfo.listOrderDetail.get(i).total + " €");
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).designation));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).quantity));
+			c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).single_price
+							+ " € "));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table1.addCell(c1);
+
+			c1 = new PdfPCell(new Phrase(
+					this.invoiceInfo.listOrderDetail.get(i).total + " € "));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table1.addCell(c1);
+
 			total += Double
 					.parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
 		}
@@ -578,19 +611,83 @@ public class convertPDF {
 
 	private void addContent_L(Chapter catPart) throws DocumentException {
 
-		Section subCatPart = catPart.addSection("");
 
 		// add content table 1
-		createContentL_Content1(subCatPart);
+		createContentL_Content1(catPart);
 
 		// add content table 2
-		createContentL_Content2(subCatPart);
+		createContentL_Content2(catPart);
 
 		// add content 3
-		createContentL_Content3(subCatPart);
+		createContentL_Content3(catPart);
 
 		// add content 4
-		createContentL_tableValue(subCatPart);
+		createContentL_tableValue(catPart);
+
+		// add content 5
+		createContentL_Content5(catPart);
+
+		// add content 6
+		createContentL_Content6(catPart);
+	}
+
+	/**
+	 * method description
+	 * 
+	 * @param @param subCatPart
+	 * @return: void
+	 * @author: HaiTC3
+	 * @date: Apr 3, 2013
+	 */
+	private void createContentL_Content6(Section subCatPart) {
+		// TODO Auto-generated method stub
+		PdfPTable table1 = new PdfPTable(4);
+
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		// left
+		c1 = new PdfPCell(new Phrase("Ort, Datum"));
+		c1.setBorder(0);
+		c1.setBorderWidthTop(1);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase("Unterschrift"));
+		c1.setBorder(0);
+		c1.setBorderWidthTop(1);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		subCatPart.add(table1);
 	}
 
 	public void createContentL_Content1(Section catpart) {
@@ -610,7 +707,7 @@ public class convertPDF {
 
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("\n\nFirma \n ");
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
 						: " ")
@@ -643,6 +740,7 @@ public class convertPDF {
 
 		// content 2
 		StringBuffer strContent2 = new StringBuffer();
+		strContent2.append("\n\n");
 		strContent2
 				.append((companyInfo.companyName != null ? companyInfo.companyName
 						: " ")
@@ -678,7 +776,7 @@ public class convertPDF {
 				+ "\n");
 		strContent2.append("Email: "
 				+ (this.companyInfo.email != null ? this.companyInfo.email
-						: " ") + "\n");
+						: " ") + "\n\n\n");
 		c1 = new PdfPCell(new Phrase(strContent2.toString()));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -725,7 +823,7 @@ public class convertPDF {
 						+ (invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber != null ? invoiceInfo.invoiceOrder.invoiceOrderInfo.customerNumber
 								: " ") + "\n");
 		strContent2.append("Lieferschein-Nr: "
-				+ fileName_L.substring(0, fileName_L.length() - 4) + "\n");
+				+ fileName_L.substring(0, fileName_L.length() - 4) + "\n\n\n");
 		c1 = new PdfPCell(new Phrase(strContent2.toString()));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -734,9 +832,9 @@ public class convertPDF {
 		catpart.add(table1);
 	}
 
-	public void createContentL_Content3(Section catpart) {
+	public void createContentL_Content5(Section catpart) {
 
-		PdfPTable table1 = new PdfPTable(2);
+		PdfPTable table1 = new PdfPTable(1);
 
 		PdfPCell c1 = new PdfPCell(new Phrase(""));
 		c1.setBorder(0);
@@ -746,8 +844,30 @@ public class convertPDF {
 
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append(StringUtil.getString(R.string.TEXT1));
-		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		strContent1.append("\n\n" + StringUtil.getString(R.string.TEXT4)
+				+ "\n\n\n\n");
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table1.addCell(c1);
+
+		catpart.add(table1);
+	}
+
+	public void createContentL_Content3(Section catpart) {
+
+		PdfPTable table1 = new PdfPTable(1);
+
+		PdfPCell c1 = new PdfPCell(new Phrase(""));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table1.addCell(c1);
+		table1.setHeaderRows(1);
+
+		// content 1
+		StringBuffer strContent1 = new StringBuffer();
+		strContent1.append(StringUtil.getString(R.string.TEXT1) + "\n\n\n");
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(c1);
@@ -794,173 +914,39 @@ public class convertPDF {
 
 	private void addContent_A(Chapter catPart) throws DocumentException {
 
-		Section subCatPart = catPart.addSection("");
 
 		// add content table 1
-		createContentA_table1(subCatPart);
+		createContentA_table1(catPart);
 
 		// add content table 2
-		createContentA_table2(subCatPart);
+		createContentA_table2(catPart);
 
 		// add content 3
-		createContentA_table3(subCatPart);
+		createContentA_table3(catPart);
 
 		// add content table 3
-		double total = createContentA_tableValue(subCatPart);
+		double total = createContentA_tableValue(catPart);
 
 		// add content 4
-		createContentA_table4(subCatPart, total);
-		
-		// add content 5
-		createContentA_table5(subCatPart);
+		createContentA_table4(catPart, total);
 
-		// Anchor anchor = new Anchor("ESTIMATING APP", catFont);
-		// anchor.setName("ESTIMATING APP");
-		// // chuong 1
-		// Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-		//
-		// Paragraph subPara = new Paragraph("text", subFont);
-		// Section subCatPart = catPart.addSection(subPara);
-		// subCatPart.add(new Paragraph("Wel come to HaiTC"));
-		//
-		// // subPara = new Paragraph("Báº¯t Ä‘áº§u", subFont);
-		// // subCatPart = catPart.addSection(subPara);
-		// String line = "Firma" + "				" + this.companyInfo.companyName;
-		// subCatPart.add(new Paragraph(line));
-		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactName
-		// + "				" + this.companyInfo.companyAddress;
-		// subCatPart.add(new Paragraph(line));
-		// if (this.invoiceInfo.invoiceOrder.contactInvoice.sex ==
-		// ContactDTO.SEX_MALE) {
-		// line = "Herr "
-		// + this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-		// + "				" + this.companyInfo.companyPLZ + " "
-		// + this.companyInfo.companyCity;
-		// } else {
-		// line = "Frau "
-		// + this.invoiceInfo.invoiceOrder.contactInvoice.firstName
-		// + "				" + this.companyInfo.companyPLZ + " "
-		// + this.companyInfo.companyCity;
-		// }
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactAddress;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = this.invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " "
-		// + this.invoiceInfo.invoiceOrder.contactInvoice.contactStadt;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "lhre Ansprechpartner/in";
-		// subCatPart.add(new Paragraph(line));
-		//
-		// if (this.companyInfo.sex == ContactDTO.SEX_MALE) {
-		// line = "							" + "Herr " + this.companyInfo.certificateOfOrigin;
-		// } else {
-		// line = "							" + "Faur" + this.companyInfo.certificateOfOrigin;
-		// }
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "Tel: " + this.companyInfo.telephone;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "Fax: " + this.companyInfo.fax;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "Email: " + this.companyInfo.email;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + this.companyInfo.unitedStatesT;
-		// subCatPart.add(new Paragraph(line));
-		//
-		// subCatPart.add(new Paragraph("Rechnung", catFont));
-		//
-		// Date currentDateTime = new Date();
-		// SimpleDateFormat format = null;
-		// format = new SimpleDateFormat("dd.MM.yyyy");
-		// line = "							" + "Datum: " + format.format(currentDateTime);
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "Rechnungsnr: " + "file name";
-		// subCatPart.add(new Paragraph(line));
-		//
-		// PdfPTable table = new PdfPTable(5);
-		// PdfPCell c1 = new PdfPCell(new Phrase("Pos"));
-		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		// table.addCell(c1);
-		//
-		// c1 = new PdfPCell(new Phrase("Bezeichnung"));
-		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		// table.addCell(c1);
-		//
-		// c1 = new PdfPCell(new Phrase("Menge"));
-		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		// table.addCell(c1);
-		//
-		// c1 = new PdfPCell(new Phrase("Einzelpreis"));
-		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		// table.addCell(c1);
-		//
-		// c1 = new PdfPCell(new Phrase("Gesamt"));
-		// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		// table.addCell(c1);
-		//
-		// table.setHeaderRows(1);
-		// double total = 0;
-		// for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
-		//
-		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).pos);
-		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).designation);
-		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).quantity);
-		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).single_price);
-		// table.addCell(this.invoiceInfo.listOrderDetail.get(i).total);
-		// total += Double
-		// .parseDouble(this.invoiceInfo.listOrderDetail.get(i).total);
-		// }
-		// subCatPart.add(table);
-		//
-		// line = "							" + "Zwischensumme: " + "	" + String.valueOf(total);
-		// subCatPart.add(new Paragraph(line));
-		//
-		// double vat = total * Float.valueOf(this.companyInfo.vatValue);
-		// line = "							" + this.companyInfo.vatText + "	" +
-		// String.valueOf(vat);
-		// subCatPart.add(new Paragraph(line));
-		//
-		// line = "							" + "Gesamtsumme: " + "	" + String.valueOf(total +
-		// vat);
-		// subCatPart.add(new Paragraph(line));
-		//
-		// // subCatPart.add(new Paragraph("Import thÆ° viá»‡n"));
-		// // subCatPart.add(new Paragraph("Run program"));
-		// //
-		// // // Add a list
-		// // createList(subCatPart);
-		// //
-		// // Paragraph paragraph = new Paragraph();
-		// // addEmptyLine(paragraph, 5);
-		// // subCatPart.add(paragraph);
-		// //
-		// // // Add a table
-		// // createTable(subCatPart);
-		//
-		// // Now add all this to the document
-		// document.add(catPart);
-		// document.newPage();
+		// add content 5
+		createContentA_table5(catPart);
 
 	}
 
 	/**
-	*  Mo ta chuc nang cua ham
-	*  @author: HaiTC3
-	*  @param subCatPart
-	*  @return: void
-	*  @throws:
-	*  @since: Apr 3, 2013
-	*/
+	 * Mo ta chuc nang cua ham
+	 * 
+	 * @author: HaiTC3
+	 * @param subCatPart
+	 * @return: void
+	 * @throws:
+	 * @since: Apr 3, 2013
+	 */
 	private void createContentA_table5(Section subCatPart) {
 		// TODO Auto-generated method stub
-		PdfPTable table1 = new PdfPTable(2);
+		PdfPTable table1 = new PdfPTable(1);
 
 		PdfPCell c1 = new PdfPCell(new Phrase(""));
 		c1.setBorder(0);
@@ -988,7 +974,7 @@ public class convertPDF {
 	 */
 	private void createContentA_table4(Section subCatPart, double total) {
 
-		PdfPTable table1 = new PdfPTable(2);
+		PdfPTable table1 = new PdfPTable(1);
 
 		PdfPCell c1 = new PdfPCell(new Phrase(""));
 		c1.setBorder(0);
@@ -998,8 +984,8 @@ public class convertPDF {
 
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Zwischensumme		" + String.valueOf(total) + " Û"
-				+ "\n");
+		strContent1.append("\n\nZwischensumme          "
+				+ String.valueOf(total) + " € " + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
@@ -1008,12 +994,18 @@ public class convertPDF {
 		double newTotal = (vatValue * total) / 100;
 		strContent1.append("Mehrwertsteuer "
 				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
-				+ "% 	von 	" + total + " Û" + "	" + String.valueOf(newTotal)
-				+ " Û");
-		strContent1.append("Gesamtsumme:		" + String.valueOf(total + newTotal)
-				+ " Û");
+				+ "%     von     " + total + " € " + "     "
+				+ String.valueOf(newTotal) + " € ");
 
 		c1 = new PdfPCell(new Phrase(strContent1.toString()));
+		c1.setBorder(0);
+		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		table1.addCell(c1);
+
+		strContent1 = new StringBuffer();
+		strContent1.append("Gesamtsumme:          "
+				+ String.valueOf(total + newTotal) + " € \n\n\n");
+		c1 = new PdfPCell(new Phrase(strContent1.toString(), smallBold));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		table1.addCell(c1);
@@ -1034,7 +1026,7 @@ public class convertPDF {
 	private void createContentA_table3(Section subCatPart) {
 		// TODO Auto-generated method stub
 
-		PdfPTable table1 = new PdfPTable(2);
+		PdfPTable table1 = new PdfPTable(1);
 
 		PdfPCell c1 = new PdfPCell(new Phrase(""));
 		c1.setBorder(0);
@@ -1044,8 +1036,8 @@ public class convertPDF {
 
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append(StringUtil.getString(R.string.TEXT2));
-		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
+		strContent1.append(StringUtil.getString(R.string.TEXT2) + "\n\n\n");
+		c1 = new PdfPCell(new Phrase(strContent1.toString()));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(c1);
@@ -1079,11 +1071,10 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Angebot");
-
+		strContent1.append("\n\nAngebot");
 		c1 = new PdfPCell(new Phrase(strContent1.toString(), subFont));
 		c1.setBorder(0);
-		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		c1.setHorizontalAlignment(Element.ALIGN_LEFT | Element.ALIGN_MIDDLE);
 		table1.addCell(c1);
 
 		// content 2
@@ -1092,9 +1083,9 @@ public class convertPDF {
 		SimpleDateFormat format = null;
 		format = new SimpleDateFormat("dd.MM.yyyy");
 		String line = "Datum: " + format.format(currentDateTime);
-		strContent2.append(line + "\n");
+		strContent2.append("\n\n" + line + "\n");
 		strContent2.append("Angebotsnr.: "
-				+ fileName_A.substring(0, fileName_A.length() - 4) + "\n");
+				+ fileName_A.substring(0, fileName_A.length() - 4) + "\n\n");
 
 		c1 = new PdfPCell(new Phrase(strContent2.toString()));
 		c1.setBorder(0);
@@ -1129,7 +1120,7 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("\n\nFirma \n ");
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
 						: " ")
@@ -1163,6 +1154,7 @@ public class convertPDF {
 
 		// content 2
 		StringBuffer strContent2 = new StringBuffer();
+		strContent2.append("\n\n");
 		strContent2
 				.append((companyInfo.companyName != null ? companyInfo.companyName
 						: " ")

@@ -158,7 +158,7 @@
             android:layout_marginBottom="10dip"
             android:layout_marginTop="10dip"
             android:gravity="left"
-            android:text="Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum. \n \n Ich habe die Ware im ordnungsgemäßen Zustand erhalten." />
+            android:text="@string/TEXT4" />
 
         <LinearLayout
             android:layout_width="fill_parent"
