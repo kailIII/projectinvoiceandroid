@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,6 +92,7 @@ public class InputInvoiceView extends BaseActivity {
 	String invoiceName = "";
 	Button btOK;
 	Button btCancel;
+	Button btCancelChooseType;
 	// check creating invoice
 	boolean isCreatingInvoice = false;
 
@@ -315,7 +317,7 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == ivSetting) {
 			this.showCompanyInfo(); // show company info
 		} else if (v == btThema) {
-
+			showDialogChooseTypeInvoice();
 		} else if (v == btSelectAnsprechpartner) {
 			gotoContactListView(true);
 		} else if (v == btOK) {
@@ -327,6 +329,10 @@ public class InputInvoiceView extends BaseActivity {
 		} else if (v == btCancel) {
 			if (alertProductDetail != null && alertProductDetail.isShowing()) {
 				alertProductDetail.dismiss();
+			}
+		} else if (v == btCancelChooseType) {
+			if (alertChooseTypeInvoice.isShowing()) {
+				alertChooseTypeInvoice.dismiss();
 			}
 		} else {
 			super.onClick(v);
@@ -835,6 +841,8 @@ public class InputInvoiceView extends BaseActivity {
 
 	// dialog product detail view
 	AlertDialog alertProductDetail;
+	// dialog product detail view
+	AlertDialog alertChooseTypeInvoice;
 
 	public void showDialogInputInvoiceName() {
 		if (alertProductDetail == null) {
@@ -857,8 +865,45 @@ public class InputInvoiceView extends BaseActivity {
 			window.setLayout(LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT);
 			window.setGravity(Gravity.CENTER);
+
+			WindowManager.LayoutParams wmlp = alertProductDetail.getWindow()
+					.getAttributes();
+
+			wmlp.gravity = Gravity.BOTTOM | Gravity.LEFT;
+			// wmlp.x = 100; //x position
+			// wmlp.y = 100; //y position
 		}
 		alertProductDetail.show();
+	}
+
+	public void showDialogChooseTypeInvoice() {
+		if (alertChooseTypeInvoice == null) {
+			Builder build = new AlertDialog.Builder(this);
+			LayoutInflater inflater = this.getLayoutInflater();
+			View view = inflater.inflate(
+					R.layout.layout_display_choose_type_invoice, null);
+
+			etInvoiceName = (EditText) view.findViewById(R.id.etInvoiceName);
+			btCancelChooseType = (Button) view.findViewById(R.id.btCancel);
+			btCancelChooseType.setOnClickListener(this);
+			build.setView(view);
+			alertChooseTypeInvoice = build.create();
+
+			Window window = alertChooseTypeInvoice.getWindow();
+			window.setBackgroundDrawable(new ColorDrawable(Color.argb(0, 255,
+					255, 255)));
+			window.setLayout(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT);
+			window.setGravity(Gravity.CENTER);
+
+			WindowManager.LayoutParams wmlp = alertChooseTypeInvoice
+					.getWindow().getAttributes();
+
+			wmlp.gravity = Gravity.BOTTOM | Gravity.LEFT;
+			// wmlp.x = 100; //x position
+			// wmlp.y = 100; //y position
+		}
+		alertChooseTypeInvoice.show();
 	}
 
 	/**
