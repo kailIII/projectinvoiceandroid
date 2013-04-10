@@ -30,7 +30,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btOK"
+            android:id="@+id/btCancel"
             style="@style/CustomButton"
             android:layout_width="100dp"
             android:layout_height="@dimen/height_of_button"
@@ -40,7 +40,7 @@
             android:textColor="@color/BLACK" />
 
         <Button
-            android:id="@+id/btCancel"
+            android:id="@+id/btOK"
             style="@style/CustomButton"
             android:layout_width="100dp"
             android:layout_height="@dimen/height_of_button"

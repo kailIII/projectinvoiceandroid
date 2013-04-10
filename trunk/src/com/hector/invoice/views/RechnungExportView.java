@@ -248,10 +248,10 @@ public class RechnungExportView extends BaseFragment implements
 			rowOrder.etBezeichnung.setEnabled(false);
 			rowOrder.etMenge.setText(dto.quantity);
 			rowOrder.etMenge.setEnabled(false);
-			rowOrder.etEinze.setText(dto.single_price + " € ");
+			rowOrder.etEinze.setText(dto.single_price + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 			rowOrder.etEinze.setEnabled(false);
 			total += Double.valueOf(dto.total);
-			rowOrder.etGesamt.setText(dto.total + " € ");
+			rowOrder.etGesamt.setText(dto.total + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 			rowOrder.etGesamt.setEnabled(false);
 			rowOrder.etArtNr.setVisibility(View.GONE);
 
@@ -260,19 +260,19 @@ public class RechnungExportView extends BaseFragment implements
 
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
-		strContent4.append("Zwischensumme		" + String.valueOf(total) + " € " + "\n");
+		strContent4.append("Zwischensumme		" + String.valueOf(total) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
 		}
 		double newTotal = (vatValue * total) / 100;
 		strContent4.append((companyInfo.vatText != null ? companyInfo.vatText
-				: " ") + "		" + String.valueOf(newTotal) + " € ");
+				: " ") + "		" + String.valueOf(newTotal) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		tvContent4.setText(strContent4.toString());
 
 		// content 5
 		StringBuffer strContent5 = new StringBuffer();
-		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal) + " € ");
+		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		tvContent5.setText(strContent5.toString());
 
 		// content 6
