@@ -414,7 +414,7 @@ public class convertPDF {
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
 		strContent4.append("\n\n\nZwischensumme          "
-				+ String.valueOf(total) + " € " + "\n");
+				+ String.valueOf(total) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
@@ -425,7 +425,7 @@ public class convertPDF {
 						: " ")
 						+ "          "
 						+ String.valueOf(newTotal)
-						+ " € " + "\n");
+						+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
 
 		c1 = new PdfPCell(new Phrase(strContent4.toString()));
 		c1.setBorder(0);
@@ -434,7 +434,7 @@ public class convertPDF {
 
 		StringBuffer dataNew = new StringBuffer();
 		dataNew.append("Gesamtsumme:          "
-				+ String.valueOf(total + newTotal) + " € ");
+				+ String.valueOf(total + newTotal) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		c1 = new PdfPCell(new Phrase(dataNew.toString(), smallBold));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -536,12 +536,12 @@ public class convertPDF {
 
 			c1 = new PdfPCell(new Phrase(
 					this.invoiceInfo.listOrderDetail.get(i).single_price
-							+ " € "));
+							+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table1.addCell(c1);
 
 			c1 = new PdfPCell(new Phrase(
-					this.invoiceInfo.listOrderDetail.get(i).total + " € "));
+					this.invoiceInfo.listOrderDetail.get(i).total + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table1.addCell(c1);
 
@@ -592,12 +592,12 @@ public class convertPDF {
 
 			c1 = new PdfPCell(new Phrase(
 					this.invoiceInfo.listOrderDetail.get(i).single_price
-							+ " € "));
+							+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table1.addCell(c1);
 
 			c1 = new PdfPCell(new Phrase(
-					this.invoiceInfo.listOrderDetail.get(i).total + " € "));
+					this.invoiceInfo.listOrderDetail.get(i).total + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table1.addCell(c1);
 
@@ -985,7 +985,7 @@ public class convertPDF {
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
 		strContent1.append("\n\nZwischensumme          "
-				+ String.valueOf(total) + " € " + "\n");
+				+ String.valueOf(total) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
@@ -994,8 +994,8 @@ public class convertPDF {
 		double newTotal = (vatValue * total) / 100;
 		strContent1.append("Mehrwertsteuer "
 				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
-				+ "%     von     " + total + " € " + "     "
-				+ String.valueOf(newTotal) + " € ");
+				+ "%     von     " + total + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "     "
+				+ String.valueOf(newTotal) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 
 		c1 = new PdfPCell(new Phrase(strContent1.toString()));
 		c1.setBorder(0);
@@ -1004,7 +1004,7 @@ public class convertPDF {
 
 		strContent1 = new StringBuffer();
 		strContent1.append("Gesamtsumme:          "
-				+ String.valueOf(total + newTotal) + " € \n\n\n");
+				+ String.valueOf(total + newTotal) + " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n\n\n");
 		c1 = new PdfPCell(new Phrase(strContent1.toString(), smallBold));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_RIGHT);

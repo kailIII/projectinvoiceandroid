@@ -866,10 +866,9 @@ public class InputInvoiceView extends BaseActivity {
 					LayoutParams.WRAP_CONTENT);
 			window.setGravity(Gravity.CENTER);
 
-			WindowManager.LayoutParams wmlp = alertProductDetail.getWindow()
-					.getAttributes();
-
-			wmlp.gravity = Gravity.BOTTOM | Gravity.LEFT;
+//			WindowManager.LayoutParams wmlp = alertProductDetail.getWindow()
+//					.getAttributes();
+			// wmlp.gravity = Gravity.BOTTOM | Gravity.LEFT;
 			// wmlp.x = 100; //x position
 			// wmlp.y = 100; //y position
 		}
@@ -883,7 +882,6 @@ public class InputInvoiceView extends BaseActivity {
 			View view = inflater.inflate(
 					R.layout.layout_display_choose_type_invoice, null);
 
-			etInvoiceName = (EditText) view.findViewById(R.id.etInvoiceName);
 			btCancelChooseType = (Button) view.findViewById(R.id.btCancel);
 			btCancelChooseType.setOnClickListener(this);
 			build.setView(view);

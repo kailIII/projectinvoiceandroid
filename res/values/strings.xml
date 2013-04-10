@@ -42,5 +42,6 @@
     <string name="TEXT3">Wir hoffen, dass Ihnen unser Angebot zusagt und würden uns über Ihren Auftrag sehr freuen. \n\nMit freundlichen Grüssen. \nIngolf Starke</string>
     <string name="TEXT4">Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum. \n \nIch habe die Ware im ordnungsgemäßen Zustand erhalten.</string>
     <string name="LOADING">loading ...</string>
+    <string name="TEXT_USD_GERMAN">€</string>
 
 </resources>
