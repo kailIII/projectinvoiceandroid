@@ -374,55 +374,55 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.logo))) {
 			editedValues.put(LOGO, dto.logo);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyName))) {
+		if (String.valueOf(dto.companyName) != null) {
 			editedValues.put(COMPANY_NAME, dto.companyName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyAddress))) {
+		if (String.valueOf(dto.companyAddress) != null) {
 			editedValues.put(COMPANY_ADDRESS, dto.companyAddress);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyPLZ))) {
+		if (String.valueOf(dto.companyPLZ) != null) {
 			editedValues.put(COMPANY_PLZ, dto.companyPLZ);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.companyCity))) {
+		if (String.valueOf(dto.companyCity) != null) {
 			editedValues.put(COMPANY_CITY, dto.companyCity);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.certificateOfOrigin))) {
+		if (String.valueOf(dto.certificateOfOrigin) != null) {
 			editedValues.put(CERTIFICATE_OF_ORIGIN, dto.certificateOfOrigin);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.sex))) {
+		if (String.valueOf(dto.sex) != null) {
 			editedValues.put(SEX, String.valueOf(dto.sex));
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.fax))) {
+		if (String.valueOf(dto.fax) != null) {
 			editedValues.put(FAX, dto.fax);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.email))) {
+		if (String.valueOf(dto.email) != null) {
 			editedValues.put(EMAIL, dto.email);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.unitedStatesT))) {
+		if (String.valueOf(dto.unitedStatesT) != null) {
 			editedValues.put(UNITED_STATES_T, dto.unitedStatesT);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankCompanyName))) {
+		if (String.valueOf(dto.bankCompanyName) != null) {
 			editedValues.put(BANK_COMPANY_NAME, dto.bankCompanyName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankAcctnum))) {
+		if (String.valueOf(dto.bankAcctnum) != null) {
 			editedValues.put(BANK_ACCTNUM, dto.bankAcctnum);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankBLZ))) {
+		if (String.valueOf(dto.bankBLZ) != null) {
 			editedValues.put(BANK_BLZ, dto.bankBLZ);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.bankName))) {
+		if (String.valueOf(dto.bankName) != null) {
 			editedValues.put(BANK_NAME, dto.bankName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.vatText))) {
+		if (String.valueOf(dto.vatText) != null) {
 			editedValues.put(VAT_TEXT, dto.vatText);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.vatValue))) {
+		if (String.valueOf(dto.vatValue) != null) {
 			editedValues.put(VAT_VALUE, dto.vatValue);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceConf))) {
+		if (String.valueOf(dto.invoiceConf) != null) {
 			editedValues.put(INVOICE_CONF, dto.invoiceConf);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.staffSale))) {
+		if (String.valueOf(dto.staffSale) != null) {
 			editedValues.put(STAFF_SALE, dto.staffSale);
 		}
 		return editedValues;

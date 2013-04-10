@@ -27,7 +27,8 @@ import com.hector.invoice.dto.InvoiceOrderDTO;
 public class INVOICE_ORDER_TABLE extends ABSTRACT_TABLE {
 
 	public static final String INVOICE_ORDER_ID = "INVOICE_ORDER_ID";
-	public static final String INVOICE_ORDER_NAME = "INVOICE_ORDER_NAME";// invoice name
+	public static final String INVOICE_ORDER_NAME = "INVOICE_ORDER_NAME";// invoice
+																			// name
 	public static final String CONTACT_ID = "CONTACT_ID";
 	public static final String CONTACT_NAME = "CONTACT_NAME"; // ansprechpartner
 	public static final String PROJECT = "PROJECT"; // projekt
@@ -259,25 +260,25 @@ public class INVOICE_ORDER_TABLE extends ABSTRACT_TABLE {
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactId))) {
 			editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceName))) {
+		if (String.valueOf(dto.invoiceName) != null) {
 			editedValues.put(INVOICE_ORDER_NAME, dto.invoiceName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactName))) {
+		if (String.valueOf(dto.contactName) != null) {
 			editedValues.put(CONTACT_NAME, dto.contactName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.project))) {
+		if (String.valueOf(dto.project) != null) {
 			editedValues.put(PROJECT, dto.project);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.project))) {
+		if (String.valueOf(dto.project) != null) {
 			editedValues.put(ORDERED_ON, dto.orderedOn);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.delivery))) {
+		if (String.valueOf(dto.delivery) != null) {
 			editedValues.put(DELIVERY, dto.delivery);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.customerNumber))) {
+		if (String.valueOf(dto.customerNumber) != null) {
 			editedValues.put(CUSTOMER_NUMBER, dto.customerNumber);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.invoiceOrderNumber))) {
+		if (String.valueOf(dto.invoiceOrderNumber) != null) {
 			editedValues.put(INVOICE_ORDER_NUMBER, dto.invoiceOrderNumber);
 		}
 		return editedValues;
@@ -296,7 +297,8 @@ public class INVOICE_ORDER_TABLE extends ABSTRACT_TABLE {
 		ArrayList<InvoiceInfoDTO> listInvoice = new ArrayList<InvoiceInfoDTO>();
 		StringBuffer queryGetlistContact = new StringBuffer();
 		ArrayList<String> listParams = new ArrayList<String>();
-		queryGetlistContact.append("select IO.*, CT.* from INVOICE_ORDER_TABLE IO LEFT JOIN CONTACT_TABLE CT ON IO.CONTACT_ID = CT.CONTACT_ID");
+		queryGetlistContact
+				.append("select IO.*, CT.* from INVOICE_ORDER_TABLE IO LEFT JOIN CONTACT_TABLE CT ON IO.CONTACT_ID = CT.CONTACT_ID");
 
 		String[] paramsGetListProduct = new String[] {};
 		paramsGetListProduct = listParams

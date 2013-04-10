@@ -271,22 +271,22 @@ public class INVOICE_ORDER_DETAIL_TABLE extends ABSTRACT_TABLE {
 			editedValues.put(INVOICE_ORDER_ID,
 					String.valueOf(dto.invoiceOrderId));
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.pos))) {
+		if (String.valueOf(dto.pos) != null) {
 			editedValues.put(POS, dto.pos);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.designation))) {
+		if (String.valueOf(dto.designation) != null) {
 			editedValues.put(DESIGNATION, dto.designation);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.art_nr))) {
+		if (String.valueOf(dto.art_nr) != null) {
 			editedValues.put(ART_NR, dto.art_nr);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+		if (String.valueOf(dto.quantity) != null) {
 			editedValues.put(QUANTITY, dto.quantity);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+		if (String.valueOf(dto.quantity) != null) {
 			editedValues.put(SINGLE_PRICE, dto.single_price);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.quantity))) {
+		if (String.valueOf(dto.quantity) != null) {
 			editedValues.put(TOTAL, dto.total);
 		}
 		return editedValues;
@@ -294,13 +294,14 @@ public class INVOICE_ORDER_DETAIL_TABLE extends ABSTRACT_TABLE {
 
 	/**
 	 * 
-	*  get list invoice detail with invoice order id
-	*  @author: HaiTC3
-	*  @param data
-	*  @return
-	*  @return: ArrayList<InvoiceOrderDetailDTO>
-	*  @throws:
-	*  @since: Mar 16, 2013
+	 * get list invoice detail with invoice order id
+	 * 
+	 * @author: HaiTC3
+	 * @param data
+	 * @return
+	 * @return: ArrayList<InvoiceOrderDetailDTO>
+	 * @throws:
+	 * @since: Mar 16, 2013
 	 */
 	public ArrayList<InvoiceOrderDetailDTO> getListInvoiceDetailWithInvoiceOrderId(
 			Bundle data) {

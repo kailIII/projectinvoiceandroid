@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/COLOR_GRAY_DONE"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btCancel"
+        style="@style/CustomButton"
+        android:layout_width="100dp"
+        android:layout_height="@dimen/height_of_button"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="right"
+        android:text="Erledigt"
+        android:textColor="@color/BLACK" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_below="@id/btCancel"
+        android:background="@color/WHITE"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/bg_button_none"
+            android:minHeight="40dip"
+            android:text="Rechnung" />
+    </LinearLayout>
+    
+    
+
+</RelativeLayout>

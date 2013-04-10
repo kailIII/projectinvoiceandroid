@@ -221,22 +221,22 @@ public class CONTACT_TABLE extends ABSTRACT_TABLE {
 		if (dto.contactId > 0) {
 			editedValues.put(CONTACT_ID, String.valueOf(dto.contactId));
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactName))) {
+		if (String.valueOf(dto.contactName) != null) {
 			editedValues.put(CONTACT_NAME, dto.contactName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactAddress))) {
+		if (String.valueOf(dto.contactAddress) != null) {
 			editedValues.put(CONTACT_ADDRESS, dto.contactAddress);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactAddress))) {
+		if (String.valueOf(dto.contactAddress) != null) {
 			editedValues.put(CONTACT_PLZ, dto.contactPLZ);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.contactStadt))) {
+		if (String.valueOf(dto.contactStadt) != null) {
 			editedValues.put(CONTACT_STADT, dto.contactStadt);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.firstName))) {
+		if (String.valueOf(dto.firstName) != null) {
 			editedValues.put(FIRST_NAME, dto.firstName);
 		}
-		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.lastName))) {
+		if (String.valueOf(dto.lastName) != null) {
 			editedValues.put(LAST_NAME, dto.lastName);
 		}
 		if (!StringUtil.isNullOrEmpty(String.valueOf(dto.sex))) {
