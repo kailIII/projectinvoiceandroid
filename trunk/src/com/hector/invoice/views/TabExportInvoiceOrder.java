@@ -257,7 +257,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			}
 			break;
 		case Constants.TAB_EXPORT_LIEFERSCHEIN:
-			tvTitleTab.setText("LIEFERSCHEIN");
+			tvTitleTab.setText("Lieferschein");
 			if (!tvTitleTab.isSelected()) {
 				tvTitleTab.setBackgroundColor(ImageUtil
 						.getColor(R.color.TRANSPARENT));
@@ -267,7 +267,7 @@ public class TabExportInvoiceOrder extends BaseFragmentActivity implements
 			}
 			break;
 		case Constants.TAB_EXPORT_ANGEBOT:
-			tvTitleTab.setText("ANGEBOT");
+			tvTitleTab.setText("Angebot");
 			if (!tvTitleTab.isSelected()) {
 				tvTitleTab.setBackgroundColor(ImageUtil
 						.getColor(R.color.TRANSPARENT));

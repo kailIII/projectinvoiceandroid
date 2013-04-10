@@ -214,7 +214,7 @@ public class CompanyInfoView extends BaseActivity {
 
 		this.companyInfo.companyAddress = etAddress.getText().toString();
 		this.companyInfo.companyPLZ = etPLZ.getText().toString();
-		this.companyInfo.companyPLZ = etStadt.getText().toString();
+		this.companyInfo.companyCity = etStadt.getText().toString();
 		this.companyInfo.certificateOfOrigin = etCO.getText().toString();
 		this.companyInfo.telephone = etTel.getText().toString();
 		this.companyInfo.fax = etFax.getText().toString();
@@ -254,7 +254,7 @@ public class CompanyInfoView extends BaseActivity {
 		etFirma.setText(this.companyInfo.companyName);
 		etAddress.setText(this.companyInfo.companyAddress);
 		etPLZ.setText(this.companyInfo.companyPLZ);
-		etStadt.setText(this.companyInfo.companyPLZ);
+		etStadt.setText(this.companyInfo.companyCity);
 		etCO.setText(this.companyInfo.certificateOfOrigin);
 		etTel.setText(this.companyInfo.telephone);
 		etFax.setText(this.companyInfo.fax);
