@@ -99,7 +99,7 @@ public class ContactAdapter extends BaseAdapter {
 					return false;
 				}
 			});
-			tvName.setText(itemData.firstName);
+			tvName.setText(itemData.firstName + " " + itemData.lastName);
 			if (!isGetContact) {
 				ivDelete.setVisibility(View.INVISIBLE);
 				ivDelete.setOnClickListener(new OnClickListener() {
@@ -119,7 +119,7 @@ public class ContactAdapter extends BaseAdapter {
 		} else {
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
 			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
-			tvName.setText(itemData.firstName);
+			tvName.setText(itemData.firstName + " " + itemData.lastName);
 			if (isGetContact) {
 				ivDelete.setVisibility(View.GONE);
 			} else {
