@@ -122,7 +122,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -184,7 +183,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -211,7 +209,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -238,7 +235,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -265,7 +261,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -292,7 +287,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -319,7 +313,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -346,7 +339,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="number"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -373,7 +365,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="none"
-                    android:maxLength="9"
                     android:singleLine="true" />
             </LinearLayout>
 

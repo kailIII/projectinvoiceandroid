@@ -19,7 +19,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
@@ -33,7 +32,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
@@ -47,7 +45,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
@@ -61,7 +58,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="number"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
@@ -75,7 +71,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="number"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <EditText
@@ -89,7 +84,6 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:maxLength="9"
         android:singleLine="true" />
 
     <ImageView
