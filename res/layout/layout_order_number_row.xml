@@ -57,6 +57,7 @@
         android:layout_weight="1"
         android:background="@color/WHITE"
         android:gravity="center"
+        android:maxLength="12"
         android:inputType="number"
         android:singleLine="true" />
 
@@ -70,6 +71,7 @@
         android:layout_weight="1"
         android:background="@color/WHITE"
         android:gravity="center"
+        android:maxLength="12"
         android:inputType="number"
         android:singleLine="true" />
 
