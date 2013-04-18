@@ -66,6 +66,14 @@ public class CompanyDTO extends AbstractTableDTO {
 		super(TableType.LIST_COMPANY);
 		vatValue = "0";
 	}
+	
+	public void initDefaultData(){
+		vatText = "19% Mehrwertsteuer (MwSt.)";
+		vatValue = "19";
+		invoiceConf = "20121022_01";
+		staffSale = "Ingolf Starke";
+				
+	}
 
 	/**
 	 * 

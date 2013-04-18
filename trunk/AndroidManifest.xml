@@ -8,11 +8,11 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="17" />
 
-     <permission
+    <permission
         android:name="com.hector.invoice.common.action"
         android:description="@string/app_permision_info"
         android:label="@string/app_permision_name"
-        android:protectionLevel="dangerous" /> 
+        android:protectionLevel="dangerous" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
     </uses-permission>
@@ -43,29 +43,34 @@
             android:name="com.hector.invoice.views.TabExportInvoiceOrder"
             android:label="@string/app_name" >
         </activity>
-         <activity
+        <activity
             android:name="com.hector.invoice.views.InputInvoiceView"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> 
+        </activity>
         <activity
             android:name="com.hector.invoice.views.ContactlistView"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.hector.invoice.views.CompanyInfoView"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.hector.invoice.views.CreateUpdateContactInfoView"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.hector.invoice.views.InvoiceOrderListView"
+            android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
     </application>

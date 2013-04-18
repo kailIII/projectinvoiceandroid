@@ -61,6 +61,15 @@ public class SQLUtils {
 										+ "/InvoiceDatabase", null);
 						if (!dbExists) {
 							createAllTableForDatabase();
+
+							// set default value for company
+							CompanyDTO companyInfo = new CompanyDTO();
+							companyInfo.initDefaultData();
+							Bundle data = new Bundle();
+							data.putSerializable(
+									IntentConstants.INTENT_COMPANY_INFO,
+									companyInfo);
+							requestUpdateCompanyInfo(data);
 						}
 
 						// mDB = SQLiteDatabase.openOrCreateDatabase(
@@ -1005,7 +1014,7 @@ public class SQLUtils {
 	 * @throws:
 	 * @since: Mar 16, 2013
 	 */
-	public int requestUpdateCompanyInfo(Bundle data) {
+	public static int requestUpdateCompanyInfo(Bundle data) {
 		COMPANY_TABLE companyInfo = new COMPANY_TABLE(mDB);
 		CompanyDTO myContact = (CompanyDTO) data
 				.getSerializable(IntentConstants.INTENT_COMPANY_INFO);
