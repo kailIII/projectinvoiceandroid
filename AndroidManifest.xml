@@ -6,8 +6,12 @@
 
     <uses-sdk
         android:minSdkVersion="5"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="8" />
 
+    <permission
+        android:name="com.hector.invoice.view.common.permission.Ac"
+        android:protectionLevel="dangerous" >
+    </permission>
     <permission
         android:name="com.hector.invoice.common.action"
         android:description="@string/app_permision_info"
@@ -40,11 +44,13 @@
         </receiver>
 
         <activity
-            android:name="com.hector.invoice.views.TabExportInvoiceOrder"
-            android:label="@string/app_name" >
+            android:name=".views.TabExportInvoiceOrder"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:permission="com.hector.invoice.view.common.permission.Ac" >
         </activity>
         <activity
-            android:name="com.hector.invoice.views.InputInvoiceView"
+            android:name=".views.InputInvoiceView"
             android:configChanges="orientation"
             android:label="@string/app_name" >
             <intent-filter>
@@ -54,24 +60,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hector.invoice.views.ContactlistView"
+            android:name=".views.ContactlistView"
             android:configChanges="orientation"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:permission="com.hector.invoice.view.common.permission.Ac" >
         </activity>
         <activity
-            android:name="com.hector.invoice.views.CompanyInfoView"
+            android:name=".views.CompanyInfoView"
             android:configChanges="orientation"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:permission="com.hector.invoice.view.common.permission.Ac" >
         </activity>
         <activity
-            android:name="com.hector.invoice.views.CreateUpdateContactInfoView"
+            android:name=".views.CreateUpdateContactInfoView"
             android:configChanges="orientation"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:permission="com.hector.invoice.view.common.permission.Ac" >
         </activity>
         <activity
-            android:name="com.hector.invoice.views.InvoiceOrderListView"
+            android:name=".views.InvoiceOrderListView"
             android:configChanges="orientation"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:permission="com.hector.invoice.view.common.permission.Ac" >
         </activity>
     </application>
 
