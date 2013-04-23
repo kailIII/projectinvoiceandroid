@@ -5,6 +5,8 @@
 
 package com.hector.invoice.views;
 
+import java.text.DecimalFormat;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +86,9 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
 					einze = Double.valueOf(etEinze.getText().toString());
 				}
-				etGesamt.setText(String.valueOf(menge * einze));
+				Math.rou
+				String amount = new DecimalFormat("#.##").format(menge * einze);
+				etGesamt.setText(amount);
 			}
 		});
 		etEinze = (EditText) view.findViewById(R.id.etEinze);
@@ -101,7 +105,8 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
 					einze = Double.valueOf(etEinze.getText().toString());
 				}
-				etGesamt.setText(String.valueOf(menge * einze));
+				String amount = new DecimalFormat("#.##").format(menge * einze);
+				etGesamt.setText(amount);
 			}
 		});
 		etGesamt = (EditText) view.findViewById(R.id.etGesamt);
