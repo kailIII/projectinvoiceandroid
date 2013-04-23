@@ -19,7 +19,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:singleLine="true" />
+        android:singleLine="false" />
 
     <EditText
         android:id="@+id/etBezeichnung"
@@ -32,7 +32,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:singleLine="true" />
+        android:singleLine="false" />
 
     <EditText
         android:id="@+id/etArtNr"
@@ -45,7 +45,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:inputType="none"
-        android:singleLine="true" />
+        android:singleLine="false" />
 
     <EditText
         android:id="@+id/etMenge"
@@ -58,7 +58,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:maxLength="12"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:singleLine="true" />
 
     <EditText
@@ -72,7 +72,7 @@
         android:background="@color/WHITE"
         android:gravity="center"
         android:maxLength="12"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:singleLine="true" />
 
     <EditText
