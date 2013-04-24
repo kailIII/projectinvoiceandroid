@@ -4,6 +4,7 @@
  */
 package com.hector.invoice.views;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseFragment;
 import com.hector.invoice.common.BaseFragmentActivity;
+import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.OnEventControlListener;
 import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
@@ -223,11 +225,12 @@ public class AngebotExportView extends BaseFragment implements
 
 			tblListOrderNumber.addView(rowOrder);
 		}
-
 		// content 4
 		StringBuffer strContent4 = new StringBuffer();
-		strContent4.append("Zwischensumme		" + String.valueOf(total) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
+		strContent4.append("Zwischensumme		"
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(total)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
+				+ "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
@@ -238,16 +241,18 @@ public class AngebotExportView extends BaseFragment implements
 		// : "0 ") + " von " + total + "	" + String.valueOf(newTotal));
 		strContent4.append("Mehrwertsteuer "
 				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
-				+ "% 	von 	" + total + " "
+				+ "% 	von 	" + GlobalUtil.getInstance().convertFormatNumberOrder(total) + " "
 				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "	"
-				+ String.valueOf(newTotal) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(newTotal)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		tvContent4.setText(strContent4.toString());
 
 		// content 5
 		StringBuffer strContent5 = new StringBuffer();
-		strContent5.append("Gesamtsumme:		" + String.valueOf(total + newTotal)
-				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
+		strContent5.append("Gesamtsumme:		"
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(
+						total + newTotal) + " "
+				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		tvContent5.setText(strContent5.toString());
 	}
 

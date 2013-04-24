@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.NumberFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -337,5 +338,22 @@ public class GlobalUtil {
 			}
 		}
 		return isExistData;
+	}
+
+	/**
+	 * 
+	*  convert format number with two point after dicemal
+	*  @author: HaiTC3
+	*  @param amount
+	*  @return
+	*  @return: String
+	*  @throws:
+	*  @since: Apr 24, 2013
+	 */
+	public String convertFormatNumberOrder(double amount) {
+		NumberFormat nf = NumberFormat.getNumberInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		return nf.format(amount);
 	}
 }

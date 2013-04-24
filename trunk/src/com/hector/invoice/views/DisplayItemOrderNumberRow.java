@@ -6,6 +6,7 @@
 package com.hector.invoice.views;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseActivity;
+import com.hector.invoice.common.GlobalUtil;
 import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.dto.InvoiceOrderDetailDTO;
@@ -59,8 +61,7 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 			ivDelete.setOnClickListener(this);
 			if (ivDelete != null && type == 0) {
 				ivDelete.setVisibility(View.VISIBLE);
-			}
-			else{
+			} else {
 				ivDelete.setVisibility(View.GONE);
 			}
 		} else if (type == 1) {
@@ -78,16 +79,16 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 
-				double menge = 0;
+				double menge = 0.0;
 				if (!StringUtil.isNullOrEmpty(etMenge.getText().toString())) {
 					menge = Double.valueOf(etMenge.getText().toString());
 				}
-				double einze = 0;
+				double einze = 0.0;
 				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
 					einze = Double.valueOf(etEinze.getText().toString());
 				}
-				Math.rou
-				String amount = new DecimalFormat("#.##").format(menge * einze);
+				String amount = GlobalUtil.getInstance()
+						.convertFormatNumberOrder(menge * einze);
 				etGesamt.setText(amount);
 			}
 		});
@@ -105,7 +106,12 @@ public class DisplayItemOrderNumberRow extends LinearLayout implements
 				if (!StringUtil.isNullOrEmpty(etEinze.getText().toString())) {
 					einze = Double.valueOf(etEinze.getText().toString());
 				}
-				String amount = new DecimalFormat("#.##").format(menge * einze);
+				NumberFormat nf = NumberFormat.getNumberInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(2);
+				// String amount = new DecimalFormat("#.##").format(menge *
+				// einze * 1.00);
+				String amount = nf.format(menge * einze);
 				etGesamt.setText(amount);
 			}
 		});
