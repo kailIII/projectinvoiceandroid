@@ -15,6 +15,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -123,12 +124,26 @@ public class InputInvoiceView extends BaseActivity {
 
 		// init view control
 		this.initViewControl();
-		// create file DB if not exist
-		SQLUtils.getInstance();
+		if (checkExistSDCard()) {
+			// create file DB if not exist
+			SQLUtils.getInstance();
 
-		if (!isDoneLoadFirst) {
-			this.getCompanyInfo();
+			if (!isDoneLoadFirst) {
+				this.getCompanyInfo();
+			}
+		} else {
+			showDialog("Bitte geben Sie SD-Karte zu bedienende Anwendung!");
 		}
+	}
+
+	public boolean checkExistSDCard() {
+		boolean check = false;
+		if (android.os.Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED)) {
+			check = true;
+		} else {
+		}
+		return check;
 	}
 
 	/*
@@ -296,46 +311,50 @@ public class InputInvoiceView extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if (v == ivAdd) {
-			this.createNewOrderNumber();
-		} else if (v == ivContact) {
-			this.gotoContactListView(false); // show list contact view
-		} else if (v == ivExport) {
-			this.showProgressDialog(StringUtil.getString(R.string.LOADING));
-			this.createPDFFile();
-			// showExportInvoiceScreen(); // export invoice
-		} else if (v == ivNewInvoice) {
-			this.isCreatingInvoice = true;
-			this.svContent.setVisibility(View.VISIBLE);
-			this.count++;
-			this.updateAllControl(); // update all control
-		} else if (v == ivOpen) {
-			showInvoiceList(); // show list invoice
-		} else if (v == ivSave) {
-			showDialogInputInvoiceName();
-			// requestSaveInvoice(); // request save invoice
-		} else if (v == ivSetting) {
-			this.showCompanyInfo(); // show company info
-		} else if (v == btThema) {
-			showDialogChooseTypeInvoice();
-		} else if (v == btSelectAnsprechpartner) {
-			gotoContactListView(true);
-		} else if (v == btOK) {
-			invoiceName = etInvoiceName.getText().toString();
-			if (alertProductDetail != null && alertProductDetail.isShowing()) {
-				alertProductDetail.dismiss();
+		if (checkExistSDCard()) {
+			if (v == ivAdd) {
+				this.createNewOrderNumber();
+			} else if (v == ivContact) {
+				this.gotoContactListView(false); // show list contact view
+			} else if (v == ivExport) {
+				this.showProgressDialog(StringUtil.getString(R.string.LOADING));
+				this.createPDFFile();
+				// showExportInvoiceScreen(); // export invoice
+			} else if (v == ivNewInvoice) {
+				this.isCreatingInvoice = true;
+				this.svContent.setVisibility(View.VISIBLE);
+				this.count++;
+				this.updateAllControl(); // update all control
+			} else if (v == ivOpen) {
+				showInvoiceList(); // show list invoice
+			} else if (v == ivSave) {
+				showDialogInputInvoiceName();
+				// requestSaveInvoice(); // request save invoice
+			} else if (v == ivSetting) {
+				this.showCompanyInfo(); // show company info
+			} else if (v == btThema) {
+				showDialogChooseTypeInvoice();
+			} else if (v == btSelectAnsprechpartner) {
+				gotoContactListView(true);
+			} else if (v == btOK) {
+				invoiceName = etInvoiceName.getText().toString();
+				if (alertProductDetail != null
+						&& alertProductDetail.isShowing()) {
+					alertProductDetail.dismiss();
+				}
+				this.requestSaveInvoice();
+			} else if (v == btCancel) {
+				if (alertProductDetail != null
+						&& alertProductDetail.isShowing()) {
+					alertProductDetail.dismiss();
+				}
+			} else if (v == btCancelChooseType) {
+				if (alertChooseTypeInvoice.isShowing()) {
+					alertChooseTypeInvoice.dismiss();
+				}
+			} else {
+				super.onClick(v);
 			}
-			this.requestSaveInvoice();
-		} else if (v == btCancel) {
-			if (alertProductDetail != null && alertProductDetail.isShowing()) {
-				alertProductDetail.dismiss();
-			}
-		} else if (v == btCancelChooseType) {
-			if (alertChooseTypeInvoice.isShowing()) {
-				alertChooseTypeInvoice.dismiss();
-			}
-		} else {
-			super.onClick(v);
 		}
 	}
 
@@ -866,8 +885,8 @@ public class InputInvoiceView extends BaseActivity {
 					LayoutParams.WRAP_CONTENT);
 			window.setGravity(Gravity.CENTER);
 
-//			WindowManager.LayoutParams wmlp = alertProductDetail.getWindow()
-//					.getAttributes();
+			// WindowManager.LayoutParams wmlp = alertProductDetail.getWindow()
+			// .getAttributes();
 			// wmlp.gravity = Gravity.BOTTOM | Gravity.LEFT;
 			// wmlp.x = 100; //x position
 			// wmlp.y = 100; //y position

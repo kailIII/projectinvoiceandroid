@@ -5,6 +5,8 @@
 
 package com.hector.invoice.common;
 
+import java.io.File;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;

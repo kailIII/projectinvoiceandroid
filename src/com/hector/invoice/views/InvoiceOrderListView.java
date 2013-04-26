@@ -4,6 +4,7 @@
  */
 package com.hector.invoice.views;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
