@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.BaseActivity;
+import com.hector.invoice.common.StringUtil;
 import com.hector.invoice.constant.ActionEventConstant;
 import com.hector.invoice.dto.ContactDTO;
 
@@ -99,7 +100,16 @@ public class ContactAdapter extends BaseAdapter {
 					return false;
 				}
 			});
-			tvName.setText(itemData.firstName + " " + itemData.lastName);
+			String textData = "";
+			if (!StringUtil.isNullOrEmpty(itemData.contactName)) {
+				textData += itemData.contactName;
+			}
+			if (!StringUtil.isNullOrEmpty(itemData.firstName)
+					|| !StringUtil.isNullOrEmpty(itemData.lastName)) {
+				textData += " - " + itemData.firstName + " "
+						+ itemData.lastName;
+			}
+			tvName.setText(textData);
 			if (!isGetContact) {
 				ivDelete.setVisibility(View.INVISIBLE);
 				ivDelete.setOnClickListener(new OnClickListener() {
@@ -119,7 +129,16 @@ public class ContactAdapter extends BaseAdapter {
 		} else {
 			TextView tvName = (TextView) vi.findViewById(R.id.tvName); // title
 			ImageView ivDelete = (ImageView) vi.findViewById(R.id.ivDelete);
-			tvName.setText(itemData.firstName + " " + itemData.lastName);
+			String textData = "";
+			if (!StringUtil.isNullOrEmpty(itemData.contactName)) {
+				textData += itemData.contactName;
+			}
+			if (!StringUtil.isNullOrEmpty(itemData.firstName)
+					|| !StringUtil.isNullOrEmpty(itemData.lastName)) {
+				textData += " - " + itemData.firstName + " "
+						+ itemData.lastName;
+			}
+			tvName.setText(textData);
 			if (isGetContact) {
 				ivDelete.setVisibility(View.GONE);
 			} else {

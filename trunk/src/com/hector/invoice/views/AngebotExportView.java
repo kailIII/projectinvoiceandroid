@@ -123,26 +123,30 @@ public class AngebotExportView extends BaseFragment implements
 		StringBuffer strContent1 = new StringBuffer();
 		strContent1.append("Firma \n ");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactName != null ? invoiceInfo.invoiceOrder.contactInvoice.contactName
 						: " ")
 						+ "\n");
 		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			strContent1
-					.append("Herr "
-							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
-									: " ") + "\n");
+			String nameCus = (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+					: " ")
+					+ (invoiceInfo.invoiceOrder.contactInvoice.lastName != null ? invoiceInfo.invoiceOrder.contactInvoice.lastName
+							: "") + "\n";
+			strContent1.append("Herr " + nameCus);
 		} else {
+			String nameCus = (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+					: " ")
+					+ (invoiceInfo.invoiceOrder.contactInvoice.lastName != null ? invoiceInfo.invoiceOrder.contactInvoice.lastName
+							: "") + "\n";
 			strContent1
 					.append("Frau "
-							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
-									: " ") + "\n");
+							+ nameCus);
 		}
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactAddress != null ? invoiceInfo.invoiceOrder.contactInvoice.contactAddress
 						: " ")
 						+ "\n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? (invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " ")
 						: ""));
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
@@ -165,7 +169,7 @@ public class AngebotExportView extends BaseFragment implements
 						: " ")
 						+ " "
 						+ (companyInfo.companyCity != null ? companyInfo.companyCity
-								: " ") + "\n \n ");
+								: " ") + "\n \n");
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
@@ -241,8 +245,10 @@ public class AngebotExportView extends BaseFragment implements
 		// : "0 ") + " von " + total + "	" + String.valueOf(newTotal));
 		strContent4.append("Mehrwertsteuer "
 				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
-				+ "% 	von 	" + GlobalUtil.getInstance().convertFormatNumberOrder(total) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "	"
+				+ "% 	von 	"
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(total)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
+				+ "	"
 				+ GlobalUtil.getInstance().convertFormatNumberOrder(newTotal)
 				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 		tvContent4.setText(strContent4.toString());

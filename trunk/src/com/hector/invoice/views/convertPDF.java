@@ -8,14 +8,12 @@ package com.hector.invoice.views;
  *
  */
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import com.hector.invoice.R;
 import com.hector.invoice.common.GlobalUtil;
@@ -25,7 +23,6 @@ import com.hector.invoice.dto.CompanyDTO;
 import com.hector.invoice.dto.ContactDTO;
 import com.hector.invoice.dto.InvoiceOrderNumberInfoView;
 import com.hector.invoice.lib.ExternalStorage;
-import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
@@ -253,11 +250,11 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("\n\nFirma \n ");
+		strContent1.append("\n\nFirma \n");
 		if (!StringUtil
-				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.firstName)) {
+				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.contactName)) {
 			strContent1
-					.append(invoiceInfo.invoiceOrder.contactInvoice.firstName
+					.append(invoiceInfo.invoiceOrder.contactInvoice.contactName
 							+ "\n");
 		} else {
 			strContent1.append("" + "\n");
@@ -298,10 +295,10 @@ public class convertPDF {
 		} else {
 			strContent1.append(" ");
 		}
-		if (StringUtil
+		if (!StringUtil
 				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.contactStadt)) {
-			strContent1
-					.append(invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
+			strContent1.append(" "
+					+ invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
 		} else {
 			strContent1.append(" ");
 		}
@@ -316,18 +313,20 @@ public class convertPDF {
 		if (!StringUtil.isNullOrEmpty(companyInfo.companyName)) {
 			strContent2.append("\n\n" + companyInfo.companyName + "\n");
 		} else {
-			strContent2.append("\n\n " + "\n");
+			strContent2.append("\n\n\n");
 		}
 		strContent2
 				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
 						: " ")
 						+ "\n");
-		strContent2
-				.append(companyInfo.companyPLZ != null ? companyInfo.companyPLZ
-						: " "
-								+ " "
-								+ (companyInfo.companyCity != null ? companyInfo.companyCity
-										: " ") + "\n \n ");
+		String tmp = companyInfo.companyPLZ != null ? companyInfo.companyPLZ
+				: "";
+		if (!StringUtil.isNullOrEmpty(companyInfo.companyCity)) {
+			tmp += " " + companyInfo.companyCity != null ? companyInfo.companyCity
+					: "";
+		}
+		tmp += "\n\n";
+		strContent2.append(tmp);
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
@@ -460,8 +459,9 @@ public class convertPDF {
 
 		// content 4
 		StringBuffer strContent5 = new StringBuffer();
-		strContent5.append((companyInfo.bankName != null ? companyInfo.bankName
-				: " "));
+		strContent5
+				.append((companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
+						: " "));
 		c1 = new PdfPCell(new Phrase(strContent5.toString(), smallBold));
 		c1.setBorder(0);
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -474,12 +474,11 @@ public class convertPDF {
 		strContent6.append("Konto-Nr: "
 				+ (companyInfo.bankAcctnum != null ? companyInfo.bankAcctnum
 						: " ") + "\n");
-		strContent6
-				.append("Bank: "
-						+ (companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
-								: " ") + "\n \n");
-		strContent6.append("Wir danken fur den Auftrag. " + "\n \n ");
-		strContent6.append("Mit freundlichen Grussen " + "\n \n");
+		strContent6.append("Bank: "
+				+ (companyInfo.bankName != null ? companyInfo.bankName : " ")
+				+ "\n\n");
+		strContent6.append(StringUtil.getString(R.string.TEXT5) + "\n\n");
+		strContent6.append(StringUtil.getString(R.string.TEXT6) + "\n\n\n\n");
 		strContent6
 				.append((companyInfo.staffSale != null ? companyInfo.staffSale
 						: " ") + "\n");
@@ -521,7 +520,9 @@ public class convertPDF {
 				smallBold));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table1.addCell(c1);
-		table1.setHeaderRows(1);
+		if (this.invoiceInfo.listOrderDetail.size() > 0) {
+			table1.setHeaderRows(1);
+		}
 
 		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
@@ -581,7 +582,9 @@ public class convertPDF {
 		c1 = new PdfPCell(new Phrase("Gesamt", smallBold));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table1.addCell(c1);
-		table1.setHeaderRows(1);
+		if (this.invoiceInfo.listOrderDetail.size() > 0) {
+			table1.setHeaderRows(1);
+		}
 
 		double total = 0;
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
@@ -719,7 +722,7 @@ public class convertPDF {
 
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("\n\nFirma \n ");
+		strContent1.append("\n\nFirma \n");
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
 						: " ")
@@ -740,7 +743,7 @@ public class convertPDF {
 						: " ")
 						+ "\n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? (invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " ")
 						: " "));
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
@@ -766,7 +769,7 @@ public class convertPDF {
 						: " ")
 						+ " "
 						+ (companyInfo.companyCity != null ? companyInfo.companyCity
-								: " ") + "\n \n ");
+								: " ") + "\n\n");
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
@@ -911,7 +914,9 @@ public class convertPDF {
 				smallBold));
 		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table1.addCell(c1);
-		table1.setHeaderRows(1);
+		if (this.invoiceInfo.listOrderDetail.size() > 0) {
+			table1.setHeaderRows(1);
+		}
 
 		for (int i = 0; i < this.invoiceInfo.listOrderDetail.size(); i++) {
 
@@ -996,8 +1001,9 @@ public class convertPDF {
 		// content 1
 		StringBuffer strContent1 = new StringBuffer();
 		strContent1.append("\n\nZwischensumme          "
-				+ GlobalUtil.getInstance().convertFormatNumberOrder(total) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " " + "\n");
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(total)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
+				+ "\n");
 		float vatValue = 0;
 		if (!StringUtil.isNullOrEmpty(companyInfo.vatValue)) {
 			vatValue = Float.valueOf(companyInfo.vatValue);
@@ -1006,10 +1012,12 @@ public class convertPDF {
 		double newTotal = (vatValue * total) / 100;
 		strContent1.append("Mehrwertsteuer "
 				+ (companyInfo.vatValue != null ? companyInfo.vatValue : "0 ")
-				+ "%     von     " + GlobalUtil.getInstance().convertFormatNumberOrder(total) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
-				+ "     " + GlobalUtil.getInstance().convertFormatNumberOrder(newTotal) + " "
-				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
+				+ "%     von     "
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(total)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
+				+ "     "
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(newTotal)
+				+ " " + StringUtil.getString(R.string.TEXT_USD_GERMAN) + " ");
 
 		c1 = new PdfPCell(new Phrase(strContent1.toString()));
 		c1.setBorder(0);
@@ -1018,7 +1026,8 @@ public class convertPDF {
 
 		strContent1 = new StringBuffer();
 		strContent1.append("Gesamtsumme:          "
-				+ GlobalUtil.getInstance().convertFormatNumberOrder(total + newTotal) + " "
+				+ GlobalUtil.getInstance().convertFormatNumberOrder(
+						total + newTotal) + " "
 				+ StringUtil.getString(R.string.TEXT_USD_GERMAN) + " "
 				+ "\n\n\n");
 		c1 = new PdfPCell(new Phrase(strContent1.toString(), smallBold));
@@ -1136,32 +1145,30 @@ public class convertPDF {
 		table1.setHeaderRows(1);
 
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("\n\nFirma \n ");
+		strContent1.append("\n\nFirma \n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactName != null ? invoiceInfo.invoiceOrder.contactInvoice.contactName
 						: " ")
 						+ "\n");
+		String nameCus = (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+				: " ")
+				+ (invoiceInfo.invoiceOrder.contactInvoice.lastName != null ? invoiceInfo.invoiceOrder.contactInvoice.lastName
+						: "") + "\n";
 		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
-			strContent1
-					.append("Herr "
-							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
-									: " ") + "\n");
+			strContent1.append("Herr " + nameCus);
 		} else {
-			strContent1
-					.append("Frau "
-							+ (invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
-									: " ") + "\n");
+			strContent1.append("Frau " + nameCus);
 		}
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactAddress != null ? invoiceInfo.invoiceOrder.contactInvoice.contactAddress
 						: " ")
 						+ "\n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? (invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " ")
 						: ""));
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
-						: " "));
+						: ""));
 
 		c1 = new PdfPCell(new Phrase(strContent1.toString()));
 		c1.setBorder(0);
@@ -1184,7 +1191,7 @@ public class convertPDF {
 						: " ")
 						+ " "
 						+ (companyInfo.companyCity != null ? companyInfo.companyCity
-								: " ") + "\n \n ");
+								: " ") + "\n\n");
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
