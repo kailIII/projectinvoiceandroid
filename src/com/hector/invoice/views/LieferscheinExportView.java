@@ -123,9 +123,9 @@ public class LieferscheinExportView extends BaseFragment implements
 
 		// show content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("Firma \n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.firstName != null ? invoiceInfo.invoiceOrder.contactInvoice.firstName
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactName != null ? invoiceInfo.invoiceOrder.contactInvoice.contactName
 						: " ")
 						+ "\n");
 		if (invoiceInfo.invoiceOrder.contactInvoice.sex == ContactDTO.SEX_MALE) {
@@ -144,11 +144,11 @@ public class LieferscheinExportView extends BaseFragment implements
 						: " ")
 						+ "\n");
 		strContent1
-				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? invoiceInfo.invoiceOrder.contactInvoice.contactPLZ
-						: " "));
+				.append((invoiceInfo.invoiceOrder.contactInvoice.contactPLZ != null ? (invoiceInfo.invoiceOrder.contactInvoice.contactPLZ + " ")
+						: ""));
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactStadt != null ? invoiceInfo.invoiceOrder.contactInvoice.contactStadt
-						: " "));
+						: ""));
 
 		tvContent1.setText(strContent1.toString());
 
@@ -167,7 +167,7 @@ public class LieferscheinExportView extends BaseFragment implements
 						: " ")
 						+ " "
 						+ (companyInfo.companyCity != null ? companyInfo.companyCity
-								: " ") + "\n \n ");
+								: " ") + "\n\n");
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2

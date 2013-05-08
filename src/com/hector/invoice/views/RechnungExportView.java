@@ -127,11 +127,11 @@ public class RechnungExportView extends BaseFragment implements
 
 		// show content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("Firma \n");
 		if (!StringUtil
-				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.firstName)) {
+				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.contactName)) {
 			strContent1
-					.append(invoiceInfo.invoiceOrder.contactInvoice.firstName
+					.append(invoiceInfo.invoiceOrder.contactInvoice.contactName
 							+ "\n");
 		} else {
 			strContent1.append("" + "\n");
@@ -172,10 +172,10 @@ public class RechnungExportView extends BaseFragment implements
 		} else {
 			strContent1.append(" ");
 		}
-		if (StringUtil
+		if (!StringUtil
 				.isNullOrEmpty(invoiceInfo.invoiceOrder.contactInvoice.contactStadt)) {
 			strContent1
-					.append(invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
+					.append(" " + invoiceInfo.invoiceOrder.contactInvoice.contactStadt);
 		} else {
 			strContent1.append(" ");
 		}
@@ -193,12 +193,14 @@ public class RechnungExportView extends BaseFragment implements
 				.append((companyInfo.companyAddress != null ? companyInfo.companyAddress
 						: " ")
 						+ "\n");
-		strContent2
-				.append(companyInfo.companyPLZ != null ? companyInfo.companyPLZ
-						: " "
-								+ " "
-								+ (companyInfo.companyCity != null ? companyInfo.companyCity
-										: " ") + "\n \n ");
+		String tmp = companyInfo.companyPLZ != null ? companyInfo.companyPLZ
+				: "";
+		if (!StringUtil.isNullOrEmpty(companyInfo.companyCity)) {
+			tmp += " " + companyInfo.companyCity != null ? companyInfo.companyCity
+					: "";
+		}
+		tmp += "\n\n";
+		strContent2.append(tmp);
 		strContent2.append("lhre Ansprechpartner/in \n");
 		if (companyInfo.sex == ContactDTO.SEX_MALE) {
 			strContent2
@@ -291,7 +293,7 @@ public class RechnungExportView extends BaseFragment implements
 
 		// content 6
 		StringBuffer strContent6 = new StringBuffer();
-		strContent6.append((companyInfo.bankName != null ? companyInfo.bankName
+		strContent6.append((companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
 				: " "));
 		tvContent6.setText(strContent6.toString());
 
@@ -305,10 +307,10 @@ public class RechnungExportView extends BaseFragment implements
 						: " ") + "\n");
 		strContent7
 				.append("Bank: "
-						+ (companyInfo.bankCompanyName != null ? companyInfo.bankCompanyName
-								: " ") + "\n \n");
-		strContent7.append("Wir danken fur den Auftrag. " + "\n \n ");
-		strContent7.append("Mit freundlichen Grussen " + "\n \n");
+						+ (companyInfo.bankName != null ? companyInfo.bankName
+								: " ") + "\n\n");
+		strContent7.append(StringUtil.getString(R.string.TEXT5) + "\n\n");
+		strContent7.append(StringUtil.getString(R.string.TEXT6) + "\n\n\n\n");
 		strContent7
 				.append((companyInfo.staffSale != null ? companyInfo.staffSale
 						: " ") + "\n");

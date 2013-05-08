@@ -48,6 +48,14 @@
             android:layout_marginLeft="10dip"
             android:contentDescription="export"
             android:src="@drawable/image_button_export_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demo check error V1.0"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textColor="@color/WHITE" />
     </LinearLayout>
 
     <ScrollView

@@ -15,7 +15,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;

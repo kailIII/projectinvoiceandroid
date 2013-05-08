@@ -66,13 +66,26 @@ public class CompanyDTO extends AbstractTableDTO {
 		super(TableType.LIST_COMPANY);
 		vatValue = "0";
 	}
-	
-	public void initDefaultData(){
+
+	public void initDefaultData() {
 		vatText = "19% Mehrwertsteuer (MwSt.)";
 		vatValue = "19";
 		invoiceConf = "20121022_01";
 		staffSale = "Ingolf Starke";
-				
+		companyName = "Fuwimedia";
+		companyAddress = "Wackersdorf Str 5";
+		companyPLZ = "92421";
+		companyCity = "Schwandorf";
+		certificateOfOrigin = "Ingolf Starke";
+		sex = 1;
+		telephone = "09431 7985553";
+		fax = "09431 7985856";
+		email = "info@fuwimedia.de";
+		unitedStatesT = "DE24827660058";
+		bankCompanyName = "Bankverbindung";
+		bankAcctnum = "97566746";
+		bankBLZ = "9995532222";
+		bankName = "Commerzbank";
 	}
 
 	/**

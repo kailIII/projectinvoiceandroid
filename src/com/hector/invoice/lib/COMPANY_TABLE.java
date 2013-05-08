@@ -392,6 +392,9 @@ public class COMPANY_TABLE extends ABSTRACT_TABLE {
 		if (String.valueOf(dto.sex) != null) {
 			editedValues.put(SEX, String.valueOf(dto.sex));
 		}
+		if (String.valueOf(dto.telephone) != null) {
+			editedValues.put(TELEPHONE, dto.telephone);
+		}
 		if (String.valueOf(dto.fax) != null) {
 			editedValues.put(FAX, dto.fax);
 		}
