@@ -43,5 +43,6 @@
     <string name="TEXT4">Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum. \n \nIch habe die Ware im ordnungsgemäßen Zustand erhalten.</string>
     <string name="LOADING">loading ...</string>
     <string name="TEXT_USD_GERMAN">€</string>
+    <string name="TEXT_NEUE">neue</string>
 
 </resources>

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:text="speichern"
+            android:text="@string/TEXT_NEUE"
             android:textColor="@color/BLACK" />
     </RelativeLayout>
 
