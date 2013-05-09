@@ -121,7 +121,7 @@ public class AngebotExportView extends BaseFragment implements
 
 		// show content 1
 		StringBuffer strContent1 = new StringBuffer();
-		strContent1.append("Firma \n ");
+		strContent1.append("Firma \n");
 		strContent1
 				.append((invoiceInfo.invoiceOrder.contactInvoice.contactName != null ? invoiceInfo.invoiceOrder.contactInvoice.contactName
 						: " ")
@@ -178,7 +178,7 @@ public class AngebotExportView extends BaseFragment implements
 									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur"
+					.append("Faur "
 							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
 									: " ") + "\n");
 		}
