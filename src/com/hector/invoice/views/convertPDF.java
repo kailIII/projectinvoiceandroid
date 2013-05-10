@@ -335,7 +335,7 @@ public class convertPDF {
 									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur "
+					.append("Frau "
 							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
 									: " ") + "\n");
 		}
@@ -778,7 +778,7 @@ public class convertPDF {
 									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur "
+					.append("Frau "
 							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
 									: " ") + "\n");
 		}
@@ -1200,7 +1200,7 @@ public class convertPDF {
 									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur "
+					.append("Frau "
 							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
 									: " ") + "\n");
 		}
