@@ -37,12 +37,12 @@
     <string name="IMG_MAX_SIZE">Image size must not exceed</string>
     <string name="IMG_INVALID_FORMAT">Upload incorrect image format (*. Bmp, *. Gif, *. Jpg, *. Jpeg, *. Png)</string>
     <string name="ERROR_OUT_MEMORY">Your phone is not enough memory to perform this feature. Please try again later!</string>
-    <string name="TEXT1">Kontrollieren Sie die Lieferung auf Vollständigkeit und Beschädigungen. \nSollten Sie Grund zur Beanstandung haben, setzen Sie sich bitte umgehend mit uns in Verbindung. \nReklamationen können nur am Tag der Lieferung angenommen werden.</string>
+    <string name="TEXT1">Kontrollieren Sie die Lieferung auf Vollständigkeit und Beschädigungen. \nSollten Sie Grund zur Beanstandung haben, setzen Sie sich bitte umgehend mit uns in Verbindung. \nReklamationen können nur am Tag der Lieferung angenommen werden.</string>
     <string name="TEXT2">Sehr geehrte Damen und Herren, \n\nwir danken für Ihre Anfrage und unterbreiten nachstehendes Angebot.</string>
-    <string name="TEXT3">Wir hoffen, dass Ihnen unser Angebot zusagt und würden uns über Ihren Auftrag sehr freuen.\n\nMit freundlichen Grüssen.\n\n\n\nIngolf Starke</string>
-    <string name="TEXT4">Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum. \n \nIch habe die Ware im ordnungsgemäßen Zustand erhalten.</string>
-    <string name="TEXT5">Wir danken für den Auftrag.</string>
-    <string name="TEXT6">Mit freundlichen Grüssen</string>
+    <string name="TEXT3">Wir hoffen, dass Ihnen unser Angebot zusagt und würden uns über Ihren Auftrag sehr freuen.\n\nMit freundlichen Grüssen.\n\n\n\nIngolf Starke</string>
+    <string name="TEXT4">Die Ware bleibt bis zur volständigen Bezahlung unser Eigentum. \n \nIch habe die Ware im ordnungsgemäßen Zustand erhalten.</string>
+    <string name="TEXT5">Wir danken für den Auftrag.</string>
+    <string name="TEXT6">Mit freundlichen Grüssen</string>
     <string name="LOADING">loading ...</string>
     <string name="TEXT_USD_GERMAN">€</string>
     <string name="TEXT_NEUE">neue</string>
