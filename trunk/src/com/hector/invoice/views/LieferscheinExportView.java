@@ -176,7 +176,7 @@ public class LieferscheinExportView extends BaseFragment implements
 									: " ") + "\n");
 		} else {
 			strContent2
-					.append("Faur "
+					.append("Frau "
 							+ (companyInfo.certificateOfOrigin != null ? companyInfo.certificateOfOrigin
 									: " ") + "\n");
 		}
